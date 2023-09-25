@@ -16,7 +16,7 @@ class Banner extends BaseController
 
     public function index()
     {
-        return view('Admin/banner');
+        return view('admin/banner');
     }
 
     public function create()
@@ -26,7 +26,7 @@ class Banner extends BaseController
             'btn_text'     => 'Simpan',
             'header_text'  => 'Tambah'
         ];
-        return view('Admin/create_banner', $data);
+        return view('admin/create_banner', $data);
     }
 
     public function store()
@@ -45,7 +45,7 @@ class Banner extends BaseController
             return redirect()->back()->withInput();
         }
      
-        $parent_id      = $this->request->getPost('parent_category');
+        $banner_name      = $this->request->getPost('banner_name');
         $category_name  = $this->request->getPost('category_name');
         
         $data = [
@@ -76,7 +76,7 @@ class Banner extends BaseController
             'mode'          => 'edit',
             'header_text'   => 'Update'
         ];
-        return view('Admin/create_category', $data);
+        return view('admin/create_category', $data);
     }
 
     public function update()

@@ -20,7 +20,7 @@ class Tenant extends BaseController
 
     public function index()
     {
-        return view('Admin/tenant');
+        return view('admin/tenant');
     }
 
     public function create()
@@ -34,7 +34,7 @@ class Tenant extends BaseController
             'btn_text'     => 'Simpan',
             'header_text'  => 'Tambah'
         ];
-        return view('Admin/create_tenant', $data);
+        return view('admin/create_tenant', $data);
     }
 
     public function store()
@@ -188,7 +188,7 @@ class Tenant extends BaseController
             'btn_text'      => 'Update',
             'header_text'  => 'Update'
         ];
-        return view('Admin/create_tenant', $data);
+        return view('admin/create_tenant', $data);
     }
 
     public function update()

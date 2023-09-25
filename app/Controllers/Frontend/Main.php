@@ -8,6 +8,6 @@ class Main extends BaseController
 {
     public function index()
     {
-        return view('Frontend/main');
+        return view('frontend/main');
     }
 }

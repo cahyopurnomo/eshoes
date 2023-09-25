@@ -16,7 +16,7 @@ class Users extends BaseController
 
     public function index()
     {
-        return view('Admin/users');
+        return view('admin/users');
     }
 
     public function create()
@@ -27,7 +27,7 @@ class Users extends BaseController
             'header_text'  => 'Tambah'
         ];
         
-        return view('Admin/create_user', $data);
+        return view('admin/create_user', $data);
     }
 
     public function store()
@@ -125,7 +125,7 @@ class Users extends BaseController
             'btn_text'    => 'Update',
             'header_text' => 'Update'
         ];
-        return view('Admin/create_user', $data);
+        return view('admin/create_user', $data);
     }
 
     public function update()

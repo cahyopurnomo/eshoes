@@ -18,7 +18,7 @@ class Login extends BaseController
         if (!empty(session()->get('tenant_idx')))
             return redirect()->to('/tenant/dashboard');
         else
-            return view('Tenant/login');
+            return view('tenant/login');
     }
 
     public function do_login()

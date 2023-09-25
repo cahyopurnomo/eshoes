@@ -16,7 +16,7 @@ class Category extends BaseController
 
     public function index()
     {
-        return view('Admin/category');
+        return view('admin/category');
     }
 
     public function create()
@@ -27,7 +27,7 @@ class Category extends BaseController
             'btn_text'     => 'Simpan',
             'header_text'  => 'Tambah'
         ];
-        return view('Admin/create_category', $data);
+        return view('admin/create_category', $data);
     }
 
     public function store()
@@ -76,7 +76,7 @@ class Category extends BaseController
             'btn_text'      => 'Update',
             'header_text'   => 'Update'
         ];
-        return view('Admin/create_category', $data);
+        return view('admin/create_category', $data);
     }
 
     public function update()
