@@ -1,4 +1,4 @@
-<?=$this->extend('Layouts/template'); ?>
+<?=$this->extend('layouts/template'); ?>
 <?=$this->Section('content_admin'); ?>
 
 <!-- Begin Page Content -->
