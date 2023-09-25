@@ -13,7 +13,7 @@ class BannerModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['tenant_idx', 'banner_name', 'image', 'position', 'status', 'created_at', 'updated_at', 'deleted_at'];
+    protected $allowedFields    = ['tenant_idx', 'banner_name', 'banner_image', 'position', 'status', 'created_at', 'updated_at', 'deleted_at'];
 
     // Dates
     protected $useTimestamps = false;

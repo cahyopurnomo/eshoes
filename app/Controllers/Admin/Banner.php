@@ -23,6 +23,10 @@ class Banner extends BaseController
     {
         $data = [
             'url'          => base_url('admin/save-banner'),
+            'banner_name'  => '',
+            'banner_image' => '',
+            'position'     => '',
+            'status'       => '',
             'btn_text'     => 'Simpan',
             'header_text'  => 'Tambah'
         ];
@@ -35,8 +39,29 @@ class Banner extends BaseController
             'banner_name' => [
                 'rules' => 'required|is_unique[banner.banner_name]',
                 'errors' => [
-                    'required' => 'Nama Kategori Tidak Boleh Kosong',
-                    'is_unique' => 'Nama Kategori Sudah Ada'
+                    'required' => 'Nama Banner Tidak Boleh Kosong',
+                    'is_unique' => 'Nama Banner Sudah Ada'
+                ]
+            ],
+            'banner_image' => [
+                'rules' => 'uploaded[banner_image]|mime_in[banner_image,image/jpg,image/jpeg,image/gif,image/png]|max_size[banner_image,500]|is_image[banner_image]',
+                'errors' => [
+                    'uploaded' => 'Harus Ada File yang diupload',
+					'mime_in'  => 'File Extention Harus Berupa jpg, jpeg, gif, png',
+					'max_size' => 'Ukuran File Maksimal 500KB',
+                    'is_image' => 'Format file tidak diijinkan',
+                ]
+            ],
+            'position' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Posisi Banner Tidak Boleh Kosong'
+                ]
+            ],
+            'status' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Status Banner Tidak Boleh Kosong'
                 ]
             ]
         ]); //rules
@@ -45,47 +70,68 @@ class Banner extends BaseController
             return redirect()->back()->withInput();
         }
      
-        $banner_name      = $this->request->getPost('banner_name');
-        $category_name  = $this->request->getPost('category_name');
+        $banner_name  = $this->request->getPost('banner_name');
+        $position     = $this->request->getPost('position');
+        $status       = $this->request->getPost('status');
+        $banner_image = $this->request->getFile('banner_image');
+        $filename     = $banner_image->getName();
         
         $data = [
-            'parent_idx'    => $parent_id,
-            'category_name' => $category_name
+            'banner_name'  => $banner_name,
+            'banner_image' => $filename,
+            'position'     => $position,
+            'tenant_idx'   => 0,
+            'status'       => $status,
         ];
-        $id = $this->categoryModel->insert($data);
+
+        // upload file banner_image
+        $banner_image->move(FCPATH.'assets/uploads/banner/', $filename);
+
+        $id = $this->bannerModel->insert($data);
 
         if ($id) {
-            return redirect()->to('admin/category')->with('success', 'Kategori berhasil ditambahkan.');
+            return redirect()->to('admin/banner')->with('success', 'Banner berhasil ditambahkan.');
         } else {
-            return redirect()->back()->withInput()->with('error', 'Kategori gagal ditambahkan.');
+            return redirect()->back()->withInput()->with('error', 'Banner gagal ditambahkan.');
         }
     }
 
     public function edit($id)
     {
-        $category_id = $this->encrypter->decrypt(hex2bin($id));
-        $category = $this->categoryModel->where('category_idx', $category_id)->first();
+        $banner_id = $this->encrypter->decrypt(hex2bin($id));
+        $banner = $this->bannerModel->where('banner_idx', $banner_id)->first();
         
         $data = [
-            'category_idx'  => bin2hex($this->encrypter->encrypt($category['category_idx'])),
-            'parent'        => $this->categoryModel->findAll(),
-            'parent_idx'    => $category['parent_idx'],
-            'category_name' => $category['category_name'],
-            'url'           => base_url('admin/update-category'),
-            'btn_text'      => 'Update',
-            'mode'          => 'edit',
-            'header_text'   => 'Update'
+            'banner_idx'   => bin2hex($this->encrypter->encrypt($banner['banner_idx'])),
+            'banner_name'  => $banner['banner_name'],
+            'banner_image' => base_url('assets/uploads/banner/'.$banner['banner_image']),
+            'position'     => $banner['position'],
+            'status'       => $banner['status'],
+            'btn_text'     => 'Update',
+            'header_text'  => 'Update'
         ];
-        return view('admin/create_category', $data);
+        return view('admin/create_banner', $data);
     }
 
     public function update()
     {
         $validation = $this->validate([
-            'category_name' => [
+            'banner_name' => [
                 'rules' => 'required',
                 'errors' => [
-                    'required' => 'Nama Kategori Tidak Boleh Kosong',
+                    'required' => 'Nama Banner Tidak Boleh Kosong'
+                ]
+            ],
+            'position' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Posisi Banner Tidak Boleh Kosong'
+                ]
+            ],
+            'status' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Status Banner Tidak Boleh Kosong'
                 ]
             ]
         ]); //rules
@@ -94,18 +140,42 @@ class Banner extends BaseController
             return redirect()->back()->withInput();
         }
      
-        $category_id    = $this->request->getPost('category_id');
-        $category_id    = $this->encrypter->decrypt(hex2bin($category_id));
-        $parent_id      = $this->request->getPost('parent_category');
-        $category_name  = $this->request->getPost('category_name');
+        $banner_id    = $this->encrypter->decrypt(hex2bin($banner_id));
+        $banner_name  = $this->request->getPost('banner_name');
+        $position     = $this->request->getPost('position');
+        $status       = $this->request->getPost('status');
+        $banner_image = $this->request->getFile('banner_image');
         
-        $data = [
-            'parent_idx'    => $parent_id,
-            'category_name' => $category_name,
-        ];
-        $this->categoryModel->update($category_id, $data);
+        if (!empty($banner_image)) {
+            $validation = $this->validate([
+                'banner_image' => [
+                    'rules' => 'uploaded[banner_image]|mime_in[banner_image,image/jpg,image/jpeg,image/gif,image/png]|max_size[banner_image,500]|is_image[banner_image]',
+                    'errors' => [
+                        'uploaded' => 'Harus Ada File yang diupload',
+                        'mime_in'  => 'File Extention Harus Berupa jpg, jpeg, gif, png',
+                        'max_size' => 'Ukuran File Maksimal 500KB',
+                        'is_image' => 'Format file tidak diijinkan',
+                    ]
+                ]
+            ]); //rules
+    
+            if (!$validation) {
+                return redirect()->back()->withInput();
+            }
+            
+            $filename = $banner_image->getName();
+            $data['banner_image'] = $filename;
+        }
 
-        return redirect()->to('admin/category')->with('success', 'Kategori berhasil diupdate.');
+        $data = [
+            'banner_name'  => $banner_name,
+            'position'     => $position,
+            'tenant_idx'   => 0,
+            'status'       => $status,
+        ];
+        $this->bannerModel->update($banner_id, $data);
+
+        return redirect()->to('admin/banner')->with('success', 'Banner berhasil diupdate.');
     }
 
     public function delete($id)
@@ -143,7 +213,9 @@ class Banner extends BaseController
                 $row    = array();
                 $row[] = $no;
                 $row[] = '<a href="'.base_url('admin/edit-banner/'.bin2hex($this->encrypter->encrypt($list->banner_idx))).'" title="Edit Banner">'.$list->banner_name.'</a>';
-                $row[] = '<img src="'.base_url('assets/uploads/'.$list->image).'">';
+                $row[] = '<img style="width: 100%; max-width: 200px;" src="'.base_url('assets/uploads/banner/'.$list->banner_image).'">';
+                $row[] = $list->position;
+                $row[] = $list->status;
                 $list->action = "<a data-toggle=\"confirm\" data-title=\"Konfirmasi\" data-text=\"Yakin Banner Dihapus ?\" href=\"". base_url('admin/delete-banner/'.bin2hex($this->encrypter->encrypt($list->banner_idx))) ."\"><i class=\"fas fa-trash\"></i></a>";
                 $row[] = $list->action;
                 $data[] = $row;

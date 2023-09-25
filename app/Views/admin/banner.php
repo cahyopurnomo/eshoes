@@ -29,8 +29,10 @@
             <thead>
                   <tr>
                      <th>NO</th>    
-                     <th>NAMA BANNER</th>
+                     <th>JUDUL BANNER</th>
                      <th>GAMBAR</th>
+                     <th>POSISI</th>
+                     <th>STATUS</th>
                      <th>ACTION</th>
                   </tr>
             </thead>
@@ -60,8 +62,8 @@
             { 'targets': "_all", "orderable": false, },
             { "className": 'text-center', "targets": "_all" },
             { "className": 'dt-head-center', "targets": "_all" },
-            { "width": "3%", "targets": 0 },
-            { "width": "5%", "targets": 3 },
+            { "width": "3%", "targets": [0] },
+            { "width": "5%", "targets": [3,4,5] },
          ],    
       });
    });
