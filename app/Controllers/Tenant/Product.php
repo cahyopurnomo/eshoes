@@ -326,6 +326,22 @@ class Product extends BaseController
         }
     }
 
+    public function delete_image($order, $product_id)
+    {
+        if (!empty($order) && !empty($product_id)) {
+            $product_idx = $this->encrypter->decrypt(hex2bin($product_id));
+            $product = $this->productModel->where('product_idx', $product_idx)->first();
+
+            if (!$product) {
+                return redirect()->back()->withInput()->with('error', 'Data Produk Tidak Ditemukan');
+            }
+
+            $this->productModel->set('image'.$order, '')->where('product_idx', $product_idx)->update();
+
+            return redirect()->to('tenant/product')->with('success', 'Gambar '.$order.' Berhasil Dihapus');
+        }
+    }
+
     public function ajax_product_list()
     {
         if ($this->request->getMethod(true) === 'POST') {

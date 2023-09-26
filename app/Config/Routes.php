@@ -83,5 +83,5 @@ $routes->group('tenant', ['filter' => 'userAuth'], function($routes) {
     $routes->post('update-product', 'Tenant\Product::update');
     $routes->get('delete-product/(:any)', 'Tenant\Product::delete/$1');
     $routes->post('ajax-product-list', 'Tenant\Product::ajax_product_list');
-
+    $routes->get('delete-image/(:num)/(:any)', 'Tenant\Product::delete_image/$1/$2');
 });
