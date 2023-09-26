@@ -17,6 +17,8 @@
     <link href="<?=base_url('assets/preset/vendor/datatables/dataTables.bootstrap4.min.css?v=').time(); ?>" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
     <!-- <?= $this->renderSection('styles') ?> -->
+    <!-- Style CSS -->
+    <link rel="stylesheet" href="<?=base_url('assets/preset/css/style-admin.css') ?>">
 
     <!-- Bootstrap core JavaScript-->
     <script src="<?=base_url('assets/preset/vendor/jquery/jquery.min.js?v=').time(); ?>"></script>

@@ -1,0 +1,59 @@
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+p,
+span,
+label,
+button,
+nav {
+  font-family: "Familjen Grotesk", sans-serif !important;
+  letter-spacing: 0.2px !important;
+}
+
+body,
+p,
+label,
+nav,
+h6,
+.btn {
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 1.8em !important;
+}
+
+body {
+  background: #ffffff;
+}
+
+.bold {
+  font-weight: 700 !important;
+}
+
+.medium-bold {
+  font-weight: 600 !important;
+}
+
+.text-grey {
+  color: #58595b !important;
+}
+
+.text-green {
+  color: #004daf !important;
+}
+
+a {
+  text-decoration: none !important;
+  transition: all 0.3s ease-in-out;
+}
+
+a:hover,
+a:focus,
+a:active {
+  opacity: 0.72;
+  transition: all 0.3s ease-in-out;
+}
