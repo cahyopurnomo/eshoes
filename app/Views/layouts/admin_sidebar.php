@@ -19,25 +19,25 @@
     <hr class="sidebar-divider">
     <li class="nav-item">
         <a class="nav-link" href="<?=base_url('admin/banner') ?>">
-        <i class="fas fa-fw fa-table"></i>
+        <i class="fas fa-fw fa-image"></i>
         <span>Banner</span></a>
     </li>
     <hr class="sidebar-divider">
     <li class="nav-item">
         <a class="nav-link" href="<?=base_url('admin/tenant') ?>">
-        <i class="fas fa-fw fa-table"></i>
+        <i class="fas fa-fw fa-file"></i>
         <span>Tenant</span></a>
     </li>
     <hr class="sidebar-divider">
     <li class="nav-item">
         <a class="nav-link" href="<?=base_url('admin/category') ?>">
-        <i class="fas fa-fw fa-table"></i>
+        <i class="fas fa-fw fa-tags"></i>
         <span>Kategori</span></a>
     </li>
     <hr class="sidebar-divider">
     <li class="nav-item">
         <a class="nav-link" href="<?=base_url('admin/users') ?>">
-        <i class="fas fa-fw fa-table"></i>
+        <i class="fas fa-fw fa-users"></i>
         <span>Manajemen User</span></a>
     </li>
 

@@ -78,7 +78,7 @@
                 <div class="row mb-3">
                     <div class="col-12">
                         <div class="form-group">
-                            <img style="width: 100%; max-width: 100%;" src="<?=!empty($banner_image) ? $banner_image : base_url('assets/uploads/banner/no-image.jpg'); ?>">
+                            <img style="width: 100%; background-position: center center; background-repeat: no-repeat; background-size: cover; max-width: 300px;" src="<?=!empty($banner_image) ? $banner_image : base_url('assets/uploads/banner/no-image.jpg'); ?>">
                         </div>
                     </div>
                 </div>
