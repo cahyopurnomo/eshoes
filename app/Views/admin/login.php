@@ -64,7 +64,7 @@
                                     <?php endif; ?>
                                     <form class="user" method="post" action="<?=base_url('admin/do-login'); ?>">
                                         <?= csrf_field(); ?>
-                                        <div class="row mb-2">
+                                        <div class="row mb-3">
                                             <div class="col-lg-6">
                                                 <div class="form-outline mb-2">
                                                     <label class="form-label text-grey" for="">Email</label>
@@ -78,12 +78,14 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row">
+                                        <div class="row mb-3">
                                             <div class="col-lg-12">
                                                 <button class="btn btn-primary text-white medium-bold" type="submit">Login</button>
                                             </div>
-                                            <div>
-                                                <a class="small" href="<?=base_url('admin/forgot-password'); ?>">Forgot Password?</a>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <a class="text-green medium-bold" href="<?=base_url('admin/forgot-password'); ?>">Forgot Password?</a>
                                             </div>
                                         </div>
                                     </form>
