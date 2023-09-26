@@ -36,17 +36,17 @@
         <!-- Page Wrapper -->
         <div id="wrapper">
             <!-- Sidebar -->
-            <?=session()->get('loggedAs') == 'admin' ? $this->include('Layouts/admin_sidebar') : $this->include('Layouts/tenant_sidebar') ?>
+            <?=session()->get('loggedAs') == 'admin' ? $this->include('layouts/admin_sidebar') : $this->include('layouts/tenant_sidebar') ?>
             <!-- End of Sidebar -->
             <!-- Content Wrapper -->
             <div id="content-wrapper" class="d-flex flex-column">
                 <!-- Main Content -->
                 <div id="content">
                     <!-- Topbar -->
-                    <?= $this->include('Layouts/topbar') ?>
+                    <?= $this->include('layouts/topbar') ?>
                     <!-- End of Topbar -->
                     <!-- Begin Page Content -->
-                    <?=session()->get('loggedAs') == 'admin' ? $this->renderSection('content_admin') : $this->renderSection('content_tenant') ?>
+                    <?=session()->get('loggedAs') == 'admin' ? $this->renderSection('content') : $this->renderSection('content') ?>
                     <!-- /.container-fluid -->
                 </div>
                 <!-- End of Main Content -->

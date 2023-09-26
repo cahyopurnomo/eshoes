@@ -52,7 +52,7 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <?=session()->get('loggedAs') == 'admin' ? $this->renderSection('content_admin') : $this->renderSection('content_tenant') ?>
+                <?=$this->renderSection('content') ?>
                 <!-- /.container-fluid -->
 
             </div>

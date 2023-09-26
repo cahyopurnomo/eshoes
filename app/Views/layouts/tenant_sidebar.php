@@ -10,38 +10,26 @@
     <hr class="sidebar-divider my-0">
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="<?=base_url('tenant/dashboard') ?>">
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Dashboard</span></a>
     </li>
     
     <hr class="sidebar-divider">
     <li class="nav-item">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="<?=base_url('tenant/banner') ?>">
         <i class="fas fa-fw fa-table"></i>
         <span>Banner</span></a>
     </li>
     <hr class="sidebar-divider">
     <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-        <i class="fas fa-fw fa-table"></i>
-        <span>Brand</span></a>
-    </li>
-    <hr class="sidebar-divider">
-    <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-        <i class="fas fa-fw fa-table"></i>
-        <span>Kategori</span></a>
-    </li>
-    <hr class="sidebar-divider">
-    <li class="nav-item">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="<?=base_url('tenant/product') ?>">
         <i class="fas fa-fw fa-table"></i>
         <span>Produk</span></a>
     </li>
     <hr class="sidebar-divider">
     <li class="nav-item">
-        <a class="nav-link" href="tables.html">
+        <a class="nav-link" href="<?=base_url('tenant/change-passwd') ?>">
         <i class="fas fa-fw fa-table"></i>
         <span>Ganti Password</span></a>
     </li>

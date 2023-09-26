@@ -1,5 +1,5 @@
 <?=$this->extend('layouts/template'); ?>
-<?=$this->Section('content_admin'); ?>
+<?=$this->Section('content'); ?>
 
 <div class="container-fluid">
    <div class="d-sm-flex align-items-center justify-content-between mb-4">

@@ -1,10 +1,10 @@
 <?=$this->extend('layouts/template'); ?>
-<?=$this->Section('content_admin'); ?>
+<?=$this->Section('content'); ?>
 
 <div class="container-fluid">
    <div class="d-sm-flex align-items-center justify-content-between mb-4">
       <h1 class="h3 mb-0">Data Banner</h1>
-      <a href="<?= site_url('admin/create-banner') ?>" class="btn btn-success"><i class="fas fa-plus"></i> Tambah</a>
+      <a href="<?=$url_create ?>" class="btn btn-success"><i class="fas fa-plus"></i> Tambah</a>
    </div>
 
    <div class="card">
@@ -54,7 +54,7 @@
          "scrollX": true,
          "stateSave" : true,
          "ajax": {
-            "url": "<?=site_url('admin/ajax-banner-list') ;?>",
+            "url": "<?=$url_datatables ?>",
             "type": "POST"
          },
          "order": [],

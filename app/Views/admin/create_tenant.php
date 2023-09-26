@@ -1,5 +1,5 @@
 <?=$this->extend('layouts/template'); ?>
-<?=$this->Section('content_admin'); ?>
+<?=$this->Section('content'); ?>
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
