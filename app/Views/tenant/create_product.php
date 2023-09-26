@@ -73,23 +73,52 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-4">
                         <div class="form-group required">
-                            <label>File Banner</label>
-                            <input type="file" class="form-control" name="banner_image">
+                            <label>Gambar Produk 1</label>
+                            <input type="file" class="form-control" name="image1">
                             <div class="invalid-feedback d-block">
-                                <?=!empty($error['banner_image']) ? $error['banner_image'] : '' ?>
+                                <?=!empty($error['image1']) ? $error['image1'] : '' ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label>Gambar Produk 2</label>
+                            <input type="file" class="form-control" name="image2">
+                            <div class="invalid-feedback d-block">
+                                <?=!empty($error['image2']) ? $error['image2'] : '' ?>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label>Gambar Produk 3</label>
+                            <input type="file" class="form-control" name="image3">
+                            <div class="invalid-feedback d-block">
+                                <?=!empty($error['image3']) ? $error['image3'] : '' ?>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-12">
+                    <div class="col-4">
                         <div class="form-group">
-                            <img style="width: 100%; max-width: 100%;" src="<?=!empty($banner_image) ? $banner_image : ''; ?>" alt="Katalog Sepatu Indonesia">
+                            <img style="width: 100%; max-width: 100%;" src="<?=!empty($image1) ? $image1 : base_url('assets/uploads/banner/no-image.jpg'); ?>">
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <img style="width: 100%; max-width: 100%;" src="<?=!empty($image2) ? $image2 : base_url('assets/uploads/banner/no-image.jpg'); ?>">
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group">
+                            <img style="width: 100%; max-width: 100%;" src="<?=!empty($image3) ? $image3 : base_url('assets/uploads/banner/no-image.jpg'); ?>">
                         </div>
                     </div>
                 </div>
+                
                 <button type="submit" id="btnSave" class="btn btn-primary"><i class="fa fa-share-square"></i> &nbsp; <?=$btn_text ?></button>
                 <a href="<?=base_url('tenant/product') ?>" class="btn btn-danger"><i class="fa fa-times"></i> &nbsp; Batal</a>
             </form>    

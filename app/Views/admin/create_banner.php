@@ -78,7 +78,7 @@
                 <div class="row mb-3">
                     <div class="col-12">
                         <div class="form-group">
-                            <img style="width: 100%; max-width: 100%;" src="<?=!empty($banner_image) ? $banner_image : ''; ?>" alt="Katalog Sepatu Indonesia">
+                            <img style="width: 100%; max-width: 100%;" src="<?=!empty($banner_image) ? $banner_image : base_url('assets/uploads/banner/no-image.jpg'); ?>">
                         </div>
                     </div>
                 </div>
