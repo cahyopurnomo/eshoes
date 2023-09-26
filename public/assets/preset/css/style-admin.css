@@ -47,6 +47,7 @@ body {
 }
 
 a {
+  color: #004daf;
   text-decoration: none !important;
   transition: all 0.3s ease-in-out;
 }
@@ -81,6 +82,58 @@ a:active {
   border: 0px;
 }
 
+label {
+  color: #58595b;
+}
+
+img {
+  width: 100%;
+  border-radius: 4px;
+}
+
+.form-control {
+  color: #13182b;
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+  background: #f7f8ff;
+  border-radius: 4px;
+  border: 1px #eeeeee solid;
+  box-shadow: none !important;
+}
+
+.form-control::placeholder {
+  color: #b2b2b2;
+}
+
+.form-control:focus {
+  background: #ffffff;
+  border: 1px #004daf solid;
+}
+
+.form-check {
+  width: 100%;
+}
+
+.form-check-input {
+  box-shadow: none !important;
+  position: relative;
+  top: 2px;
+}
+
+.form-check-input:focus {
+  border-color: #004daf;
+}
+
+.form-check-input:checked {
+  background-color: #004daf;
+  border-color: #004daf;
+}
+
+textarea.form-control {
+  min-height: 80px;
+}
+
 .text-primary {
   color: #004daf !important;
 }
@@ -95,6 +148,30 @@ a:active {
 
 .text-warning {
   color: #ffbd5b !important;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #004daf;
+  border-color: #004daf;
+}
+
+.btn-success {
+  color: #fff;
+  background-color: #22c197;
+  border-color: #22c197;
+}
+
+.btn-info {
+  color: #fff;
+  background-color: #00c7dd;
+  border-color: #00c7dd;
+}
+
+.btn-warning {
+  color: #fff;
+  background-color: #ffbd5b;
+  border-color: #ffbd5b;
 }
 
 .bg-primary {
@@ -143,6 +220,136 @@ h5 {
 }
 
 .text-gray-800 {
+  color: #58595b !important;
+}
+
+.btn {
+  box-shadow: none !important;
+}
+
+/* DATA TABLES */
+
+#dataBanner_length {
+  margin-bottom: 5px;
+}
+
+div.dataTables_wrapper div.dataTables_length select {
+  margin: 0 5px;
+}
+
+#dataBanner_filter {
+  margin-bottom: 5px;
+}
+
+#dataBanner_paginate {
+  margin-top: 20px;
+}
+
+#dataBanner_info {
+  margin-top: 15px;
+  color: #58595b !important;
+}
+
+.page-item:first-child .page-link,
+.page-item:last-child .page-link {
+  border-radius: 0;
+}
+
+.page-item.disabled .page-link {
+  border-color: #eeeeee;
+  background-color: #f7f8ff;
+  color: #58595b !important;
+}
+
+.page-item.active .page-link {
+  z-index: 3;
+  color: #fff;
+  background-color: #004daf;
+  border-color: #004daf;
+}
+
+.page-item .page-link {
+  color: #004daf;
+  background-color: #fff;
+  border: 1px solid #eeeeee;
+  box-shadow: none !important;
+}
+
+table.table-bordered.dataTable th,
+table.table-bordered.dataTable td {
+  vertical-align: middle;
+  font-size: 14px;
+}
+
+.table-bordered thead td,
+.table-bordered thead th {
+  border-bottom-width: 1px;
+}
+
+.table-bordered th {
+  border-top: 0px;
+  color: #13182b;
+  font-weight: 600;
+}
+
+.table {
+  color: #58595b;
+}
+
+.table-striped tbody tr:nth-of-type(2n + 1) {
+  background-color: #f7f8ff;
+}
+
+/*SELECT 2*/
+
+.select2-container {
+  width: 100% !important;
+}
+
+.select2-selection {
+  border: 1px #e2eee6 solid !important;
+  height: 40px !important;
+}
+
+.select2-selection__rendered {
+  color: #13182b !important;
+  font-weight: 600 !important;
+  line-height: 2.6em !important;
+}
+
+.select2-selection__arrow {
+  height: 40px !important;
+}
+
+.select2-dropdown {
+  border: 1px #e2eee6 solid !important;
+}
+
+.select2-results {
+  font-weight: 600 !important;
+}
+
+.select2-search__field {
+  border: 1px #e2eee6 solid !important;
+}
+
+.select2-search__field:focus,
+.select2-search__field:active {
+  border: 1px #004daf solid !important;
+}
+
+.select2-results__option--selected {
+  background-color: #e2eee6 !important;
+  color: #13182b !important;
+}
+
+.select2-results__option--highlighted.select2-results__option--selectable {
+  background-color: #004daf !important;
+  color: #ffffff !important;
+}
+
+.select2-results__option--disabled {
+  background: #f7f8ff !important;
   color: #58595b !important;
 }
 
@@ -220,10 +427,23 @@ nav.navbar .dropdown .dropdown-menu .dropdown-item i.fa-sign-out-alt {
   box-shadow: none !important;
 }
 
+i.fas.fa-trash {
+  color: #a40c35 !important;
+}
+
 /* FOOTER */
 
 footer.sticky-footer .copyright {
   font-size: 14px;
   color: #58595b;
   line-height: 1.6em;
+}
+
+@media (min-width: 360px) and (max-width: 767px) {
+  .h3.mb-0 {
+    margin-bottom: 15px !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
 }
