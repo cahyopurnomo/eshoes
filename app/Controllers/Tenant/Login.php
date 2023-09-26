@@ -30,9 +30,9 @@ class Login extends BaseController
         if ($tenant) {
             if (password_verify($passwd, $tenant['passwd'])) {
                 session()->set([
-                    'tenant_idx'    => $tenant['tenant_idx'],
+                    'user_idx'      => $tenant['tenant_idx'],
                     'email'         => $tenant['email'],
-                    'tenant_name'   => $tenant['tenant_name'],
+                    'fullname'      => $tenant['tenant_name'],
                     'isLoggedIn'    => TRUE,
                     'loggedAs'      => 'tenant',
                     'segment'       => 'tenant',

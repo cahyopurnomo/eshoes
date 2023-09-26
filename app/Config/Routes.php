@@ -54,7 +54,6 @@ $routes->group('admin', ['filter' => 'userAuth'], function($routes) {
     $routes->get('delete-banner/(:any)', 'Admin\Banner::delete/$1');
     $routes->post('ajax-banner-list', 'Admin\Banner::ajax_banner_list');
 
-
     $routes->get('logout', 'Admin\Login::logout');
 });
 
@@ -66,4 +65,23 @@ $routes->get('forgot-password', 'Tenant\Login::forgot_password');
 $routes->group('tenant', ['filter' => 'userAuth'], function($routes) {
     $routes->get('dashboard', 'Tenant\Dashboard::index');
     $routes->get('logout', 'Tenant\Login::logout');
+
+    //banner
+    $routes->get('banner', 'Admin\Banner::index');
+    $routes->get('create-banner', 'Admin\Banner::create');
+    $routes->post('save-banner', 'Admin\Banner::store');
+    $routes->get('edit-banner/(:any)', 'Admin\Banner::edit/$1');
+    $routes->post('update-banner', 'Admin\Banner::update');
+    $routes->get('delete-banner/(:any)', 'Admin\Banner::delete/$1');
+    $routes->post('ajax-banner-list', 'Admin\Banner::ajax_banner_list');
+
+    //product
+    $routes->get('product', 'Tenant\Product::index');
+    $routes->get('create-product', 'Tenant\Product::create');
+    $routes->post('save-product', 'Tenant\Product::store');
+    $routes->get('edit-product/(:any)', 'Tenant\Product::edit/$1');
+    $routes->post('update-product', 'Tenant\Product::update');
+    $routes->get('delete-product/(:any)', 'Tenant\Product::delete/$1');
+    $routes->post('ajax-product-list', 'Tenant\Product::ajax_product_list');
+
 });

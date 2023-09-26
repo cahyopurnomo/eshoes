@@ -1,44 +1,58 @@
 <?php
 
-namespace App\Controllers\Admin;
+namespace App\Controllers\Tenant;
 
 use App\Controllers\BaseController;
-use App\Models\Admin\BannerModel;
+use App\Models\Tenant\ProductModel;
+use App\Models\Admin\CategoryModel;
 use Config\Services;
 
-class Banner extends BaseController
+class Product extends BaseController
 {
     public function __construct()
     {
         $this->encrypter = \Config\Services::encrypter();
-        $this->bannerModel = new BannerModel();
+        $this->productModel = new ProductModel();
+        $this->categoryModel = new CategoryModel();
     }
 
     public function index()
     {
-        $data = [
-            'url_datatables' => session()->get('loggedAs') == 'admin' ? base_url('admin/ajax-banner-list') : base_url('tenant/ajax-banner-list'),
-            'url_create' => session()->get('loggedAs') == 'admin' ? base_url('admin/create-banner') : base_url('tenant/create-banner'),
-        ];
-
-        return view('admin/banner', $data);
+        return view('tenant/product');
     }
 
     public function create()
     {
+        $categories = $this->getCategoryTree(0);
+        // echo '<pre>', print_r($categories), die();
+
         $data = [
-            'url_save'     => session()->get('loggedAs') == 'admin' ? base_url('admin/save-banner') : base_url('tenant/save-banner'),
-            'url_back'     => session()->get('loggedAs') == 'admin' ? base_url('admin/banner') : base_url('tenant/banner'),
-            'banner_name'  => '',
-            'banner_image' => '',
-            'position'     => '',
+            'product_idx'  => '',
+            'product_name' => '',
+            'slug'         => '',
+            'category_id'  => '',
             'status'       => '',
+            'category'     => $categories,
             'btn_text'     => 'Simpan',
             'header_text'  => 'Tambah'
         ];
         
-        return view('admin/create_banner', $data);
+        return view('tenant/create_product', $data);
     }
+
+    public function getCategoryTree($parent_id = 0) {
+        $categories = array();
+        $result = $this->categoryModel->where('parent_idx', $parent_id)->findAll();
+
+        foreach ($result as $mainCategory) {
+          $category = array();
+          $category['category_idx'] = $mainCategory['category_idx'];
+          $category['category_name'] = $mainCategory['category_name'];
+          $category['sub_categories'] = $this->getCategoryTree($category['category_idx']);
+          $categories[$mainCategory['category_idx']] = $category;
+        }
+        return $categories;
+      }
 
     public function store()
     {
@@ -93,31 +107,28 @@ class Banner extends BaseController
         ];
 
         // upload file banner_image
-        $banner_image->move(FCPATH.'assets/uploads/banner/', $filename);
+        $banner_image->move(FCPATH.'assets/uploads/products/', $filename);
 
-        $id = $this->bannerModel->insert($data);
+        $id = $this->productModel->insert($data);
 
         if ($id) {
-            $url = session()->get('loggedAs') == 'admin' ? 'admin/banner' : 'tenant/banner';
-            return redirect()->to($url)->with('success', 'Banner berhasil ditambahkan.');
+            return redirect()->to('tenant/product')->with('success', 'Produk berhasil ditambahkan.');
         } else {
-            return redirect()->back()->withInput()->with('error', 'Banner gagal ditambahkan.');
+            return redirect()->back()->withInput()->with('error', 'Produk gagal ditambahkan.');
         }
     }
 
     public function edit($id)
     {
-        $banner_id = $this->encrypter->decrypt(hex2bin($id));
-        $banner = $this->bannerModel->where('banner_idx', $banner_id)->first();
+        $product_id = $this->encrypter->decrypt(hex2bin($id));
+        $product = $this->productModel->where('product_idx', $product_id)->first();
         
         $data = [
-            'banner_idx'   => bin2hex($this->encrypter->encrypt($banner['banner_idx'])),
-            'banner_name'  => $banner['banner_name'],
-            'banner_image' => base_url('assets/uploads/banner/'.$banner['banner_image']),
-            'position'     => $banner['position'],
-            'status'       => $banner['status'],
-            'url_save'     => session()->get('loggedAs') == 'admin' ? base_url('admin/update-banner') : base_url('tenant/update-banner'),
-            'url_back'     => session()->get('loggedAs') == 'admin' ? base_url('admin/banner') : base_url('tenant/banner'),
+            'product_idx'   => bin2hex($this->encrypter->encrypt($product['product_idx'])),
+            'banner_name'  => $product['banner_name'],
+            'banner_image' => base_url('assets/uploads/banner/'.$product['banner_image']),
+            'position'     => $product['position'],
+            'status'       => $product['status'],
             'btn_text'     => 'Update',
             'header_text'  => 'Update'
         ];
@@ -158,7 +169,7 @@ class Banner extends BaseController
             return redirect()->back()->withInput();
         }
      
-        $banner_id  = $this->request->getPost('banner_id');
+        $banner_id    = $this->request->getPost('banner_id');
         $banner_id    = $this->encrypter->decrypt(hex2bin($banner_id));
         $banner_name  = $this->request->getPost('banner_name');
         $position     = $this->request->getPost('position');
@@ -191,64 +202,59 @@ class Banner extends BaseController
         $data['position']    = $position;
         $data['status']      = $status;
         $data['tenant_idx']  = $tenant_id;
-        $this->bannerModel->update($banner_id, $data);
+        $this->productModel->update($banner_id, $data);
 
-        $url = session()->get('loggedAs') == 'admin' ? 'admin/banner' : 'tenant/banner';
-        return redirect()->to($url)->with('success', 'Banner berhasil diupdate.');
+        return redirect()->to('tenant/produxt')->with('success', 'Product berhasil diupdate.');
     }
 
     public function delete($id)
     {
         if (!empty($id)) {
-            $banner_idx = $this->encrypter->decrypt(hex2bin($id));
-            $banner = $this->bannerModel->where('banner_idx', $banner_idx)->first();
+            $product_idx = $this->encrypter->decrypt(hex2bin($id));
+            $product = $this->productModel->where('product_idx', $product_idx)->first();
 
-            if (!$banner) {
-                return redirect()->to('admin/banner')->with('error', 'Data Banner Tidak Ditemukan');
+            if (!$product) {
+                return redirect()->to('tenant/product')->with('error', 'Data Produk Tidak Ditemukan');
             }
 
             // delete tenant
-            $this->bannerModel->delete($banner_idx);    
+            $this->productModel->delete($product_idx);    
 
-            $url = session()->get('loggedAs') == 'admin' ? 'admin/banner' : 'tenant/banner';
-            return redirect()->to($url)->with('success', 'Data Banner Berhasil Dihapus');
+            return redirect()->to('tenant/product')->with('success', 'Data Produk Berhasil Dihapus');
         }
     }
 
-    public function ajax_banner_list()
+    public function ajax_product_list()
     {
         if ($this->request->getMethod(true) === 'POST') {
-            $table = 'banner';
-            $tenant_id = session()->get('loggedAs') == 'admin' ? 0 : session()->get('user_idx');
-            $where = ['deleted_at' => NULL, 'tenant_idx' => $tenant_id];
+            $table = 'products';
+            $where = ['deleted_at' => NULL, 'tenant_idx' => session()->get('user_idx')];
             $orWhere = '';
             $column_order = array();
             $column_search = array();
             $order = array('created_at' => 'desc');
-            $lists = $this->bannerModel->get_datatables($table, $column_order, $column_search, $order, $where, $orWhere);
+            $lists = $this->productModel->get_datatables($table, $column_order, $column_search, $order, $where, $orWhere);
             $data = array();
             $no = $this->request->getPost("start");
-
-            $url_edit = session()->get('loggedAs') == 'admin' ? 'admin/edit-banner/' : 'tenant/edit-banner/';
-            $url_delete = session()->get('loggedAs') == 'admin' ? 'admin/delete-banner/' : 'tenant/delete-banner/';
 
             foreach ($lists as $list) {
                 $no++;
                 $row    = array();
                 $row[] = $no;
-                $row[] = '<a href="'.base_url($url_edit.bin2hex($this->encrypter->encrypt($list->banner_idx))).'" title="Edit Banner">'.$list->banner_name.'</a>';
-                $row[] = '<img style="width: 100%; max-width: 200px;" src="'.base_url('assets/uploads/banner/'.$list->banner_image).'">';
-                $row[] = $list->position;
-                $row[] = $list->status;
-                $list->action = "<a data-toggle=\"confirm\" data-title=\"Konfirmasi\" data-text=\"Yakin Banner Dihapus ?\" href=\"". base_url($url_delete.bin2hex($this->encrypter->encrypt($list->banner_idx))) ."\"><i class=\"fas fa-trash\"></i></a>";
+                $row[] = '<a href="'.base_url('tenant/edit-product/'.bin2hex($this->encrypter->encrypt($list->product_idx))).'" title="Edit Product">'.$list->product_name.'</a>';
+                $row[] = $list->slug;
+                $category = $this->categoryModel->select('category_name')->where('category_idx', $list->category_id)->first();
+                $list->category_name = $category['category_name'];
+                $row[] = $list->category_name;
+                $list->action = "<a data-toggle=\"confirm\" data-title=\"Konfirmasi\" data-text=\"Yakin Produk Dihapus ?\" href=\"". base_url('tenant/delete-product/'.bin2hex($this->encrypter->encrypt($list->product_idx))) ."\"><i class=\"fas fa-trash\"></i></a>";
                 $row[] = $list->action;
                 $data[] = $row;
             }
 
             $output = array(
                 "draw" => $this->request->getPost("draw"),
-                "recordsTotal" => $this->bannerModel->count_all($table, $where),
-                "recordsFiltered" => $this->bannerModel->count_filtered($table, $column_order, $column_search, $order, $where),
+                "recordsTotal" => $this->productModel->count_all($table, $where),
+                "recordsFiltered" => $this->productModel->count_filtered($table, $column_order, $column_search, $order, $where),
                 "data" => $data,
             );
 

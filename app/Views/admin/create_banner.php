@@ -1,5 +1,5 @@
 <?=$this->extend('layouts/template'); ?>
-<?=$this->Section('content_admin'); ?>
+<?=$this->Section('content'); ?>
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
@@ -26,14 +26,14 @@
     <div class="card mb-4">
         <div class="card-body">
             <?php $error = validation_errors(); ?>
-            <form id="form_banner" action="<?=$url ?>" method="POST" autocomplete="off" enctype="multipart/form-data">
+            <form id="form_banner" action="<?=$url_save ?>" method="POST" autocomplete="off" enctype="multipart/form-data">
             <?= csrf_field() ?>
                 <div class="row mb-3">
                     <div class="col-6">
                         <div class="form-group required">
                             <label>Judul Banner</label>
                             <input type="text" maxlength="100" class="form-control <?=!empty($error['banner_name']) ? 'is-invalid' : null ?>" name="banner_name" value="<?=!empty($banner_name) ? $banner_name : old('banner_name') ?>">
-                            <input type="hidden" maxlength="4" class="form-control" name="banner_id" value="<?=!empty($banner_idx) ? $banner_idx : '' ?>">
+                            <input type="hidden" class="form-control" name="banner_id" value="<?=!empty($banner_idx) ? $banner_idx : '' ?>">
                             <div class="invalid-feedback d-block">
                                 <?=!empty($error['banner_name']) ? $error['banner_name'] : '' ?>
                             </div>
@@ -53,9 +53,14 @@
                             <label>Posisi</label>
                             <select name="position" class="form-control">
                                 <option value="">--Pilih Posisi--</option>
-                                <option value="TOP" <?=(!empty($position) && $position == 'TOP') || ('TOP' == old('position')) ? 'selected' : ''; ?>>Top</option>
-                                <option value="MIDDLE" <?=(!empty($position) && $position == 'MIDDLE') || ('MIDDLE' == old('position')) ? 'selected' : ''; ?>>Middle</option>
-                                <option value="BOTTOM" <?=(!empty($position) && $position == 'BOTTOM') || ('BOTTOM' == old('position')) ? 'selected' : ''; ?>>Bottom</option>
+                                <option value="BANNER 1" <?=(!empty($position) && $position == 'BANNER 1') || ('TOP' == old('position')) ? 'selected' : ''; ?>>BANNER 1</option>
+                                <?php if(session()->get('loggedAs') == 'tenant'): ?>
+                                <option value="BANNER 2" <?=(!empty($position) && $position == 'BANNER 2') || ('BANNER 2' == old('position')) ? 'selected' : ''; ?>>BANNER 2</option>
+                                <option value="BANNER 3" <?=(!empty($position) && $position == 'BANNER 3') || ('BANNER 3' == old('position')) ? 'selected' : ''; ?>>BANNER 3</option>
+                                <option value="BANNER 4" <?=(!empty($position) && $position == 'BANNER 4') || ('BANNER 4' == old('position')) ? 'selected' : ''; ?>>BANNER 4</option>
+                                <option value="BANNER 5" <?=(!empty($position) && $position == 'BANNER 5') || ('BANNER 5' == old('position')) ? 'selected' : ''; ?>>BANNER 5</option>
+                                <option value="BANNER 6" <?=(!empty($position) && $position == 'BANNER 6') || ('BANNER 6' == old('position')) ? 'selected' : ''; ?>>BANNER 6</option>
+                                <?php endif; ?>
                             </select>
                         </div>
                     </div>
@@ -73,12 +78,12 @@
                 <div class="row mb-3">
                     <div class="col-12">
                         <div class="form-group">
-                            <img width="100%" src="<?=!empty($banner_image) ? base_url('assets/uploads/banner/'.$banner_image) : ''; ?>" alt="Katalog Sepatu Indonesia">
+                            <img style="width: 100%; max-width: 100%;" src="<?=!empty($banner_image) ? $banner_image : base_url('assets/uploads/banner/no-image.jpg'); ?>">
                         </div>
                     </div>
                 </div>
                 <button type="submit" id="btnSave" class="btn btn-primary"><i class="fa fa-share-square"></i> &nbsp; <?=$btn_text ?></button>
-                <a href="<?=base_url('admin/banner');?>" class="btn btn-danger"><i class="fa fa-times"></i> &nbsp; Batal</a>
+                <a href="<?=$url_back ?>" class="btn btn-danger"><i class="fa fa-times"></i> &nbsp; Batal</a>
             </form>    
         </div>
     </div>

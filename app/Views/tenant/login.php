@@ -81,9 +81,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-12">
-                                                <button class="btn btn-primary text-white medium-bold" type="button">
-                                                    Login
-                                                </button>
+                                                <input class="btn btn-primary text-white medium-bold" type="submit" value="Login">
                                             </div>
                                             <div>
                                                 <a class="small" href="<?=base_url('forgot-password'); ?>">Forgot Password?</a>

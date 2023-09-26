@@ -44,6 +44,8 @@ class Filters extends BaseConfig
                 'admin/ajax-category-list',
                 'admin/ajax-user-list',
                 'admin/ajax-banner-list',
+                'tenant/ajax-banner-list',
+                'tenant/ajax-product-list',
             ]],
             // 'invalidchars',
         ],

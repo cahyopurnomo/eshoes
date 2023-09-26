@@ -3,8 +3,8 @@
 
 <div class="container-fluid">
    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-      <h1 class="h3 mb-0">Data User</h1>
-      <a href="<?= site_url('admin/create-user') ?>" class="btn btn-success"><i class="fas fa-plus"></i> Tambah</a>
+      <h1 class="h3 mb-0">Data Produk</h1>
+      <a href="<?=base_url('tenant/create-product') ?>" class="btn btn-success"><i class="fas fa-plus"></i> Tambah</a>
    </div>
 
    <div class="card">
@@ -25,13 +25,13 @@
                </div>
             </div>
          <?php endif; ?>
-         <table class="table table-striped table-bordered display nowrap" id="dataUsers" width="100%" cellspacing="0">
+         <table class="table table-striped table-bordered display nowrap" id="dataProduct" width="100%" cellspacing="0">
             <thead>
                   <tr>
                      <th>NO</th>    
-                     <th>NAMA LENGKAP</th>
-                     <th>EMAIL</th>
-                     <th>ROLE</th>
+                     <th>NAMA PRODUK</th>
+                     <th>SLUG</th>
+                     <th>KATEGORI</th>
                      <th>ACTION</th>
                   </tr>
             </thead>
@@ -44,7 +44,7 @@
 
 <script>
    $(document).ready(function(){
-      $('#dataUsers').DataTable({
+      $('#dataProduct').DataTable({
          "processing": true,
          "serverSide": true,
          "responsive": true,
@@ -53,7 +53,7 @@
          "scrollX": true,
          "stateSave" : true,
          "ajax": {
-            "url": "<?=site_url('admin/ajax-user-list') ;?>",
+            "url": "<?=base_url('tenant/ajax-product-list') ?>",
             "type": "POST"
          },
          "order": [],
@@ -61,8 +61,8 @@
             { 'targets': "_all", "orderable": false, },
             { "className": 'text-center', "targets": "_all" },
             { "className": 'dt-head-center', "targets": "_all" },
-            { "width": "3%", "targets": 0 },
-            // { "width": "5%", "targets": 3 },
+            { "width": "3%", "targets": [0] },
+            { "width": "5%", "targets": [4] },
          ],    
       });
    });
