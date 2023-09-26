@@ -32,6 +32,7 @@
                      <th>NAMA PRODUK</th>
                      <th>SLUG</th>
                      <th>KATEGORI</th>
+                     <th>STATUS</th>
                      <th>ACTION</th>
                   </tr>
             </thead>

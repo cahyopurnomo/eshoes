@@ -26,13 +26,13 @@
     <div class="card mb-4">
         <div class="card-body">
             <?php $error = validation_errors(); ?>
-            <form id="form_banner" action="<?=base_url('tenant/save-product') ?>" method="POST" autocomplete="off" enctype="multipart/form-data">
+            <form id="form_banner" action="<?=$url_save ?>" method="POST" autocomplete="off" enctype="multipart/form-data">
             <?= csrf_field() ?>
                 <div class="row mb-3">
                     <div class="col-12">
                         <div class="form-group required">
                             <label>Judul Produk</label>
-                            <input type="text" maxlength="100" class="form-control <?=!empty($error['product_name']) ? 'is-invalid' : null ?>" name="product_name" value="<?=!empty($product_name) ? $product_name : old('product_name') ?>">
+                            <input type="text" maxlength="100" onkeypress="return (event.charCode > 64 && event.charCode < 91) || (event.charCode > 96 && event.charCode < 123) || (event.charCode == 32)" class="form-control <?=!empty($error['product_name']) ? 'is-invalid' : null ?>" name="product_name" id="product_name" value="<?=!empty($product_name) ? $product_name : old('product_name') ?>">
                             <input type="hidden" class="form-control" name="product_id" value="<?=!empty($product_idx) ? $product_idx : '' ?>">
                             <div class="invalid-feedback d-block">
                                 <?=!empty($error['product_name']) ? $error['product_name'] : '' ?>
@@ -42,7 +42,7 @@
                     <div class="col-12">
                         <div class="form-group required">
                             <label>Slug</label>
-                            <input type="text" maxlength="100" class="form-control <?=!empty($error['slug']) ? 'is-invalid' : null ?>" name="slug" value="<?=!empty($slug) ? $slug : old('slug') ?>">
+                            <input type="text" maxlength="100" class="form-control <?=!empty($error['slug']) ? 'is-invalid' : null ?>" name="slug" id="slug" value="<?=!empty($slug) ? $slug : old('slug') ?>">
                             <div class="invalid-feedback d-block">
                                 <?=!empty($error['slug']) ? $error['slug'] : '' ?>
                             </div>
@@ -64,10 +64,20 @@
                             </select>
                         </div>
                     </div>
+                    <div class="col-6">
+                        <div class="form-group required">
+                            <label>Status</label>
+                            <select name="status" class="form-control">
+                                <option value="">--Pilih Status--</option>
+                                <option value="ON" <?=(!empty($status) && $status == 'ON') || ('ON' == old('status')) ? 'selected' : ''; ?>>Aktif</option>
+                                <option value="OFF" <?=(!empty($status) && $status == 'OFF') || ('OFF' == old('status')) ? 'selected' : ''; ?>>Tidak Aktif</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="col-12">
                         <div class="form-group required">
                             <label>Deskripsi</label>
-                            <textarea name="description" class="form-control <?=!empty($error['description']) ? 'is-invalid' : null ?>" cols="30" rows="10"><?=old('description') ?></textarea>
+                            <textarea name="description" class="form-control <?=!empty($error['description']) ? 'is-invalid' : null ?>" cols="30" rows="10"><?=!empty($description) ? $description : old('description') ?></textarea>
                             <div class="invalid-feedback d-block">
                                 <?=!empty($error['description']) ? $error['description'] : '' ?>
                             </div>
@@ -104,17 +114,17 @@
                 <div class="row mb-3">
                     <div class="col-4">
                         <div class="form-group">
-                            <img style="width: 100%; max-width: 100%;" src="<?=!empty($image1) ? $image1 : base_url('assets/uploads/banner/no-image.jpg'); ?>">
+                            <img style="width: 100%; max-width: 100%;" src="<?=$image1 ?>">
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-group">
-                            <img style="width: 100%; max-width: 100%;" src="<?=!empty($image2) ? $image2 : base_url('assets/uploads/banner/no-image.jpg'); ?>">
+                            <img style="width: 100%; max-width: 100%;" src="<?=$image2 ?>">
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-group">
-                            <img style="width: 100%; max-width: 100%;" src="<?=!empty($image3) ? $image3 : base_url('assets/uploads/banner/no-image.jpg'); ?>">
+                            <img style="width: 100%; max-width: 100%;" src="<?=$image3 ?>">
                         </div>
                     </div>
                 </div>
@@ -137,12 +147,27 @@
         
         $('#form_banner').confirm({
             title: 'Konfirmasi',
-            text: 'Pastikan Input Data Sudah Benar. <br>Yakin Simpan Data Banner Sekarang?',
+            text: 'Pastikan Input Data Sudah Benar. <br>Yakin Simpan Data Produk Sekarang?',
             ask: false,
             btnConfirm: 'Yes',
             btnCancel: 'Cancel',
             btnType: 'primary'
         });
+
+        $('#product_name').on('keyup', function(){
+            title = $(this).val();
+            slug = createSlug(title);
+            $('#slug').val(slug);
+        });
+
+        function createSlug(str) {
+            var $slug = '';
+            var trimmed = $.trim(str);
+            $slug = trimmed.replace(/[^a-z0-9-]/gi, '-').
+            replace(/-+/g, '-').
+            replace(/^-|-$/g, '');
+            return $slug.toLowerCase();
+        }
     });
 </script>
 <?=$this->endSection(); ?>
