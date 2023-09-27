@@ -54,7 +54,10 @@ a {
 
 a:hover,
 a:focus,
-a:active {
+a:active,
+.btn:hover,
+.btn:focus,
+.btn:active {
   opacity: 0.72;
   transition: all 0.3s ease-in-out;
 }
@@ -80,6 +83,7 @@ a:active {
 
 .card {
   border: 0px;
+  border-radius: 0;
 }
 
 label {
@@ -152,61 +156,61 @@ textarea.form-control {
 
 .btn-primary {
   color: #fff;
-  background-color: #004daf;
-  border-color: #004daf;
+  background-color: #004daf !important;
+  border-color: #004daf !important;
 }
 
 .btn-success {
   color: #fff;
-  background-color: #22c197;
-  border-color: #22c197;
+  background-color: #22c197 !important;
+  border-color: #22c197 !important;
 }
 
 .btn-info {
   color: #fff;
-  background-color: #00c7dd;
-  border-color: #00c7dd;
+  background-color: #00c7dd !important;
+  border-color: #00c7dd !important;
 }
 
 .btn-warning {
   color: #fff;
-  background-color: #ffbd5b;
-  border-color: #ffbd5b;
+  background-color: #ffbd5b !important;
+  border-color: #ffbd5b !important;
 }
 
 .btn-danger {
   color: #fff;
   background-color: #a40c35 !important;
-  border-color: #a40c35;
+  border-color: #a40c35 !important;
 }
 
 .alert-primary {
   border-color: #004daf !important;
-  background-color: rgba(0, 77, 175, 0.92);
+  background-color: rgba(0, 77, 175, 0.92) !important;
   color: #004daf !important;
 }
 
 .alert-success {
   border-color: #22c197 !important;
-  background-color: rgba(34, 193, 151, 0.92);
+  background-color: rgba(34, 193, 151, 0.92) !important;
   color: #22c197 !important;
 }
 
 .alert-info {
   border-color: #00c7dd !important;
-  background-color: rgba(0, 199, 221, 0.92);
+  background-color: rgba(0, 199, 221, 0.92) !important;
   color: #00c7dd !important;
 }
 
 .alert-warning {
   border-color: #ffbd5b !important;
-  background-color: rgba(255, 189, 91, 0.92);
+  background-color: rgba(255, 189, 91, 0.92) !important;
   color: #ffbd5b !important;
 }
 
 .alert-danger {
   border-color: #a40c35 !important;
-  background-color: rgba(164, 12, 53, 0.92);
+  background-color: rgba(164, 12, 53, 0.92) !important;
   color: #a40c35 !important;
 }
 

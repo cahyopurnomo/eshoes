@@ -7,7 +7,7 @@
       <a href="<?= site_url('admin/create-tenant') ?>" class="btn btn-primary"><i class="fas fa-plus"></i> &nbsp; Tambah</a>
    </div>
 
-   <div class="card">
+   <div class="card mb-4">
       <div class="card-body">
          <?php if (session()->getFlashdata('success')) : ?>
             <div class="alert alert-success alert-dismissible show fade">
