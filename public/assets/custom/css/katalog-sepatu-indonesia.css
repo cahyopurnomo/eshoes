@@ -595,6 +595,14 @@ img.img-pin-marker {
 @media (min-width: 768px) and (max-width: 1024px) {
   /*LOGIN*/
 
+  .bg-left-login {
+    display: none !important;
+  }
+
+  .bg-right-login {
+    height: 100vh;
+  }
+
   .bg-right-login .card-body {
     padding-top: 2rem;
     padding-bottom: 3rem;

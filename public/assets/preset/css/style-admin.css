@@ -180,6 +180,36 @@ textarea.form-control {
   border-color: #a40c35;
 }
 
+.alert-primary {
+  border-color: #004daf !important;
+  background-color: rgba(0, 77, 175, 0.92);
+  color: #004daf !important;
+}
+
+.alert-success {
+  border-color: #22c197 !important;
+  background-color: rgba(34, 193, 151, 0.92);
+  color: #22c197 !important;
+}
+
+.alert-info {
+  border-color: #00c7dd !important;
+  background-color: rgba(0, 199, 221, 0.92);
+  color: #00c7dd !important;
+}
+
+.alert-warning {
+  border-color: #ffbd5b !important;
+  background-color: rgba(255, 189, 91, 0.92);
+  color: #ffbd5b !important;
+}
+
+.alert-danger {
+  border-color: #a40c35 !important;
+  background-color: rgba(164, 12, 53, 0.92);
+  color: #a40c35 !important;
+}
+
 .bg-primary {
   background-color: #004daf !important;
 }

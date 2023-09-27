@@ -114,17 +114,17 @@
                 <div class="row mb-3">
                     <div class="col-4">
                         <div class="form-group">
-                            <img style="width: 100%; max-width: 100%;" src="<?=$image1 ?>">
+                            <img style="width: 100%; max-width: 100%;" src="<?=!empty($image1) ? $image1 : '' ?>">
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-group">
-                            <img style="width: 100%; max-width: 100%;" src="<?=$image2 ?>">
+                            <img style="width: 100%; max-width: 100%;" src="<?=!empty($image2) ? $image2 : '' ?>">
                         </div>
                     </div>
                     <div class="col-4">
                         <div class="form-group">
-                            <img style="width: 100%; max-width: 100%;" src="<?=$image3 ?>">
+                            <img style="width: 100%; max-width: 100%;" src="<?=!empty($image3) ? $image3 : '' ?>">
                         </div>
                     </div>
                 </div>

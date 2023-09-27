@@ -58,7 +58,7 @@
                                     <h3 class="mt-1 mb-1 pb-1 text-green bold">Login</h3>
                                     <p class="mb-4 medium-bold">Katalog Elektronik Produk Sepatu Indonesia</p>
                                     <?php if (!empty(session()->getFlashdata('error'))) : ?>
-                                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                             <?php echo session()->getFlashdata('error'); ?>
                                         </div>
                                     <?php endif; ?>
