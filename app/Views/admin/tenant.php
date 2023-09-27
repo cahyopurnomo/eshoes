@@ -4,7 +4,7 @@
 <div class="container-fluid">
    <div class="d-sm-flex align-items-center justify-content-between mb-4">
       <h1 class="h3 mb-0">Data Tenant</h1>
-      <a href="<?= site_url('admin/create-tenant') ?>" class="btn btn-success"><i class="fas fa-plus"></i> Tambah</a>
+      <a href="<?= site_url('admin/create-tenant') ?>" class="btn btn-primary"><i class="fas fa-plus"></i> &nbsp; Tambah</a>
    </div>
 
    <div class="card">
