@@ -4,7 +4,7 @@
 <div class="container-fluid">
    <div class="d-sm-flex align-items-center justify-content-between mb-4">
       <h1 class="h3 mb-0">Data Banner</h1>
-      <a href="<?=$url_create ?>" class="btn btn-success"><i class="fas fa-plus"></i> &nbsp; Tambah</a>
+      <a href="<?=$url_create ?>" class="btn btn-primary"><i class="fas fa-plus"></i> &nbsp; Tambah</a>
    </div>
 
    <div class="card">

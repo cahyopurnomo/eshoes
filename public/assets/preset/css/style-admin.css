@@ -176,7 +176,7 @@ textarea.form-control {
 
 .btn-danger {
   color: #fff;
-  background-color: #a40c35;
+  background-color: #a40c35 !important;
   border-color: #a40c35;
 }
 
@@ -475,11 +475,50 @@ footer.sticky-footer .copyright {
   line-height: 1.6em;
 }
 
+/* MODAL */
+
+.modal-content {
+  border: 0px;
+}
+
+.modal-header {
+  background-color: #004daf;
+  border-bottom: 0px;
+}
+
+.modal-header .modal-title {
+  color: #fff;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.modal-header .close {
+  text-shadow: none;
+  color: #fff;
+  opacity: 1;
+  box-shadow: none !important;
+}
+
+.modal-body {
+  color: #58595b;
+}
+
 @media (min-width: 360px) and (max-width: 767px) {
   .h3.mb-0 {
     margin-bottom: 15px !important;
   }
+
+  /* DATA TABLES */
+
+  div.dataTables_wrapper div.dataTables_filter input {
+    max-width: 110px;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
+  /* DATA TABLES */
+
+  div.dataTables_wrapper div.dataTables_filter input {
+    max-width: 160px;
+  }
 }
