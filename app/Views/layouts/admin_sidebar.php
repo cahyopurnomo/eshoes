@@ -1,12 +1,12 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
     <!-- Sidebar - Brand -->
-    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <div class="sidebar-brand d-flex align-items-center justify-content-center">
         <div class="sidebar-brand-icon rotate-n-15">
-            <!-- <i class="fas fa-laugh-wink"></i> -->
-            <img src="<?=base_url('assets/custom/img/icon-logo-katalog-sepatu-indonesia-white.png') ?>" class="img-icon-admin">
+            <i class="fas fa-laugh-wink"></i>
+            <!-- <img src="<?=base_url('assets/custom/img/icon-logo-katalog-sepatu-indonesia-white.png') ?>" class="img-icon-admin"> -->
         </div>
-        <div class="sidebar-brand-text mx-1">Admin</div>
-    </a>
+        <div class="sidebar-brand-text mx-1"> &nbsp; Admin</div>
+    </div>
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
     <!-- Nav Item - Dashboard -->

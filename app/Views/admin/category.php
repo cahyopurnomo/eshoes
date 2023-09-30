@@ -4,10 +4,10 @@
 <div class="container-fluid">
    <div class="d-sm-flex align-items-center justify-content-between mb-4">
       <h1 class="h3 mb-0">Data Kategori</h1>
-      <a href="<?= site_url('admin/create-category') ?>" class="btn btn-success"><i class="fas fa-plus"></i> Tambah</a>
+      <a href="<?= site_url('admin/create-category') ?>" class="btn btn-primary"><i class="fas fa-plus"></i></i> &nbsp; Tambah</a>
    </div>
 
-   <div class="card">
+   <div class="card mb-4">
       <div class="card-body">
          <?php if (session()->getFlashdata('success')) : ?>
             <div class="alert alert-success alert-dismissible show fade">

@@ -54,7 +54,10 @@ a {
 
 a:hover,
 a:focus,
-a:active {
+a:active,
+.btn:hover,
+.btn:focus,
+.btn:active {
   opacity: 0.72;
   transition: all 0.3s ease-in-out;
 }
@@ -80,6 +83,7 @@ a:active {
 
 .card {
   border: 0px;
+  border-radius: 0;
 }
 
 label {
@@ -88,7 +92,7 @@ label {
 
 img {
   width: 100%;
-  border-radius: 4px;
+  border-radius: 0px;
 }
 
 .form-control {
@@ -97,7 +101,7 @@ img {
   font-weight: 500;
   height: 40px;
   background: #f7f8ff;
-  border-radius: 4px;
+  border-radius: 0px;
   border: 1px #eeeeee solid;
   box-shadow: none !important;
 }
@@ -152,61 +156,61 @@ textarea.form-control {
 
 .btn-primary {
   color: #fff;
-  background-color: #004daf;
-  border-color: #004daf;
+  background-color: #004daf !important;
+  border-color: #004daf !important;
 }
 
 .btn-success {
   color: #fff;
-  background-color: #22c197;
-  border-color: #22c197;
+  background-color: #22c197 !important;
+  border-color: #22c197 !important;
 }
 
 .btn-info {
   color: #fff;
-  background-color: #00c7dd;
-  border-color: #00c7dd;
+  background-color: #00c7dd !important;
+  border-color: #00c7dd !important;
 }
 
 .btn-warning {
   color: #fff;
-  background-color: #ffbd5b;
-  border-color: #ffbd5b;
+  background-color: #ffbd5b !important;
+  border-color: #ffbd5b !important;
 }
 
 .btn-danger {
   color: #fff;
-  background-color: #a40c35;
-  border-color: #a40c35;
+  background-color: #a40c35 !important;
+  border-color: #a40c35 !important;
 }
 
 .alert-primary {
   border-color: #004daf !important;
-  background-color: rgba(0, 77, 175, 0.92);
+  background-color: rgba(0, 77, 175, 0.92) !important;
   color: #004daf !important;
 }
 
 .alert-success {
   border-color: #22c197 !important;
-  background-color: rgba(34, 193, 151, 0.92);
+  background-color: rgba(34, 193, 151, 0.92) !important;
   color: #22c197 !important;
 }
 
 .alert-info {
   border-color: #00c7dd !important;
-  background-color: rgba(0, 199, 221, 0.92);
+  background-color: rgba(0, 199, 221, 0.92) !important;
   color: #00c7dd !important;
 }
 
 .alert-warning {
   border-color: #ffbd5b !important;
-  background-color: rgba(255, 189, 91, 0.92);
+  background-color: rgba(255, 189, 91, 0.92) !important;
   color: #ffbd5b !important;
 }
 
 .alert-danger {
   border-color: #a40c35 !important;
-  background-color: rgba(164, 12, 53, 0.92);
+  background-color: rgba(164, 12, 53, 0.92) !important;
   color: #a40c35 !important;
 }
 
@@ -261,28 +265,29 @@ h5 {
 
 .btn {
   box-shadow: none !important;
+  border-radius: 0px !important;
 }
 
 /* DATA TABLES */
 
-#dataBanner_length {
-  margin-bottom: 5px;
+.dataTables_length {
+  margin-bottom: 5px !important;
 }
 
 div.dataTables_wrapper div.dataTables_length select {
-  margin: 0 5px;
+  margin: 0 5px !important;
 }
 
-#dataBanner_filter {
-  margin-bottom: 5px;
+.dataTables_filter {
+  margin-bottom: 5px !important;
 }
 
-#dataBanner_paginate {
-  margin-top: 20px;
+.dataTables_paginate {
+  margin-top: 20px !important;
 }
 
-#dataBanner_info {
-  margin-top: 15px;
+.dataTables_info {
+  margin-top: 15px !important;
   color: #58595b !important;
 }
 
@@ -440,6 +445,7 @@ nav.navbar .dropdown .dropdown-menu {
   padding: 0;
   font-size: 14px;
   border: 1px #e2eee6 solid;
+  border-radius: 0px;
 }
 
 nav.navbar .dropdown .dropdown-menu .dropdown-item {
@@ -475,11 +481,68 @@ footer.sticky-footer .copyright {
   line-height: 1.6em;
 }
 
+/* MODAL */
+
+.modal-content {
+  border: 0px;
+  border-radius: 0px;
+}
+
+.modal-header {
+  background-color: #004daf;
+  border-bottom: 0px;
+  border-radius: 0px;
+}
+
+.modal-header .modal-title {
+  color: #fff;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.modal-header .close {
+  text-shadow: none;
+  color: #fff;
+  opacity: 1;
+  box-shadow: none !important;
+}
+
+.modal-body {
+  color: #58595b;
+}
+
+.modal-body p {
+  margin: 0px;
+}
+
+.modal-footer {
+  border-radius: 0px;
+}
+
 @media (min-width: 360px) and (max-width: 767px) {
   .h3.mb-0 {
     margin-bottom: 15px !important;
   }
+
+  /* DATA TABLES */
+
+  div.dataTables_wrapper div.dataTables_filter input {
+    max-width: 110px;
+  }
+
+  .dataTables_info {
+    margin-top: 5px !important;
+  }
+
+  .dataTables_paginate {
+    margin-top: 15px !important;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
+  /* DATA TABLES */
+
+  div.dataTables_wrapper div.dataTables_filter input {
+    max-width: 160px;
+  }
 }

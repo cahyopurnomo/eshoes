@@ -47,6 +47,13 @@ body {
   color: #004daf !important;
 }
 
+.alert-danger {
+  border-color: #a40c35 !important;
+  background-color: rgba(164, 12, 53, 0.1);
+  color: #a40c35 !important;
+  border-radius: 0px !important;
+}
+
 a {
   text-decoration: none !important;
   transition: all 0.3s ease-in-out;
@@ -61,7 +68,7 @@ a:active {
 
 img {
   width: 100%;
-  border-radius: 4px;
+  border-radius: 0px;
 }
 
 .form-control {
@@ -70,8 +77,8 @@ img {
   font-weight: 500;
   height: 40px;
   background: #f7f8ff;
-  border-radius: 4px;
-  border: 1px #f7f8ff solid;
+  border-radius: 0px;
+  border: 1px #eeeeee solid;
   box-shadow: none !important;
 }
 
@@ -113,7 +120,7 @@ textarea.form-control {
   background: #004daf;
   background-image: linear-gradient(to right, #004daf, #004daf);
   border: 0px #004daf solid;
-  border-radius: 4px;
+  border-radius: 0px;
   padding: 0.375rem 1.5rem;
   transition: all 0.3s ease-in-out;
 }
@@ -136,7 +143,7 @@ textarea.form-control {
 /*MODAL*/
 
 .modal-content {
-  border-radius: 4px;
+  border-radius: 0px;
   border: 0px;
 }
 
@@ -214,7 +221,7 @@ a.nav-link .fa.fa-list {
   height: 32px;
   background: transparent;
   border: 1px #004daf solid;
-  border-radius: 4px;
+  border-radius: 0px;
   padding: 0.375rem 1rem;
   margin-right: 5px;
   margin-left: 10px;
@@ -341,7 +348,7 @@ li.page-item.disabled .page-link {
   display: block;
   height: auto;
   max-width: 100%;
-  border-radius: 4px;
+  border-radius: 0px;
   border: 1px #dddddd solid;
 }
 
@@ -379,7 +386,7 @@ li.page-item.disabled .page-link {
   display: inline-block;
   border: 1px #dddddd solid;
   border-color: rgb(221, 221, 221, 0.72);
-  border-radius: 4px;
+  border-radius: 0px;
 }
 
 /*PRODUK DETAIL*/
@@ -440,7 +447,7 @@ img.img-pin-marker {
 .btn.btn-email {
   background: #ffffff;
   border: 1px #004daf solid;
-  border-radius: 4px;
+  border-radius: 0px;
   min-width: 130px;
   height: 40px;
   transition: all 0.3s ease-in-out;
@@ -461,7 +468,7 @@ img.img-pin-marker {
 
 .card {
   border: 1px #e2eee6 solid;
-  border-radius: 4px;
+  border-radius: 0px;
   transition: all 0.3s ease-in-out;
 }
 
