@@ -66,6 +66,19 @@
             { "width": "5%", "targets": [3,4,5] },
          ],    
       });
+
+      $('[data-toggle=confirm]').confirmation({
+         rootSelector: '[data-toggle=confirm]',
+         buttons: [
+            {
+               class: 'btn btn-sm btn-danger',
+               iconClass: 'material-icons mr-1',
+               iconContent: 'directions_railway',
+               label: 'Railway',
+               value: 'Railway',
+            }
+         ]
+      });
    });
 </script>
 <?=$this->endSection(); ?>
