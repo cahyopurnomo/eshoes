@@ -29,19 +29,24 @@
             <form id="form_category" action="<?=$url ?>" method="POST" autocomplete="off">
             <?= csrf_field() ?>
                 <div class="row mb-3">
-                    <div class="col-3">
+                    <div class="col-6">
                         <div class="form-group">
                             <label>Induk Kategori</label>
                             <select name="parent_category" class="form-control select2">
                             <option value="0">--Pilih Induk Kategori--</option>
-                            <?php foreach ($parent as $key => $row) : ?>
-                                <option value="<?=$row['category_idx'] ?>" <?=(!empty($parent_idx) && $row['category_idx'] == $parent_idx) || ($row['category_idx'] == old('parent_category')) ? 'selected' : ''; ?>><?=$row['category_name'] ?></option>
+                            <?php foreach ($category as $key => $row): ?>
+                                <option value="<?=$row['category_idx'] ?>" <?=(!empty($category_id) && $category_id == $row['category_idx']) || ($row['category_idx'] == old('position')) ? 'selected' : ''; ?>><?=$row['category_name'] ?></option>
+                                <?php if (!empty($row['sub_categories'])): ?>
+                                    <?php foreach ($row['sub_categories'] as $k => $rec): ?>
+                                        <option value="<?=$rec['category_idx'] ?>" <?=(!empty($category_id) && $category_id == $rec['category_idx']) || ($rec['category_idx'] == old('position')) ? 'selected' : ''; ?>>&nbsp--&nbsp<?=$rec['category_name'] ?></option>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
                             <?php endforeach; ?>
                             </select>
                             <input type="hidden" maxlength="4" class="form-control" name="category_id" value="<?=!empty($category_idx) ? $category_idx : '' ?>">
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-6">
                         <div class="form-group required">
                             <label>Nama Kategori</label>
                             <input type="text" maxlength="100" class="form-control <?=!empty($error['category_name']) ? 'is-invalid' : null ?>" name="category_name" value="<?=!empty($category_name) ? $category_name : old('category_name') ?>">

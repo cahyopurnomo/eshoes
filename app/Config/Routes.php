@@ -55,6 +55,8 @@ $routes->group('admin', ['filter' => 'userAuth'], function($routes) {
     $routes->post('ajax-banner-list', 'Admin\Banner::ajax_banner_list');
 
     $routes->get('logout', 'Admin\Login::logout');
+    $routes->get('change-passwd', 'Admin\Login::change_passwd');
+    $routes->post('do-change-passwd', 'Admin\Login::do_change_passwd');
 });
 
 //TENANT
@@ -65,6 +67,8 @@ $routes->get('forgot-password', 'Tenant\Login::forgot_password');
 $routes->group('tenant', ['filter' => 'userAuth'], function($routes) {
     $routes->get('dashboard', 'Tenant\Dashboard::index');
     $routes->get('logout', 'Tenant\Login::logout');
+    $routes->get('change-passwd', 'Admin\Login::change_passwd');
+    $routes->post('do-change-passwd', 'Tenant\Login::do_change_passwd');
 
     //banner
     $routes->get('banner', 'Admin\Banner::index');

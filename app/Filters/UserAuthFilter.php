@@ -38,9 +38,6 @@ class UserAuthFilter implements FilterInterface
                 return redirect()->to(base_url('login'));
         }
 
-        
-        
-        
         if ($sessionSegment !== $segment) {
             return redirect()->to(site_url($sessionSegment));
         }

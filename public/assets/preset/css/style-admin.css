@@ -193,7 +193,8 @@ textarea.form-control {
 .alert-success {
   border-color: #22c197 !important;
   background-color: rgba(34, 193, 151, 0.92) !important;
-  color: #22c197 !important;
+  /* color: #22c197 !important; */
+  color: #fff !important;
 }
 
 .alert-info {

@@ -15,11 +15,13 @@
                 src="<?= base_url('assets/preset/img/undraw_profile.svg') ?>">
             </a>
             <!-- Dropdown - User Information -->
-            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                aria-labelledby="userDropdown">
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"aria-labelledby="userDropdown">
+                <?php $url = session()->get('loggedAs') == 'admin' ? "admin/change-passwd" : "tenant/change-passwd"; ?>
+                <a class="dropdown-item" href="<?= base_url($url); ?>">
+                    <i class="fa fa-key mr-2"></i>Ganti Password</a>
+                <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="<?=session()->get('loggedAs') == 'admin' ? 'admin/logout' : 'tenant/logout' ?>" data-toggle="modal" data-target="#logoutModal">
-                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                Logout
+                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Logout
                 </a>
             </div>
         </li>

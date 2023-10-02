@@ -57,7 +57,7 @@
                                     <option value="<?=$row['category_idx'] ?>" <?=(!empty($category_id) && $category_id == $row['category_idx']) || ($row['category_idx'] == old('position')) ? 'selected' : ''; ?>><?=$row['category_name'] ?></option>
                                     <?php if (!empty($row['sub_categories'])): ?>
                                         <?php foreach ($row['sub_categories'] as $k => $rec): ?>
-                                            <option value="<?=$row['category_idx'] ?>" <?=(!empty($category_id) && $category_id == $rec['category_idx']) || ($rec['category_idx'] == old('position')) ? 'selected' : ''; ?>>&nbsp--&nbsp<?=$rec['category_name'] ?></option>
+                                            <option value="<?=$rec['category_idx'] ?>" <?=(!empty($category_id) && $category_id == $rec['category_idx']) || ($rec['category_idx'] == old('position')) ? 'selected' : ''; ?>>&nbsp--&nbsp<?=$rec['category_name'] ?></option>
                                         <?php endforeach; ?>
                                     <?php endif; ?>
                                 <?php endforeach; ?>

@@ -158,7 +158,7 @@ class Banner extends BaseController
             return redirect()->back()->withInput();
         }
      
-        $banner_id  = $this->request->getPost('banner_id');
+        $banner_id    = $this->request->getPost('banner_id');
         $banner_id    = $this->encrypter->decrypt(hex2bin($banner_id));
         $banner_name  = $this->request->getPost('banner_name');
         $position     = $this->request->getPost('position');
@@ -185,6 +185,8 @@ class Banner extends BaseController
             
             $filename = $banner_image->getName();
             $data['banner_image'] = $filename;
+            // upload file banner_image
+            $banner_image->move(FCPATH.'assets/uploads/banner/', $filename);
         }
         
         $data['banner_name'] = $banner_name;

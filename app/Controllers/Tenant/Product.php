@@ -55,7 +55,7 @@ class Product extends BaseController
           $categories[$mainCategory['category_idx']] = $category;
         }
         return $categories;
-      }
+    }
 
     public function store()
     {

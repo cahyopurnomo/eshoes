@@ -21,14 +21,53 @@ class Category extends BaseController
 
     public function create()
     {
+        // $categories = $this->categoryModel->findAll();
+        // $cat = $this->generateTree($categories, 0);
+
+        $categories = $this->getCategoryTree(0);
+        // echo '<pre>', print_r($cat), die();
+
         $data = [
-            'parent'       => $this->categoryModel->findAll(),
+            'category'     => $categories,
             'url'          => base_url('admin/save-category'),
             'btn_text'     => 'Simpan',
             'header_text'  => 'Tambah'
         ];
         return view('admin/create_category', $data);
     }
+
+    public function getCategoryTree($parent_id = 0) {
+        $categories = array();
+        $result = $this->categoryModel->where('parent_idx', $parent_id)->findAll();
+
+        foreach ($result as $mainCategory) {
+          $category = array();
+          $category['category_idx'] = $mainCategory['category_idx'];
+          $category['category_name'] = $mainCategory['category_name'];
+          if (!empty($this->getCategoryTree($category['category_idx']))) {
+                $category['sub_categories'] = $this->getCategoryTree($category['category_idx']);
+          }
+          $categories[$mainCategory['category_idx']] = $category;
+        }
+        return $categories;
+    }
+
+    function generateTree($items = array(), $parent_id = 0){
+        // $tree = '<ul>';
+        $tree = '';
+        // for($i=0, $ni=count($items); $i < $ni; $i++){
+        foreach ($items as $key => $row) {
+            if($row['parent_idx'] == $parent_id){
+                // $tree .= '<li>';
+                $tree .= $row['category_name'].'<br>';
+                $sep = 
+                $tree .= $sep.$this->generateTree($items, $row['category_idx']);
+                // $tree .= '</li>';
+            } 
+        }
+        // $tree .= '</ul>';
+        return $tree;
+      }
 
     public function store()
     {
@@ -66,10 +105,11 @@ class Category extends BaseController
     {
         $category_id = $this->encrypter->decrypt(hex2bin($id));
         $category = $this->categoryModel->where('category_idx', $category_id)->first();
-        
+        $categories = $this->getCategoryTree(0);
+
         $data = [
             'category_idx'  => bin2hex($this->encrypter->encrypt($category['category_idx'])),
-            'parent'        => $this->categoryModel->findAll(),
+            'category'      => $categories,
             'parent_idx'    => $category['parent_idx'],
             'category_name' => $category['category_name'],
             'url'           => base_url('admin/update-category'),
