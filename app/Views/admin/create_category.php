@@ -26,10 +26,10 @@
     <div class="card mb-4">
         <div class="card-body">
             <?php $error = validation_errors(); ?>
-            <form id="form_category" action="<?=$url ?>" method="POST" autocomplete="off">
+            <form id="form_category" action="<?=$url ?>" method="POST" autocomplete="off" enctype="multipart/form-data">
             <?= csrf_field() ?>
                 <div class="row mb-3">
-                    <div class="col-6">
+                    <div class="col-4">
                         <div class="form-group">
                             <label>Induk Kategori</label>
                             <select name="parent_category" class="form-control select2">
@@ -46,13 +46,29 @@
                             <input type="hidden" maxlength="4" class="form-control" name="category_id" value="<?=!empty($category_idx) ? $category_idx : '' ?>">
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-4">
                         <div class="form-group required">
                             <label>Nama Kategori</label>
                             <input type="text" maxlength="100" class="form-control <?=!empty($error['category_name']) ? 'is-invalid' : null ?>" name="category_name" value="<?=!empty($category_name) ? $category_name : old('category_name') ?>">
                             <div class="invalid-feedback d-block">
                                 <?=!empty($error['category_name']) ? $error['category_name'] : '' ?>
                             </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="form-group required">
+                            <label>Logo Tenant</label>
+                            <input type="file" class="form-control <?=!empty($error['category_image']) ? 'is-invalid' : null ?>" name="category_image">
+                            <div class="invalid-feedback d-block">
+                                <?=!empty($error['category_image']) ? $error['category_image'] : '' ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-4">
+                        <div class="form-group">
+                            <img style="width: 100%; background-position: center center; background-repeat: no-repeat; background-size: cover; max-width: 300px;" src="<?=!empty($category_image) ? $category_image : base_url('assets/uploads/banner/no-image.jpg'); ?>">
                         </div>
                     </div>
                 </div>

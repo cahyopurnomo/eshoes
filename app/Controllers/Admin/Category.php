@@ -78,7 +78,16 @@ class Category extends BaseController
                     'required' => 'Nama Kategori Tidak Boleh Kosong',
                     'is_unique' => 'Nama Kategori Sudah Ada'
                 ]
-            ]
+                ],
+            'category_image' => [
+                'rules' => 'uploaded[category_image]|mime_in[category_image,image/jpg,image/jpeg,image/gif,image/png]|max_size[category_image,100]|is_image[category_image]',
+                'errors' => [
+                    'uploaded' => 'Harus Ada File yang diupload',
+                    'mime_in'  => 'File Extention Harus Berupa jpg, jpeg, gif, png',
+                    'max_size' => 'Ukuran File Maksimal 100KB',
+                    'is_image' => 'Format file tidak diijinkan',
+                ]
+            ],
         ]); //rules
 
         if (!$validation) {
@@ -87,10 +96,16 @@ class Category extends BaseController
      
         $parent_id      = $this->request->getPost('parent_category');
         $category_name  = $this->request->getPost('category_name');
+        $category_image = $this->request->getFile('category_image');
+        $filename       = $category_image->getName();
         
+        // upload file logo
+        $category_image->move(FCPATH.'assets/uploads/logo/', $filename);
+
         $data = [
-            'parent_idx'    => $parent_id,
-            'category_name' => $category_name
+            'parent_idx'     => $parent_id,
+            'category_name'  => $category_name,
+            'category_image' => $filename
         ];
         $id = $this->categoryModel->insert($data);
 
@@ -108,13 +123,14 @@ class Category extends BaseController
         $categories = $this->getCategoryTree(0);
 
         $data = [
-            'category_idx'  => bin2hex($this->encrypter->encrypt($category['category_idx'])),
-            'category'      => $categories,
-            'parent_idx'    => $category['parent_idx'],
-            'category_name' => $category['category_name'],
-            'url'           => base_url('admin/update-category'),
-            'btn_text'      => 'Update',
-            'header_text'   => 'Update'
+            'category_idx'      => bin2hex($this->encrypter->encrypt($category['category_idx'])),
+            'category'          => $categories,
+            'parent_idx'        => $category['parent_idx'],
+            'category_name'     => $category['category_name'],
+            'category_image'    => !empty($category['category_image']) ? base_url('assets/uploads/logo/'.$category['category_image']) : '',
+            'url'               => base_url('admin/update-category'),
+            'btn_text'          => 'Update',
+            'header_text'       => 'Update'
         ];
         return view('admin/create_category', $data);
     }
@@ -138,11 +154,34 @@ class Category extends BaseController
         $category_id    = $this->encrypter->decrypt(hex2bin($category_id));
         $parent_id      = $this->request->getPost('parent_category');
         $category_name  = $this->request->getPost('category_name');
+        $category_image = $this->request->getFile('category_image');
+
+        if (!empty($category_image->getName())) {
+            $validation = $this->validate([
+                'category_image' => [
+                    'rules' => 'uploaded[category_image]|mime_in[category_image,image/jpg,image/jpeg,image/gif,image/png]|max_size[category_image,100]|is_image[category_image]',
+                    'errors' => [
+                        'uploaded' => 'Harus Ada File yang diupload',
+                        'mime_in'  => 'File Extention Harus Berupa jpg, jpeg, gif, png',
+                        'max_size' => 'Ukuran File Maksimal 100KB',
+                        'is_image' => 'Format file tidak diijinkan',
+                    ]
+                ]
+            ]); //rules
+    
+            if (!$validation) {
+                return redirect()->back()->withInput();
+            }
+            
+            $filename = $category_image->getName();
+            $data['category_image'] = $filename;
+            // upload file logo
+            $category_image->move(FCPATH.'assets/uploads/logo/', $filename);
+        }
         
-        $data = [
-            'parent_idx'    => $parent_id,
-            'category_name' => $category_name,
-        ];
+        $data['parent_idx'] = $parent_id;
+        $data['category_name'] = $category_name;
+        
         $this->categoryModel->update($category_id, $data);
 
         return redirect()->to('admin/category')->with('success', 'Kategori berhasil diupdate.');

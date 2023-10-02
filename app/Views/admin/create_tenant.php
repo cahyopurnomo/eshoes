@@ -26,7 +26,7 @@
     <div class="card mb-4">
         <div class="card-body">
             <?php $error = validation_errors(); ?>
-            <form id="form_tenant" action="<?=$url ?>" method="POST" autocomplete="off">
+            <form id="form_tenant" action="<?=$url ?>" method="POST" autocomplete="off" enctype="multipart/form-data">
             <?= csrf_field() ?>
                 <div class="row mb-3">
                     <div class="col-3">
@@ -172,6 +172,22 @@
                         </div>
                     </div>
                     <?php endif; ?>
+                    <div class="col-3">
+                        <div class="form-group required">
+                            <label>Logo Tenant</label>
+                            <input type="file" class="form-control <?=!empty($error['logo']) ? 'is-invalid' : null ?>" name="logo">
+                            <div class="invalid-feedback d-block">
+                                <?=!empty($error['logo']) ? $error['logo'] : '' ?>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <img style="width: 100%; background-position: center center; background-repeat: no-repeat; background-size: cover; max-width: 300px;" src="<?=!empty($logo) ? $logo : base_url('assets/uploads/banner/no-image.jpg'); ?>">
+                        </div>
+                    </div>
                 </div>
                 <button type="submit" id="btnSave" class="btn btn-primary"><i class="fa fa-share-square"></i> &nbsp; <?=$btn_text ?></button>
                 <a href="<?=base_url('admin/tenant');?>" class="btn btn-danger"><i class="fa fa-times"></i> &nbsp; Batal</a>

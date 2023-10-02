@@ -87,13 +87,22 @@ class Tenant extends BaseController
                 'errors' => [
                     'required' => 'Nama Propinsi Tidak Boleh Kosong'
                 ]
-            ]
+                ],
+            'logo' => [
+                'rules' => 'uploaded[logo]|mime_in[logo,image/jpg,image/jpeg,image/gif,image/png]|max_size[logo,100]|is_image[logo]',
+                'errors' => [
+                    'uploaded' => 'Harus Ada File yang diupload',
+                    'mime_in'  => 'File Extention Harus Berupa jpg, jpeg, gif, png',
+                    'max_size' => 'Ukuran File Maksimal 100KB',
+                    'is_image' => 'Format file tidak diijinkan',
+                ]
+            ],
         ]); //rules
 
         if (!$validation) {
             return redirect()->back()->withInput();
         }
-     
+
         $tenant_id      = $this->request->getPost('tenant_id');
         $tenant_name    = $this->request->getPost('tenant_name');
         $email          = $this->request->getPost('email');
@@ -112,6 +121,8 @@ class Tenant extends BaseController
         $lazada         = !empty($this->request->getPost('lazada')) ? $this->request->getPost('lazada') : '';
         $shopee         = !empty($this->request->getPost('shopee')) ? $this->request->getPost('shopee') : '';
         $blibli         = !empty($this->request->getPost('blibli')) ? $this->request->getPost('blibli') : '';
+        $logo           = $this->request->getFile('logo');
+        $filename       = $logo->getName();
         
         // check existing email except softdelete
         $tenant = $this->tenantModel->where('email', $email)->first();
@@ -130,6 +141,9 @@ class Tenant extends BaseController
             }
         }
 
+        // upload file logo
+        $logo->move(FCPATH.'assets/uploads/logo/', $filename);
+
         $data = [
             'tenant_name'   => $tenant_name,
             'email'         => $email,
@@ -147,6 +161,7 @@ class Tenant extends BaseController
             'lazada'        => $lazada,
             'shopee'        => $shopee,
             'blibli'        => $blibli,
+            'logo'          => $filename,
             'status'        => 'ACTIVE'
         ];
         $id = $this->tenantModel->insert($data);
@@ -182,6 +197,7 @@ class Tenant extends BaseController
             'shopee'        => $tenant['shopee'],
             'blibli'        => $tenant['blibli'],
             'status'        => $tenant['status'],
+            'logo'          => base_url('assets/uploads/logo/'.$tenant['logo']),
             'province'      => $this->provinceModel->findAll(),
             'city'          => $this->cityModel->findAll(),
             'url'           => base_url('admin/update-tenant'),
@@ -251,6 +267,30 @@ class Tenant extends BaseController
         $lazada         = !empty($this->request->getPost('lazada')) ? $this->request->getPost('lazada') : '';
         $shopee         = !empty($this->request->getPost('shopee')) ? $this->request->getPost('shopee') : '';
         $blibli         = !empty($this->request->getPost('blibli')) ? $this->request->getPost('blibli') : '';
+        $logo           = $this->request->getFile('logo');
+
+        if (!empty($logo->getName())) {
+            $validation = $this->validate([
+                'logo' => [
+                    'rules' => 'uploaded[logo]|mime_in[logo,image/jpg,image/jpeg,image/gif,image/png]|max_size[logo,100]|is_image[logo]',
+                    'errors' => [
+                        'uploaded' => 'Harus Ada File yang diupload',
+                        'mime_in'  => 'File Extention Harus Berupa jpg, jpeg, gif, png',
+                        'max_size' => 'Ukuran File Maksimal 100KB',
+                        'is_image' => 'Format file tidak diijinkan',
+                    ]
+                ]
+            ]); //rules
+    
+            if (!$validation) {
+                return redirect()->back()->withInput();
+            }
+            
+            $filename = $logo->getName();
+            $data['logo'] = $filename;
+            // upload file logo
+            $logo->move(FCPATH.'assets/uploads/logo/', $filename);
+        }
 
         // check existing email except softdelete
         // jika email != session email
@@ -295,26 +335,25 @@ class Tenant extends BaseController
                 return redirect()->back()->withInput();
             }
 
-            $data['passwd'] = $passwd; 
+            $data['passwd'] = password_hash($passwd, PASSWORD_BCRYPT); 
         }
         
-        $data = [
-            'tenant_name'   => $tenant_name,
-            'email'         => $email,
-            'phone'         => $phone,
-            'city_name'     => $city_name,
-            'province_name' => $province_name,
-            'facebook'      => $facebook,
-            'instagram'     => $instagram,
-            'linkedin'      => $linkedin,
-            'twitter'       => $twitter,
-            'youtube'       => $youtube,
-            'tiktok'        => $tiktok,
-            'tokopedia'     => $tokopedia,
-            'lazada'        => $lazada,
-            'shopee'        => $shopee,
-            'blibli'        => $blibli
-        ];
+        $data['tenant_name']   = $tenant_name;
+        $data['email']         = $email;
+        $data['phone']         = $phone;
+        $data['city_name']     = $city_name;
+        $data['province_name'] = $province_name;
+        $data['facebook']      = $facebook;
+        $data['instagram']     = $instagram;
+        $data['linkedin']      = $linkedin;
+        $data['twitter']       = $twitter;
+        $data['youtube']       = $youtube;
+        $data['tiktok']        = $tiktok;
+        $data['tokopedia']     = $tokopedia;
+        $data['lazada']        = $lazada;
+        $data['shopee']        = $shopee;
+        $data['blibli']        = $blibli;
+
         $this->tenantModel->update($tenant_id, $data);
 
         return redirect()->to('admin/tenant')->with('success', 'Tenant berhasil diupdate.');
