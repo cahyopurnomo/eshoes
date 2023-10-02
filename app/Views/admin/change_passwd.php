@@ -28,7 +28,7 @@
             <?php $error = validation_errors(); ?>
             <form id="form_change_passwd" action="<?=$url_save ?>" method="POST" autocomplete="off">
                 <?= csrf_field() ?>
-                <div class="row ">
+                <div class="row mb-3">
                     <div class="col-6">
                         <div class="form-group required">
                             <label>Password Baru</label>
@@ -48,9 +48,13 @@
                         </div>
                     </div>
                 </div>
-                <input type="hidden" maxlength="200" class="form-control" name="user_id" value="<?=$user_id ?>">
-                <button type="submit" id="btnSave" class="btn btn-primary"><i class="fa fa-share-square"></i> &nbsp; Update</button>
-                <a href="<?=$url_back ?>" class="btn btn-danger"><i class="fa fa-times"></i> &nbsp; Batal</a>
+                <div class="row ">
+                    <div class="col-12">
+                        <input type="hidden" maxlength="200" class="form-control" name="user_id" value="<?=$user_id ?>">
+                        <button type="submit" id="btnSave" class="btn btn-primary"><i class="fa fa-share-square"></i> &nbsp; Update</button>
+                        <a href="<?=$url_back ?>" class="btn btn-danger"><i class="fa fa-times"></i> &nbsp; Batal</a>
+                    </div>
+                </div>
             </form>    
         </div>
     </div>
