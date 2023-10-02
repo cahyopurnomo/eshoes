@@ -28,7 +28,7 @@
             <?php $error = validation_errors(); ?>
             <form id="form_change_passwd" action="<?=$url_save ?>" method="POST" autocomplete="off">
                 <?= csrf_field() ?>
-                <div class="row mb-3">
+                <div class="row mb-2">
                     <div class="col-6">
                         <div class="form-group required">
                             <label>Password Baru</label>
