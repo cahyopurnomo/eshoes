@@ -31,6 +31,7 @@ class Product extends BaseController
             'slug'         => '',
             'category_id'  => '',
             'status'       => '',
+            'price'        => '',
             'image1'       => base_url('assets/uploads/banner/no-image.jpg'),
             'image2'       => base_url('assets/uploads/banner/no-image.jpg'),
             'image3'       => base_url('assets/uploads/banner/no-image.jpg'),
@@ -109,6 +110,7 @@ class Product extends BaseController
         $slug         = $this->request->getPost('slug');
         $description  = $this->request->getPost('description');
         $category_id  = $this->request->getPost('category');
+        $price        = $this->request->getPost('price');
         $status       = $this->request->getPost('status');
         $image1       = $this->request->getFile('image1');
         $image2       = $this->request->getFile('image2');
@@ -120,6 +122,7 @@ class Product extends BaseController
             'description'   => $description,
             'category_idx'  => $category_id,
             'status'        => $status,
+            'price'         => !empty($price) ? $price : 0,
             'tenant_idx'    => session()->get('user_idx'),
             'image1'        => !empty($image1->getName()) ? $image1->getName() : '',
             'image2'        => !empty($image2->getName()) ? $image2->getName() : '',
@@ -174,6 +177,7 @@ class Product extends BaseController
             'image3'       => !empty($product['image3']) ? base_url('assets/uploads/products/'.$product['image3']) : base_url('assets/uploads/banner/no-image.jpg'),
             'status'       => $product['status'],
             'category'     => $categories,
+            'price'        => $product['price'],
             'url_save'     => base_url('tenant/update-product'),
             'btn_text'     => 'Update',
             'header_text'  => 'Update'
@@ -222,11 +226,12 @@ class Product extends BaseController
         }
      
         $product_id   = $this->request->getPost('product_id');
-        $product_id    = $this->encrypter->decrypt(hex2bin($product_id));
+        $product_id   = $this->encrypter->decrypt(hex2bin($product_id));
         $product_name = $this->request->getPost('product_name');
         $slug         = $this->request->getPost('slug');
         $description  = $this->request->getPost('description');
         $category_id  = $this->request->getPost('category');
+        $price        = $this->request->getPost('price');
         $status       = $this->request->getPost('status');
         $image1       = $this->request->getFile('image1');
         $image2       = $this->request->getFile('image2');
@@ -238,6 +243,7 @@ class Product extends BaseController
             'description'   => $description,
             'category_idx'  => $category_id,
             'status'        => $status,
+            'price'         => !empty($price) ? $price : 0,
             'updated_at'    => date('Y-m-d H:i:s'),
         ];
         
@@ -363,6 +369,7 @@ class Product extends BaseController
                 $row    = array();
                 $row[] = $no;
                 $row[] = '<a href="'.base_url('tenant/edit-product/'.bin2hex($this->encrypter->encrypt($list->product_idx))).'" title="Edit Product">'.$list->product_name.'</a>';
+                $row[] = number_format($list->price);
                 $row[] = $list->slug;
                 $category = $this->categoryModel->select('category_name')->where('category_idx', $list->category_idx)->first();
                 $list->category_name = $category['category_name'];

@@ -9,15 +9,11 @@
                 <button type="button" data-bs-target="#carouselHomePage" data-bs-slide-to="2" aria-label="Slide 3"></button>
             </div>
             <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="<?=base_url('assets/custom/img/slide-01.jpg') ?>" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                    <img src="<?=base_url('assets/custom/img/slide-03.jpg') ?>" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                    <img src="<?=base_url('assets/custom/img/slide-02.jpg') ?>" class="d-block w-100" alt="...">
-                </div>
+                <?php foreach ($banner as $key => $row): ?>
+                    <div class="carousel-item <?=$key == 0 ? 'active' : '' ?>">
+                        <img src="<?=base_url('assets/uploads/banner/'.$row['banner_image']) ?>" class="d-block w-100" alt="...">
+                    </div>
+                <?php endforeach; ?>
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselHomePage" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -46,66 +42,20 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col mb-3">
-                    <div class="card text-center">
-                        <a href="kategori.html">
-                            <img src="assets/custom/img/sepatu-sport-graphity.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h6 class="medium-bold mb-0">Sepatu Sport</h6>
+                <?php foreach ($category as $key => $row): ?>
+                    <?php if (!empty($row['category_name'])): ?>
+                        <div class="col mb-3">
+                            <div class="card text-center">
+                                <a href="<?=base_url('product?cat='.$row['category_idx']) ?>">
+                                    <img src="<?=!empty($row['category_image']) ? base_url('assets/uploads/logo/'.$row['category_image']) : base_url('assets/uploads/banner/no-image.jpg') ?>" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h6 class="medium-bold mb-0"><?=$row['category_name'] ?></h6>
+                                    </div>
+                                </a>
                             </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col mb-3">
-                    <div class="card text-center">
-                        <a href="kategori.html">
-                            <img src="<?=base_url() ?>assets/custom/img/sepatu-sekolah-graphity.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h6 class="medium-bold mb-0">Sepatu Sneaker</h6>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col mb-3">
-                    <div class="card text-center">
-                        <a href="kategori.html">
-                            <img src="<?=base_url() ?>assets/custom/img/goodyear-welted-shoes.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h6 class="medium-bold mb-0">Sepatu Fashion</h6>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col mb-3">
-                    <div class="card text-center">
-                        <a href="kategori.html">
-                            <img src="<?=base_url() ?>assets/custom/img/sepatu-jogging-phylon.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h6 class="medium-bold mb-0">Sepatu Jogging</h6>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col mb-3">
-                    <div class="card text-center">
-                        <a href="kategori.html">
-                            <img src="<?=base_url() ?>assets/custom/img/sepatu-olahraga-phylon.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h6 class="medium-bold mb-0">Sepatu Olahraga</h6>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col mb-3">
-                    <div class="card text-center">
-                        <a href="kategori.html">
-                            <img src="<?=base_url() ?>assets/custom/img/sepatu-boots-graphity.jpg" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h6 class="medium-bold mb-0">Sepatu Boots</h6>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+                        </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
             </div>
         </div>
     </div>
@@ -125,36 +75,13 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-2 mb-3">
-                <div class="card">
-                    <a href="brand.html"><img src="<?=base_url() ?>assets/custom/img/ventela.jpg" class="card-img-top" alt="..."></a>
+            <?php foreach ($tenant as $key => $row): ?>
+                <div class="col-2 mb-3">
+                    <div class="card">
+                        <a href="<?=base_url('brand?t='.$row['tenant_idx']) ?>"><img src="<?=!empty($row['logo']) ? base_url('assets/uploads/logo/'.$row['logo']) : base_url('assets/uploads/banner/no-image.jpg') ?>" class="card-img-top" alt="..."></a>
+                    </div>
                 </div>
-            </div>
-            <div class="col-2 mb-3">
-                <div class="card">
-                    <a href="brand.html"><img src="<?=base_url() ?>assets/custom/img/aero-street.jpg" class="card-img-top" alt="..."></a>
-                </div>
-            </div>
-            <div class="col-2 mb-3">
-                <div class="card">
-                    <a href="brand.html"><img src="<?=base_url() ?>assets/custom/img/patrobas.jpg" class="card-img-top" alt="..."></a>
-                </div>
-            </div>
-            <div class="col-2 mb-3">
-                <div class="card">
-                    <a href="brand.html"><img src="<?=base_url() ?>assets/custom/img/brodo.jpg" class="card-img-top" alt="..."></a>
-                </div>
-            </div>
-            <div class="col-2 mb-3">
-                <div class="card">
-                    <a href="brand.html"><img src="<?=base_url() ?>assets/custom/img/nah-project.jpg" class="card-img-top" alt="..."></a>
-                </div>
-            </div>
-            <div class="col-2 mb-3">
-                <div class="card">
-                    <a href="brand.html"><img src="<?=base_url() ?>assets/custom/img/buccheri.jpg" class="card-img-top" alt="..."></a>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
     </div>
 </main>
@@ -173,220 +100,22 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-3 mb-4">
-                <div class="card text-left">
-                    <a href="produk-detail.html">
-                        <img src="<?=base_url() ?>assets/custom/img/sepatu-sport-graphity.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="medium-bold mb-1">Servodio 36-44 Navy Sepatu Sneakers Casual - SV02</p>
-                            <p class="text-green bold mb-3">Rp. 1.500.000</p>
-                            <p class="mb-1 text-grey"><img src="<?=base_url() ?>assets/custom/img/toko-01.jpg" class="img-toko">&nbsp; Aero Street Shoes Indonesia</p>
-                            <p class="mb-0 text-grey"><img src="<?=base_url() ?>assets/custom/img/pin-marker.png" class="img-pin-marker">&nbsp; Jawa Tengah</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-3 mb-4">
-                <div class="card text-left">
-                    <a href="produk-detail.html">
-                        <img src="<?=base_url() ?>assets/custom/img/sepatu-sekolah-graphity.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="medium-bold mb-1">Servodio 36-44 Navy Sepatu Sneakers Casual - SV02</p>
-                            <p class="text-green bold mb-3">Rp. 1.500.000</p>
-                            <p class="mb-1 text-grey"><img src="<?=base_url() ?>assets/custom/img/toko-01.jpg" class="img-toko">&nbsp; Aero Street Shoes Indonesia</p>
-                            <p class="mb-0 text-grey"><img src="<?=base_url() ?>assets/custom/img/pin-marker.png" class="img-pin-marker">&nbsp; Jawa Tengah</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-3 mb-4">
-                <div class="card text-left">
-                    <a href="produk-detail.html">
-                        <img src="<?=base_url() ?>assets/custom/img/goodyear-welted-shoes.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="medium-bold mb-1">Servodio 36-44 Navy Sepatu Sneakers Casual - SV02</p>
-                            <p class="text-green bold mb-3">Rp. 1.500.000</p>
-                            <p class="mb-1 text-grey"><img src="assets/custom/img/toko-01.jpg" class="img-toko">&nbsp; Aero Street Shoes Indonesia</p>
-                            <p class="mb-0 text-grey"><img src="assets/custom/img/pin-marker.png" class="img-pin-marker">&nbsp; Jawa Tengah</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-3 mb-4">
-                <div class="card text-left">
-                    <a href="produk-detail.html">
-                        <img src="assets/custom/img/sepatu-jogging-phylon.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="medium-bold mb-1">Servodio 36-44 Navy Sepatu Sneakers Casual - SV02</p>
-                            <p class="text-green bold mb-3">Rp. 1.500.000</p>
-                            <p class="mb-1 text-grey"><img src="assets/custom/img/toko-01.jpg" class="img-toko">&nbsp; Aero Street Shoes Indonesia</p>
-                            <p class="mb-0 text-grey"><img src="assets/custom/img/pin-marker.png" class="img-pin-marker">&nbsp; Jawa Tengah</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-3 mb-4">
-                <div class="card text-left">
-                    <a href="produk-detail.html">
-                        <img src="assets/custom/img/sepatu-olahraga-phylon.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="medium-bold mb-1">Servodio 36-44 Navy Sepatu Sneakers Casual - SV02</p>
-                            <p class="text-green bold mb-3">Rp. 1.500.000</p>
-                            <p class="mb-1 text-grey"><img src="assets/custom/img/toko-01.jpg" class="img-toko">&nbsp; Aero Street Shoes Indonesia</p>
-                            <p class="mb-0 text-grey"><img src="assets/custom/img/pin-marker.png" class="img-pin-marker">&nbsp; Jawa Tengah</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-3 mb-4">
-                <div class="card text-left">
-                    <a href="produk-detail.html">
-                        <img src="assets/custom/img/sepatu-boots-graphity.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="medium-bold mb-1">Servodio 36-44 Navy Sepatu Sneakers Casual - SV02</p>
-                            <p class="text-green bold mb-3">Rp. 1.500.000</p>
-                            <p class="mb-1 text-grey"><img src="assets/custom/img/toko-01.jpg" class="img-toko">&nbsp; Aero Street Shoes Indonesia</p>
-                            <p class="mb-0 text-grey"><img src="assets/custom/img/pin-marker.png" class="img-pin-marker">&nbsp; Jawa Tengah</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-3 mb-4">
-                <div class="card text-left">
-                    <a href="produk-detail.html">
-                        <img src="assets/custom/img/img-produk-01.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="medium-bold mb-1">Servodio 36-44 Navy Sepatu Sneakers Casual - SV02</p>
-                            <p class="text-green bold mb-3">Rp. 1.500.000</p>
-                            <p class="mb-1 text-grey"><img src="assets/custom/img/toko-01.jpg" class="img-toko">&nbsp; Aero Street Shoes Indonesia</p>
-                            <p class="mb-0 text-grey"><img src="assets/custom/img/pin-marker.png" class="img-pin-marker">&nbsp; Jawa Tengah</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-3 mb-4">
-                <div class="card text-left">
-                    <a href="produk-detail.html">
-                        <img src="assets/custom/img/img-produk-02.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="medium-bold mb-1">Servodio 36-44 Navy Sepatu Sneakers Casual - SV02</p>
-                            <p class="text-green bold mb-3">Rp. 1.500.000</p>
-                            <p class="mb-1 text-grey"><img src="assets/custom/img/toko-01.jpg" class="img-toko">&nbsp; Aero Street Shoes Indonesia</p>
-                            <p class="mb-0 text-grey"><img src="assets/custom/img/pin-marker.png" class="img-pin-marker">&nbsp; Jawa Tengah</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-3 mb-4">
-                <div class="card text-left">
-                    <a href="produk-detail.html">
-                        <img src="assets/custom/img/img-produk-03.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="medium-bold mb-1">Servodio 36-44 Navy Sepatu Sneakers Casual - SV02</p>
-                            <p class="text-green bold mb-3">Rp. 1.500.000</p>
-                            <p class="mb-1 text-grey"><img src="assets/custom/img/toko-01.jpg" class="img-toko">&nbsp; Aero Street Shoes Indonesia</p>
-                            <p class="mb-0 text-grey"><img src="assets/custom/img/pin-marker.png" class="img-pin-marker">&nbsp; Jawa Tengah</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-3 mb-4">
-                <div class="card text-left">
-                    <a href="produk-detail.html">
-                        <img src="assets/custom/img/img-produk-04.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="medium-bold mb-1">Servodio 36-44 Navy Sepatu Sneakers Casual - SV02</p>
-                            <p class="text-green bold mb-3">Rp. 1.500.000</p>
-                            <p class="mb-1 text-grey"><img src="assets/custom/img/toko-01.jpg" class="img-toko">&nbsp; Aero Street Shoes Indonesia</p>
-                            <p class="mb-0 text-grey"><img src="assets/custom/img/pin-marker.png" class="img-pin-marker">&nbsp; Jawa Tengah</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-3 mb-4">
-                <div class="card text-left">
-                    <a href="produk-detail.html">
-                        <img src="assets/custom/img/img-produk-05.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="medium-bold mb-1">Servodio 36-44 Navy Sepatu Sneakers Casual - SV02</p>
-                            <p class="text-green bold mb-3">Rp. 1.500.000</p>
-                            <p class="mb-1 text-grey"><img src="assets/custom/img/toko-01.jpg" class="img-toko">&nbsp; Aero Street Shoes Indonesia</p>
-                            <p class="mb-0 text-grey"><img src="assets/custom/img/pin-marker.png" class="img-pin-marker">&nbsp; Jawa Tengah</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-3 mb-4">
-                <div class="card text-left">
-                    <a href="produk-detail.html">
-                        <img src="assets/custom/img/img-produk-06.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="medium-bold mb-1">Servodio 36-44 Navy Sepatu Sneakers Casual - SV02</p>
-                            <p class="text-green bold mb-3">Rp. 1.500.000</p>
-                            <p class="mb-1 text-grey"><img src="assets/custom/img/toko-01.jpg" class="img-toko">&nbsp; Aero Street Shoes Indonesia</p>
-                            <p class="mb-0 text-grey"><img src="assets/custom/img/pin-marker.png" class="img-pin-marker">&nbsp; Jawa Tengah</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-3 mb-4">
-                <div class="card text-left">
-                    <a href="produk-detail.html">
-                        <img src="assets/custom/img/img-produk-07.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="medium-bold mb-1">Servodio 36-44 Navy Sepatu Sneakers Casual - SV02</p>
-                            <p class="text-green bold mb-3">Rp. 1.500.000</p>
-                            <p class="mb-1 text-grey"><img src="assets/custom/img/toko-01.jpg" class="img-toko">&nbsp; Aero Street Shoes Indonesia</p>
-                            <p class="mb-0 text-grey"><img src="assets/custom/img/pin-marker.png" class="img-pin-marker">&nbsp; Jawa Tengah</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-3 mb-4">
-                <div class="card text-left">
-                    <a href="produk-detail.html">
-                        <img src="assets/custom/img/img-produk-08.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="medium-bold mb-1">Servodio 36-44 Navy Sepatu Sneakers Casual - SV02</p>
-                            <p class="text-green bold mb-3">Rp. 1.500.000</p>
-                            <p class="mb-1 text-grey"><img src="assets/custom/img/toko-01.jpg" class="img-toko">&nbsp; Aero Street Shoes Indonesia</p>
-                            <p class="mb-0 text-grey"><img src="assets/custom/img/pin-marker.png" class="img-pin-marker">&nbsp; Jawa Tengah</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-3 mb-4">
-                <div class="card text-left">
-                    <a href="produk-detail.html">
-                        <img src="assets/custom/img/img-produk-09.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="medium-bold mb-1">Servodio 36-44 Navy Sepatu Sneakers Casual - SV02</p>
-                            <p class="text-green bold mb-3">Rp. 1.500.000</p>
-                            <p class="mb-1 text-grey"><img src="assets/custom/img/toko-01.jpg" class="img-toko">&nbsp; Aero Street Shoes Indonesia</p>
-                            <p class="mb-0 text-grey"><img src="assets/custom/img/pin-marker.png" class="img-pin-marker">&nbsp; Jawa Tengah</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="col-3 mb-4">
-                <div class="card text-left">
-                    <a href="produk-detail.html">
-                        <img src="assets/custom/img/img-produk-10.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <p class="medium-bold mb-1">Servodio 36-44 Navy Sepatu Sneakers Casual - SV02</p>
-                            <p class="text-green bold mb-3">Rp. 1.500.000</p>
-                            <p class="mb-1 text-grey"><img src="assets/custom/img/toko-01.jpg" class="img-toko">&nbsp; Aero Street Shoes Indonesia</p>
-                            <p class="mb-0 text-grey"><img src="assets/custom/img/pin-marker.png" class="img-pin-marker">&nbsp; Jawa Tengah</p>
-                        </div>
-                    </a>
-                </div>
-            </div>
+            <?php foreach ($product as $key => $row): ?>
+                <div class="col-3 mb-4">
+                    <div class="card text-left">
+                        <a href="<?=base_url('product/'.$row['slug']) ?>">
+                            <img src="<?=!empty($row['image1']) ? base_url('assets/uploads/products/'.$row['image1']) : base_url('assets/uploads/banner/no-image.jpg') ?>" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <p class="medium-bold mb-1"><?=$row['product_name'] ?></p>
+                                <p class="text-green bold mb-3">Rp. <?=$row['price'] ?></p>
+                                <p class="mb-1 text-grey"><img src="<?=base_url() ?>assets/custom/img/toko-01.jpg" class="img-toko">&nbsp; <?=$row['tenant_name'] ?></p>
+                                <p class="mb-0 text-grey"><img src="<?=base_url() ?>assets/custom/img/pin-marker.png" class="img-pin-marker">&nbsp; <?=$row['province'] ?></p>
+                            </div>
+                        </a>
+                    </div>
+                </div>    
+            <?php endforeach; ?>
         </div>
-        <!-- <div class="row">
-            <div class="col-md-2 offset-md-5">
-                <a href="#" id="loadMore" class="btn-load-more">Tampilkan lebih banyak &nbsp;<i class="fa fa-angle-double-right"></i></a>
-            </div>
-        </div> -->
         <div class="row mb-3 mt-2">
             <div class="col-md-12">
                 <nav aria-label="Page navigation">

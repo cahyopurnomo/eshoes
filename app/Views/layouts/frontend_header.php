@@ -18,50 +18,20 @@
                     <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="fa fa-list"></i>&nbsp; Kategori</a>
                     <div class="dropdown-menu megamenu" role="menu">
                         <div class="row">
-                            <div class="col-sm-3">
-                                <h6 class="bold text-green mb-2"><i class="fa fa-file-text-o"></i>&nbsp; Sepatu Pria</h6>
-                                <ul>
-                                    <li><a href="kategori.html">-&nbsp; Sepatu Sport</a></li>
-                                    <li><a href="kategori.html">-&nbsp; Sepatu Sneaker</a></li>
-                                    <li><a href="kategori.html">-&nbsp; Sepatu Booth</a></li>
-                                    <li><a href="kategori.html">-&nbsp; Sepatu Casual</a></li>
-                                    <li><a href="kategori.html">-&nbsp; Sepatu PDH</a></li>
-                                    <li><a href="kategori.html">-&nbsp; Sepatu PDL</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-sm-3">
-                                <h6 class="bold text-green mb-2"><i class="fa fa-file-text-o"></i>&nbsp; Sepatu Wanita</h6>
-                                <ul>
-                                    <li><a href="kategori.html">-&nbsp; Sepatu Sport</a></li>
-                                    <li><a href="kategori.html">-&nbsp; Sepatu Sneaker</a></li>
-                                    <li><a href="kategori.html">-&nbsp; Sepatu Booth</a></li>
-                                    <li><a href="kategori.html">-&nbsp; Sepatu Casual</a></li>
-                                    <li><a href="kategori.html">-&nbsp; Sepatu PDH</a></li>
-                                    <li><a href="kategori.html">-&nbsp; Sepatu PDL</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-sm-3">
-                                <h6 class="bold text-green mb-2"><i class="fa fa-file-text-o"></i>&nbsp; Sepatu Anak Laki-laki</h6>
-                                <ul>
-                                    <li><a href="kategori.html">-&nbsp; Sepatu Sport</a></li>
-                                    <li><a href="kategori.html">-&nbsp; Sepatu Sneaker</a></li>
-                                    <li><a href="kategori.html">-&nbsp; Sepatu Booth</a></li>
-                                    <li><a href="kategori.html">-&nbsp; Sepatu Casual</a></li>
-                                    <li><a href="kategori.html">-&nbsp; Sepatu PDH</a></li>
-                                    <li><a href="kategori.html">-&nbsp; Sepatu PDL</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-sm-3">
-                                <h6 class="bold text-green mb-2"><i class="fa fa-file-text-o"></i>&nbsp; Sepatu Anak Perempuan</h6>
-                                <ul>
-                                    <li><a href="kategori.html">-&nbsp; Sepatu Sport</a></li>
-                                    <li><a href="kategori.html">-&nbsp; Sepatu Sneaker</a></li>
-                                    <li><a href="kategori.html">-&nbsp; Sepatu Booth</a></li>
-                                    <li><a href="kategori.html">-&nbsp; Sepatu Casual</a></li>
-                                    <li><a href="kategori.html">-&nbsp; Sepatu PDH</a></li>
-                                    <li><a href="kategori.html">-&nbsp; Sepatu PDL</a></li>
-                                </ul>
-                            </div>
+                            <?php foreach ($category as $key => $row): ?>
+                                <?php if (!empty($row['category_name'])): ?>
+                                <div class="col-sm-3">
+                                    <h6 class="bold text-green mb-2"><i class="fa fa-file-text-o"></i>&nbsp; <?=$row['category_name'] ?></h6>
+                                    <ul>
+                                    <?php if (!empty($row['sub_categories'])): ?>
+                                        <?php foreach ($row['sub_categories'] as $k => $rec): ?>
+                                            <li><a href="<?=base_url('main?cat='.$rec['category_idx']) ?>">-&nbsp; <?=$rec['category_name'] ?></a></li>
+                                        <?php endforeach; ?>
+                                    <?php endif; ?>
+                                    </ul>
+                                </div>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
                         </div>
                     </div>
                 </li>

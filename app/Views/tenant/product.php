@@ -30,6 +30,7 @@
                   <tr>
                      <th>NO</th>    
                      <th>NAMA PRODUK</th>
+                     <th>HARGA</th>
                      <th>SLUG</th>
                      <th>KATEGORI</th>
                      <th>STATUS</th>

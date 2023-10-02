@@ -48,7 +48,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-4">
                         <div class="form-group required">
                             <label>Kategori</label>
                             <select name="category" class="form-control select2">
@@ -64,7 +64,13 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label>Harga</label>
+                            <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="8" class="form-control <?=!empty($error['price']) ? 'is-invalid' : null ?>" name="price" id="price" value="<?=!empty($price) ? $price : '' ?>">
+                        </div>
+                    </div>
+                    <div class="col-4">
                         <div class="form-group required">
                             <label>Status</label>
                             <select name="status" class="form-control">
