@@ -273,6 +273,19 @@ h5 {
   border-radius: 0px !important;
 }
 
+input[type="file"]::file-selector-button {
+  margin-right: 15px;
+  border: none;
+  background: #004daf;
+  padding: 5px 15px;
+  border-radius: 0px;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+  font-family: "Familjen Grotesk", sans-serif !important;
+  letter-spacing: 0.2px !important;
+}
+
 /* DATA TABLES */
 
 .dataTables_length {
