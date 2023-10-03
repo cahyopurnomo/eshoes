@@ -38,10 +38,10 @@ class Main extends BaseController
                                       ->findAll();
 
         $data = [
-            'category' => $categories,
-            'banner' => $banner,
-            'tenant' => $tenant,
-            'product' => $product,
+            'category'  => shuffle($categories),
+            'banner'    => shuffle($banner),
+            'tenant'    => shuffle($tenant),
+            'product'   => shuffle($product),
         ];
 
         return view('frontend/main', $data);

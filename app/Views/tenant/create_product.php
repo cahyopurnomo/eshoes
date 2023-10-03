@@ -5,7 +5,7 @@
 <div class="container-fluid">
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0"><?=$header_text?> Banner</h1>
+        <h1 class="h3 mb-0"><?=$header_text?> Produk</h1>
     </div>
     <?php if (session()->getFlashdata('success')) : ?>
     <div class="alert alert-success alert-dismissible show fade">
@@ -135,21 +135,27 @@
                     </div>
                 </div>
                 <div class="row mb-3">
+                    <?php if ($mode != 'create'): ?>
                     <div class="col-4">
                         <div class="form-group" style="text-align: center;">
                             <a data-toggle="confirm" data-title="Konfirmasi" data-text="Yakin Gambar Produk 1 Dihapus ?" href="<?=base_url('tenant/delete-image/1/'.$product_idx) ?>" class="btn btn-danger"><i class="fa fa-times"></i> &nbsp; Delete Image 1</a>
                         </div>
                     </div>
+                    <?php endif; ?>
+                    <?php if ($mode != 'create'): ?>
                     <div class="col-4">
                         <div class="form-group" style="text-align: center;">
                             <a data-toggle="confirm" data-title="Konfirmasi" data-text="Yakin Gambar Produk 2 Dihapus ?" href="<?=base_url('tenant/delete-image/2/'.$product_idx) ?>" class="btn btn-danger"><i class="fa fa-times"></i> &nbsp; Delete Image 2</a>
                         </div>
                     </div>
+                    <?php endif; ?>
+                    <?php if ($mode != 'create'): ?>
                     <div class="col-4">
                         <div class="form-group" style="text-align: center;">
                             <a data-toggle="confirm" data-title="Konfirmasi" data-text="Yakin Gambar Produk 3 Dihapus ?" href="<?=base_url('tenant/delete-image/3/'.$product_idx) ?>" class="btn btn-danger"><i class="fa fa-times"></i> &nbsp; Delete Image 3</a>
                         </div>
                     </div>
+                    <?php endif; ?>
                 </div>
                 
                 <button type="submit" id="btnSave" class="btn btn-primary"><i class="fa fa-share-square"></i> &nbsp; <?=$btn_text ?></button>

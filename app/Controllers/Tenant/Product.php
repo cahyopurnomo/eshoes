@@ -37,6 +37,7 @@ class Product extends BaseController
             'image3'       => base_url('assets/uploads/banner/no-image.jpg'),
             'category'     => $categories,
             'url_save'     => base_url('tenant/save-product'),
+            'mode'         => 'create',
             'btn_text'     => 'Simpan',
             'header_text'  => 'Tambah'
         ];
