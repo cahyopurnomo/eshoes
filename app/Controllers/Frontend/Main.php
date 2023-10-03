@@ -35,7 +35,7 @@ class Main extends BaseController
                                       ->join('tenant', 'tenant.tenant_idx = products.tenant_idx', 'LEFT')
                                       ->join('province', 'tenant.province_idx = province.province_idx', 'LEFT')
                                       ->where('products.status', 'ON')
-                                      ->paginate(4, 'item');
+                                      ->paginate(12, 'item');
 
         // acak result biar ga bosen
         shuffle($categories);
