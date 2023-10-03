@@ -35,6 +35,10 @@ body {
   font-size: 14px !important;
 }
 
+.fs-15 {
+  font-size: 15px !important;
+}
+
 .bold {
   font-weight: 700 !important;
 }

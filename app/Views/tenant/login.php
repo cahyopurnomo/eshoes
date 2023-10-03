@@ -57,7 +57,7 @@
                                 <div class="card-body">
                                     <!-- <img src="assets/img/logo-katalog-sepatu-indonesia.png" class="mb-3"> -->
                                     <h3 class="mt-1 mb-1 pb-1 text-green bold">Login</h3>
-                                    <p class="mb-4 medium-bold">Katalog Elektronik Produk Sepatu Indonesia</p>
+                                    <p class="mb-4 medium-bold fs-14">Katalog Elektronik Produk Sepatu Indonesia</p>
                                     <?php if (!empty(session()->getFlashdata('error'))) : ?>
                                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                             <?php echo session()->getFlashdata('error'); ?>
@@ -86,7 +86,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-12">
-                                                <a class="text-green medium-bold" href="<?=base_url('forgot-password'); ?>">Forgot Password?</a>
+                                                <a class="text-green medium-bold" href="<?=base_url('forgot-password'); ?>"><u>Forgot Password?</u></a>
                                             </div>
                                         </div>
                                     </form>
