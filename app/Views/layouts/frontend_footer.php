@@ -1,4 +1,4 @@
-<main class="col-top-footer pt-5 pb-5 text-center">
+<main class="col-top-footer pt-5 pb-6 text-center">
     <div class="container">
         <div class="row">
             <div class="col-12">
