@@ -49,7 +49,7 @@
                                         Tahap pengembangan selanjutnya adalah menyediakan layanan on-line berbasis web. Pengembangan sekarang pada tahap ketiga, tetapi waktu masih diperlukan dalam pengembangannya mengingat ini terkait dengan pengembangan sistem layanan online itu sendiri. Berdasarkan evaluasi kami, pengguna tidak hanya berasal dari dalam negeri, tetapi juga dari luar negeri.
                                     </p>
                                     <p class="mb-0">
-                                        <a href="https://www.kemendag.go.id/" class="text-white bold">Kementrian Perdaganan Indonesia</a>
+                                        <a href="https://www.kemendag.go.id/" class="text-white bold"><u>Kementrian Perdaganan Indonesia</u></a>
                                     </p>
                                 </div>
                             </div>
