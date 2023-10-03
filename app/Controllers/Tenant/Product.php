@@ -123,25 +123,25 @@ class Product extends BaseController
             'category_idx'  => $category_id,
             'status'        => $status,
             'price'         => !empty($price) ? $price : 0,
-            'tenant_idx'    => session()->get('user_idx'),
-            'image1'        => !empty($image1->getName()) ? $image1->getName() : '',
-            'image2'        => !empty($image2->getName()) ? $image2->getName() : '',
-            'image3'        => !empty($image3->getName()) ? $image3->getName() : '',
+            'tenant_idx'    => session()->get('user_idx')
         ];
 
         if (!empty($image1->getName())) {
             $filename = $slug.'-1.'.$image1->getClientExtension();
             $image1->move(FCPATH.'assets/uploads/products/', $filename);
+            $data['image1'] = $filename;
         }
 
         if (!empty($image2->getName())) {
             $filename = $slug.'-2.'.$image2->getClientExtension();
             $image2->move(FCPATH.'assets/uploads/products/', $filename);
+            $data['image2'] = $filename;
         }
 
         if (!empty($image3->getName())) {
             $filename = $slug.'-3.'.$image3->getClientExtension();
             $image3->move(FCPATH.'assets/uploads/products/', $filename);
+            $data['image3'] = $filename;
         }
 
         $id = $this->productModel->insert($data);
