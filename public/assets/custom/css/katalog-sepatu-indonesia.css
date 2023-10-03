@@ -605,6 +605,10 @@ img.img-pin-marker {
 }
 
 @media (min-width: 360px) and (max-width: 767px) {
+  .card-body h6 {
+    line-height: 1.6em !important;
+  }
+
   /*LOGIN*/
 
   .bg-left-login {
@@ -623,9 +627,56 @@ img.img-pin-marker {
   .form-check .form-check-input {
     top: 3px;
   }
+
+  /* NAVBAR */
+
+  .navbar-toggler {
+    border: 0px !important;
+    box-shadow: none !important;
+  }
+
+  .navbar-collapse {
+    border-top: 1px #004daf solid;
+    padding: 5px 0px 15px 0px;
+  }
+
+  .navbar-collapse .navbar-nav {
+    margin-bottom: 0px !important;
+  }
+
+  .navbar-collapse .form-search {
+    margin-top: 10px;
+  }
+
+  .navbar .megamenu .col-sm-3 {
+    margin-bottom: 15px;
+  }
+
+  /* Home Page */
+
+  .row-kategori-unggulan .col {
+    flex: 0 0 50%;
+  }
+
+  .row-kategori-unggulan .card-body h6 {
+    height: 100%;
+    min-height: 45px;
+  }
+
+  .row-brand-unggulan .col-2 {
+    width: 50%;
+  }
+
+  .row-produk-unggulan .col-3 {
+    width: 100%;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
+  .card-body h6 {
+    line-height: 1.6em !important;
+  }
+
   /*LOGIN*/
 
   .bg-left-login {
@@ -646,5 +697,39 @@ img.img-pin-marker {
   .navbar-toggler {
     border: 0px !important;
     box-shadow: none !important;
+  }
+
+  .navbar-collapse {
+    border-top: 1px #004daf solid;
+    padding: 5px 0px 15px 0px;
+  }
+
+  .navbar-collapse .form-search {
+    margin-top: 10px;
+  }
+
+  .navbar .megamenu .col-sm-3 {
+    width: 50%;
+    margin-bottom: 15px;
+  }
+
+  /* Home Page */
+
+  .row-kategori-unggulan .card-body h6 {
+    height: 100%;
+    min-height: 45px;
+  }
+
+  .row-brand-unggulan .col-2 {
+    width: 33.33333333%;
+  }
+
+  .row-produk-unggulan .col-3 {
+    width: 33.33333333%;
+  }
+
+  .row-produk-unggulan .col-3 .card-body .medium-bold.mb-1 {
+    height: 100%;
+    min-height: 70px;
   }
 }
