@@ -165,6 +165,7 @@ class Tenant extends BaseController
             'logo'          => $filename,
             'status'        => 'ACTIVE'
         ];
+        
         $id = $this->tenantModel->insert($data);
 
         if ($id) {
@@ -391,7 +392,7 @@ class Tenant extends BaseController
     {
         if ($this->request->getMethod(true) === 'POST') {
             $table = 'tenant';
-            $where = '';
+            $where = 'deleted_at IS NULL';
             $orWhere = '';
             $column_order = array();
             $column_search = array();
