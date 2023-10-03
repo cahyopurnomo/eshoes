@@ -2,8 +2,8 @@
 <?=$this->Section('main'); ?>
 <main class="col-page mb-4">
     <div class="container">
-        <div class="row mb-4">
-            <div class="col-6">
+        <div class="row col-contact mb-4">
+            <div class="col-6 col-6-img-kk">
                 <img src="<?=base_url('assets/img/image-kontak.png') ?>">
             </div>
             <div class="col-6">
