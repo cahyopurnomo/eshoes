@@ -49,14 +49,14 @@
                                         Tahap pengembangan selanjutnya adalah menyediakan layanan on-line berbasis web. Pengembangan sekarang pada tahap ketiga, tetapi waktu masih diperlukan dalam pengembangannya mengingat ini terkait dengan pengembangan sistem layanan online itu sendiri. Berdasarkan evaluasi kami, pengguna tidak hanya berasal dari dalam negeri, tetapi juga dari luar negeri.
                                     </p>
                                     <p class="mb-0">
-                                        <a href="https://www.kemendag.go.id/" class="text-white bold">Kementrian Perdaganan Indonesia</a>
+                                        <a href="https://www.kemendag.go.id/" class="text-white bold"><u>Kementrian Perdaganan Indonesia</u></a>
                                     </p>
                                 </div>
                             </div>
                             <div class="col-lg-6 d-flex align-items-center bg-right-login">
                                 <div class="card-body">
                                     <h3 class="mt-1 mb-1 pb-1 text-green bold">Login</h3>
-                                    <p class="mb-4 medium-bold">Katalog Elektronik Produk Sepatu Indonesia</p>
+                                    <p class="mb-4 medium-bold fs-14">Katalog Elektronik Produk Sepatu Indonesia</p>
                                     <?php if (!empty(session()->getFlashdata('error'))) : ?>
                                         <div class="alert alert-danger alert-dismissible fade show" role="alert">
                                             <?php echo session()->getFlashdata('error'); ?>
@@ -85,7 +85,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-12">
-                                                <a class="text-green medium-bold" href="<?=base_url('admin/forgot-password'); ?>">Forgot Password?</a>
+                                                <a class="text-green medium-bold" href="<?=base_url('admin/forgot-password'); ?>"><u>Forgot Password?</u></a>
                                             </div>
                                         </div>
                                     </form>

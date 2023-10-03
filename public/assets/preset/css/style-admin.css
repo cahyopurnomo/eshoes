@@ -21,7 +21,7 @@ label,
 nav,
 h6,
 .btn {
-  font-size: 14px !important;
+  font-size: 13px !important;
   font-weight: 400 !important;
   line-height: 1.6em !important;
 }
@@ -32,6 +32,14 @@ body {
 
 .bold {
   font-weight: 700 !important;
+}
+
+.fs-14 {
+  font-size: 14px !important;
+}
+
+.fs-15 {
+  font-size: 15px !important;
 }
 
 .medium-bold {
@@ -97,7 +105,7 @@ img {
 
 .form-control {
   color: #13182b;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   height: 40px;
   background: #f7f8ff;
@@ -252,7 +260,7 @@ textarea.form-control {
 }
 
 .text-xs {
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .font-weight-bold {
@@ -337,7 +345,7 @@ div.dataTables_wrapper div.dataTables_length select {
 table.table-bordered.dataTable th,
 table.table-bordered.dataTable td {
   vertical-align: middle;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .table-bordered thead td,
@@ -415,7 +423,7 @@ table.table-bordered.dataTable td {
 /* SIDEBAR */
 
 .sidebar .nav-item .nav-link span {
-  font-size: 14px !important;
+  font-size: 13px !important;
 }
 
 .sidebar .nav-item .nav-link {
@@ -454,21 +462,21 @@ table.table-bordered.dataTable td {
 }
 
 .topbar.navbar-light .navbar-nav .nav-item .nav-link span {
-  font-size: 14px;
+  font-size: 13px;
   color: #58595b !important;
   font-weight: 500 !important;
 }
 
 nav.navbar .dropdown .dropdown-menu {
   padding: 0;
-  font-size: 14px;
+  font-size: 13px;
   border: 1px #e2eee6 solid;
   border-radius: 0px;
 }
 
 nav.navbar .dropdown .dropdown-menu .dropdown-item {
   padding: 0.5rem 1.5rem;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500 !important;
   color: #58595b !important;
 }
@@ -498,7 +506,7 @@ nav.navbar .dropdown .dropdown-menu .dropdown-divider {
 /* FOOTER */
 
 footer.sticky-footer .copyright {
-  font-size: 14px;
+  font-size: 13px;
   color: #58595b;
   line-height: 1.6em;
 }
