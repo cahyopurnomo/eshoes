@@ -37,11 +37,17 @@ class Main extends BaseController
                                       ->where('products.status', 'ON')
                                       ->findAll();
 
+        // acak result biar ga bosen
+        shuffle($categories);
+        shuffle($banner);
+        shuffle($tenant);
+        shuffle($product);
+
         $data = [
-            'category'  => shuffle($categories),
-            'banner'    => shuffle($banner),
-            'tenant'    => shuffle($tenant),
-            'product'   => shuffle($product),
+            'category'  => $categories,
+            'banner'    => $banner,
+            'tenant'    => $tenant,
+            'product'   => $product,
         ];
 
         return view('frontend/main', $data);
