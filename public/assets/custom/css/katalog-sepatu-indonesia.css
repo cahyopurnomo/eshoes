@@ -79,6 +79,11 @@ img {
   border-radius: 0px;
 }
 
+.card-img,
+.card-img-top {
+  border-radius: 0px !important;
+}
+
 .form-control {
   color: #13182b;
   font-size: 13px;
