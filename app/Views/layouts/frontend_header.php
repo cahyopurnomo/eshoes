@@ -1,3 +1,4 @@
+<?php $request = \Config\Services::request(); ?>
 <nav class="navbar navbar-expand-lg fixed-top w3_megamenu">
     <div class="container-xxl">
         <a class="navbar-brand me-4" href="index.html">
@@ -9,13 +10,13 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav me-auto mb-2 mb-md-0 medium-bold">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="<?=base_url() ?>"><i class="fa fa-home"></i>&nbsp; Home</a>
+                    <a class="nav-link <?=$request->uri->getSegment(1) == '' ? 'active' : '' ?>" aria-current="page" href="<?=base_url() ?>"><i class="fa fa-home"></i>&nbsp; Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?=base_url('brand') ?>"><i class="fa fa-tags"></i>&nbsp; Brand</a>
+                    <a class="nav-link <?=$request->uri->getSegment(1) == 'brand' ? 'active' : '' ?>" href="<?=base_url('brand') ?>"><i class="fa fa-tags"></i>&nbsp; Brand</a>
                 </li>
                 <li class="nav-item dropdown has-megamenu">
-                    <a class="nav-link dropdown-toggle" href="<?=base_url('category') ?>" data-bs-toggle="dropdown"><i class="fa fa-list"></i>&nbsp; Kategori</a>
+                    <a class="nav-link dropdown-toggle <?=$request->uri->getSegment(1) == 'category' ? 'active' : '' ?>" href="<?=base_url('category') ?>" data-bs-toggle="dropdown"><i class="fa fa-list"></i>&nbsp; Kategori</a>
                     <div class="dropdown-menu megamenu" role="menu">
                         <div class="row">
                             <?php foreach ($category as $key => $row): ?>
@@ -36,15 +37,15 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?=base_url('products') ?>"><i class="fa fa-star"></i>&nbsp; Produk Unggulan</a>
+                    <a class="nav-link <?=$request->uri->getSegment(1) == 'products' ? 'active' : '' ?>" href="<?=base_url('products') ?>"><i class="fa fa-star"></i>&nbsp; Produk Unggulan</a>
                 </li>
             </ul>
             <ul class="navbar-nav mb-2 mb-md-0 medium-bold">
                 <li class="nav-item">
-                    <a class="nav-link" href="<?=base_url('about-us') ?>"><i class="fa fa-globe"></i>&nbsp; Tentang Kami</a>
+                    <a class="nav-link <?=$request->uri->getSegment(1) == 'about-us' ? 'active' : '' ?>" href="<?=base_url('about-us') ?>"><i class="fa fa-globe"></i>&nbsp; Tentang Kami</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?=base_url('contact-us') ?>"><i class="fa fa-phone"></i>&nbsp; Kontak Kami</a>
+                    <a class="nav-link <?=$request->uri->getSegment(1) == 'contact-us' ? 'active' : '' ?>" href="<?=base_url('contact-us') ?>"><i class="fa fa-phone"></i>&nbsp; Kontak Kami</a>
                 </li>
             </ul>
             <form class="d-flex form-search" role="search">
