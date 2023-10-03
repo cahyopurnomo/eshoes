@@ -5,7 +5,7 @@
                 <p>
                     <img src="<?=base_url('assets/custom/img/kementrianPerdagangan.webp') ?>" class="img-kementrian mb-4">
                     <img src="<?=base_url('assets/custom/img/Bangga-Buatan-Indonesia.webp') ?>" class="img-bangga-indonesia mb-4">
-                    <img src="<?=base_url('assets/custom/img/aprisindo.png" class="img-aprisindo mb-4') ?>">
+                    <img src="<?=base_url('assets/custom/img/aprisindo.png') ?>" class="img-aprisindo mb-4">
                 </p>
                 <h3 class="subtitle mb-2 bold">#<span>Ayo</span>Dagang</h3>
                 <h3 class="title pb-4 mb-4 bold">Katalog Elektronik Produk Sepatu Indonesia</h3>
