@@ -41,7 +41,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row row-kategori-unggulan">
                 <?php foreach ($category as $key => $row): ?>
                     <?php if (!empty($row['category_name'])): ?>
                         <div class="col mb-3">
@@ -74,7 +74,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row row-brand-unggulan">
             <?php foreach ($tenant as $key => $row): ?>
                 <div class="col-2 mb-3">
                     <div class="card">
@@ -99,7 +99,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row row-produk-unggulan">
             <?php foreach ($product as $key => $row): ?>
                 <div class="col-3 mb-4">
                     <div class="card text-left">
