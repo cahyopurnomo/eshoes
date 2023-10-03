@@ -350,9 +350,22 @@ footer {
   color: #ffffff !important;
 }
 
+.page-link:hover span,
+.page-link:focus span {
+  border-color: #004daf;
+  color: #ffffff !important;
+}
+
 li.page-item.disabled .page-link {
   background: #f7f8ff !important;
   color: #58595b !important;
+}
+
+.active > .page-link,
+.page-link.active {
+  background: #004daf !important;
+  color: #fff !important;
+  border-color: #004daf !important;
 }
 
 /*PRODUK DETAIL THUMBNAIL ZOOM*/
