@@ -135,21 +135,21 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <?php if ($mode != 'create'): ?>
+                    <?php if ($mode == 'edit'): ?>
                     <div class="col-4">
                         <div class="form-group" style="text-align: center;">
                             <a data-toggle="confirm" data-title="Konfirmasi" data-text="Yakin Gambar Produk 1 Dihapus ?" href="<?=base_url('tenant/delete-image/1/'.$product_idx) ?>" class="btn btn-danger"><i class="fa fa-times"></i> &nbsp; Delete Image 1</a>
                         </div>
                     </div>
                     <?php endif; ?>
-                    <?php if ($mode != 'create'): ?>
+                    <?php if ($mode == 'edit'): ?>
                     <div class="col-4">
                         <div class="form-group" style="text-align: center;">
                             <a data-toggle="confirm" data-title="Konfirmasi" data-text="Yakin Gambar Produk 2 Dihapus ?" href="<?=base_url('tenant/delete-image/2/'.$product_idx) ?>" class="btn btn-danger"><i class="fa fa-times"></i> &nbsp; Delete Image 2</a>
                         </div>
                     </div>
                     <?php endif; ?>
-                    <?php if ($mode != 'create'): ?>
+                    <?php if ($mode == 'edit'): ?>
                     <div class="col-4">
                         <div class="form-group" style="text-align: center;">
                             <a data-toggle="confirm" data-title="Konfirmasi" data-text="Yakin Gambar Produk 3 Dihapus ?" href="<?=base_url('tenant/delete-image/3/'.$product_idx) ?>" class="btn btn-danger"><i class="fa fa-times"></i> &nbsp; Delete Image 3</a>

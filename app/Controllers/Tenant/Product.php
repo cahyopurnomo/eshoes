@@ -179,6 +179,7 @@ class Product extends BaseController
             'status'       => $product['status'],
             'category'     => $categories,
             'price'        => $product['price'],
+            'mode'         => 'edit',
             'url_save'     => base_url('tenant/update-product'),
             'btn_text'     => 'Update',
             'header_text'  => 'Update'
