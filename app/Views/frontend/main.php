@@ -108,7 +108,7 @@
                             <div class="card-body">
                                 <p class="medium-bold mb-1"><?=$row['product_name'] ?></p>
                                 <p class="text-green bold mb-3">Rp. <?=$row['price'] ?></p>
-                                <p class="mb-1 text-grey"><img src="<?=base_url() ?>assets/custom/img/toko-01.jpg" class="img-toko">&nbsp; <?=$row['tenant_name'] ?></p>
+                                <p class="mb-1 text-grey"><img src="<?=base_url('assets/uploads/logo/'.$row['logo']) ?>" class="img-toko">&nbsp; <?=$row['tenant_name'] ?></p>
                                 <p class="mb-0 text-grey"><img src="<?=base_url() ?>assets/custom/img/pin-marker.png" class="img-pin-marker">&nbsp; <?=$row['province'] ?></p>
                             </div>
                         </a>

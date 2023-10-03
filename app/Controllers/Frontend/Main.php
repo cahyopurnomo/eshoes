@@ -31,7 +31,7 @@ class Main extends BaseController
                                     ->where('status', 'ACTIVE')
                                     ->findAll();
         
-        $product = $this->productModel->select('products.product_idx, products.product_name, products.slug, products.image1, products.price, tenant.tenant_name, province.province')
+        $product = $this->productModel->select('products.product_idx, products.product_name, products.slug, products.image1, products.price, tenant.tenant_name, tenant.logo, province.province')
                                       ->join('tenant', 'tenant.tenant_idx = products.tenant_idx', 'LEFT')
                                       ->join('province', 'tenant.province_idx = province.province_idx', 'LEFT')
                                       ->where('products.status', 'ON')
