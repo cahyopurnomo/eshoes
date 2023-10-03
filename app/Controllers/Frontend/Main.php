@@ -35,7 +35,7 @@ class Main extends BaseController
                                       ->join('tenant', 'tenant.tenant_idx = products.tenant_idx', 'LEFT')
                                       ->join('province', 'tenant.province_idx = province.province_idx', 'LEFT')
                                       ->where('products.status', 'ON')
-                                      ->findAll();
+                                      ->paginate(4, 'item');
 
         // acak result biar ga bosen
         shuffle($categories);
@@ -48,6 +48,8 @@ class Main extends BaseController
             'banner'    => $banner,
             'tenant'    => $tenant,
             'product'   => $product,
+            'product'   => $product,
+            'pager'     => $this->productModel->pager
         ];
 
         return view('frontend/main', $data);
