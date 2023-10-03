@@ -12,7 +12,7 @@
                 <p class="mb-0">
                     Dalam mewujudkan Visi Indonesia menjadi salah satu pusat Sepatu di Dunia, Direktorat Penggunaan dan Pemasaran Produk Dalam Negeri, Direktorat Jenderal Perdagangan Dalam Negeri, Kementerian Perdagangan mendukung promosi produk sepatu dalam negeri melalui katalog elektronik.
                 </p>
-                <?php if ($segment != 'about-us'): ?>
+                <?php if ($segment && $segment != 'about-us'): ?>
                 <p class="mt-3 mb-0">
                     <a href="<?=base_url('about-us') ?>" class="text-green medium-bold">Pelajari lebih lanjut &nbsp;<i class="fa fa-angle-double-right"></i></a>
                 </p>
