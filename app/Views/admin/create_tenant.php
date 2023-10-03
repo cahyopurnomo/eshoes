@@ -185,7 +185,7 @@
                 <div class="row mb-3">
                     <div class="col-12">
                         <div class="form-group">
-                            <img style="width: 100%; background-position: center center; background-repeat: no-repeat; background-size: cover; max-width: 300px;" src="<?=!empty($logo) ? $logo : base_url('assets/uploads/banner/no-image.jpg'); ?>">
+                            <img style="width: 100%; background-position: center center; background-repeat: no-repeat; background-size: cover; max-width: 300px;" src="<?=$logo ?>">
                         </div>
                     </div>
                 </div>
