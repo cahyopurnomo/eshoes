@@ -8,10 +8,13 @@ use App\Models\Tenant\ProductModel;
 use App\Models\Admin\TenantModel;
 use App\Models\Admin\BannerModel;
 
+use Config\Services;
+
 class Main extends BaseController
 {
     public function __construct()
     {
+        $this->request = Services::request();
         $this->encrypter = \Config\Services::encrypter();
         $this->tenantModel = new TenantModel();
         $this->categoryModel = new CategoryModel();
@@ -48,7 +51,6 @@ class Main extends BaseController
             'banner'    => $banner,
             'tenant'    => $tenant,
             'product'   => $product,
-            'product'   => $product,
             'pager'     => $this->productModel->pager
         ];
 
@@ -70,5 +72,34 @@ class Main extends BaseController
           $categories[$mainCategory['category_idx']] = $category;
         }
         return $categories;
+    }
+
+    public function about_us()
+    {
+        $segment = $this->request->uri->getSegment(1);
+        $categories = $this->getCategoryTree(0);
+
+        $data = [
+            'category'  => $categories,
+            'segment'   => $segment
+        ];
+        return view('frontend/about_us', $data);
+    }
+
+    public function contact_us()
+    {
+        $categories = $this->getCategoryTree(0);
+
+        $data = [
+            'category' => $categories,
+            'segment'  => '',
+        ];
+        return view('frontend/contact_us', $data);
+    }
+
+    public function submit_contact_us()
+    {
+        // SEND EMAIL TO ADMIN
+        $email_admin = getenv('EMAIL_ADMIN');
     }
 }
