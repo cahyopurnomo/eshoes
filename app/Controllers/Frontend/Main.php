@@ -101,5 +101,62 @@ class Main extends BaseController
     {
         // SEND EMAIL TO ADMIN
         $email_admin = getenv('EMAIL_ADMIN');
+
+        $validation = $this->validate([
+            'firstname' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Nama Depan Tidak Boleh Kosong',
+                ]
+            ],
+            'email' => [
+                'rules' => 'required|valid_email',
+                'errors' => [
+                    'required' => 'Email Tidak Boleh Kosong',
+                    'valid_email' => 'Format Email Salah'
+                ]
+            ],
+            'title' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Judul Pesan Tidak Boleh Kosong',
+                ]
+            ],
+            'message' => [
+                'rules' => 'required',
+                'errors' => [
+                    'required' => 'Pesan Tidak Boleh Kosong',
+                ]
+            ],
+        ]); //rules
+
+        if (!$validation) {
+            return redirect()->back()->withInput();
+        }
+     
+        $firstname  = $this->request->getPost('firstname');
+        $lastname   = $this->request->getPost('lastname');
+        $email      = $this->request->getPost('email');
+        $phone      = $this->request->getPost('phone');
+        $title      = $this->request->getPost('title');
+        $message    = $this->request->getPost('message');
+
+        $data = 'Nama Lengkap: '.$firstname.' '.$lastname.'<br>';
+        $data .= 'Phone: '.$phone.'<br>';
+        $message = $data.'Pesan: '.$message;
+
+        $data_email = [
+            'to'      => $email,
+            'subject' => $title,
+            'message' => $message,
+        ];
+        send_email($data_email);
+    
+        return redirect()->back()->withInput()->with('success', 'Pesan Berhasil Kirimkan');
+    }
+
+    public function search_product()
+    {
+        
     }
 }

@@ -24,6 +24,12 @@
     <link rel="stylesheet" href="<?=base_url('assets/custom/css/fontawesome.css') ?>">
     <!-- Style CSS -->
     <link rel="stylesheet" href="<?=base_url('assets/custom/css/katalog-sepatu-indonesia.css') ?>">
+    <style>
+        .required label:after {
+            color: #ff5159;
+            content: " *";
+        }
+    </style>
 </head>
 
 <body class="d-flex flex-column h-100">

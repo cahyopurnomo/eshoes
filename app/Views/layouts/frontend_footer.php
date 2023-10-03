@@ -36,7 +36,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body">
-                <form class="row">
+                <form class="row" method="post" url="<?=base_url('search-product') ?>" autocomplete="off">
                     <div class="col-9">
                         <input type="search" class="form-control" placeholder="Cari Sepatu ...">
                     </div>

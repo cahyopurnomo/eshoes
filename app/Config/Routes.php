@@ -8,7 +8,8 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Frontend\Main::index');
 $routes->get('about-us', 'Frontend\Main::about_us');
 $routes->get('contact-us', 'Frontend\Main::contact_us');
-$routes->post('save-contact-us', 'Frontend\Main::save_contact_us');
+$routes->post('submit-contact-us', 'Frontend\Main::submit_contact_us');
+$routes->post('search-product', 'Frontend\Main::search_product');
 
 //ADMIN
 $routes->get('admin', 'Admin\Login::index');
