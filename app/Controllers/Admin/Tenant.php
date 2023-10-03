@@ -28,6 +28,7 @@ class Tenant extends BaseController
         $data = [
             'province_idx' => '',
             'city_idx'     => '',
+            'logo'         => base_url('assets/uploads/banner/no-image.jpg'),
             'province'     => $this->provinceModel->findAll(),
             'city'         => $this->cityModel->findAll(),
             'url'          => base_url('admin/save-tenant'),
@@ -197,7 +198,7 @@ class Tenant extends BaseController
             'shopee'        => $tenant['shopee'],
             'blibli'        => $tenant['blibli'],
             'status'        => $tenant['status'],
-            'logo'          => base_url('assets/uploads/logo/'.$tenant['logo']),
+            'logo'          => !empty($tenant['logo']) ? base_url('assets/uploads/logo/'.$tenant['logo']) : base_url('assets/uploads/banner/no-image.jpg'),
             'province'      => $this->provinceModel->findAll(),
             'city'          => $this->cityModel->findAll(),
             'url'           => base_url('admin/update-tenant'),
@@ -341,8 +342,8 @@ class Tenant extends BaseController
         $data['tenant_name']   = $tenant_name;
         $data['email']         = $email;
         $data['phone']         = $phone;
-        $data['city_name']     = $city_name;
-        $data['province_name'] = $province_name;
+        $data['city_idx']      = $city_name;
+        $data['province_idx']  = $province_name;
         $data['facebook']      = $facebook;
         $data['instagram']     = $instagram;
         $data['linkedin']      = $linkedin;
