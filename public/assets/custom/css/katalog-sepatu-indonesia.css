@@ -56,7 +56,7 @@ body {
 }
 
 .pb-6 {
-  padding-bottom: 4rem !important;
+  padding-bottom: 3.5rem !important;
 }
 
 .alert-danger {
@@ -128,7 +128,7 @@ img {
 }
 
 textarea.form-control {
-  min-height: 80px;
+  min-height: 115px;
 }
 
 .btn-primary {
@@ -673,6 +673,20 @@ img.img-pin-marker {
 
   .row-produk-unggulan .col-3 {
     width: 100%;
+  }
+
+  /* FOOTER */
+
+  img.img-kementrian {
+    max-width: 120px;
+  }
+
+  img.img-bangga-indonesia {
+    max-width: 100px;
+  }
+
+  img.img-aprisindo {
+    max-width: 50px;
   }
 }
 
