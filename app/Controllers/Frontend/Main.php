@@ -39,6 +39,13 @@ class Main extends BaseController
                                       ->join('province', 'tenant.province_idx = province.province_idx', 'LEFT')
                                       ->where('products.status', 'ON')
                                       ->paginate(12, 'item');
+        
+        //format tenant name into tenant-name
+        foreach ($product as $key => $row) {
+            if ($row['tenant_name']) {
+                $product[$key]['tenant_name'] = $this->createURLSlug($row['tenant_name']);
+            }
+        }
 
         // acak result biar ga bosen
         shuffle($categories);
@@ -55,6 +62,13 @@ class Main extends BaseController
         ];
 
         return view('frontend/main', $data);
+    }
+
+    function createURLSlug($urlString)
+    {
+        //unused
+        $slug = preg_replace('/[^A-Za-z0-9-]+/', '-', $urlString);
+        return $slug;
     }
 
     public function getCategoryTree($parent_id = 0) {
@@ -153,6 +167,67 @@ class Main extends BaseController
         send_email($data_email);
     
         return redirect()->back()->withInput()->with('success', 'Pesan Berhasil Kirimkan');
+    }
+
+    public function product_detail($brand, $slug)
+    {
+        // find brand
+        $original_brand = $brand;
+        $brand = str_replace('-', ' ', $brand);
+        $tenant = $this->tenantModel->where('LOWER(tenant_name)', $brand)->first();
+
+        if (!$tenant) {
+            return redirect()->back()->with('error', 'Produk Tidak Ditemukan');
+        }
+
+        $categories = $this->getCategoryTree(0);
+
+        // find product by slug
+        $product = $this->productModel->select('products.product_idx, products.category_idx, products.product_name, products.slug, products.description, products.image1, products.image2, products.image3, products.price, tenant.tenant_name, tenant.email, tenant.logo, tenant.phone, province.province, category.category_name')
+                                      ->join('tenant', 'tenant.tenant_idx = products.tenant_idx', 'LEFT')
+                                      ->join('province', 'tenant.province_idx = province.province_idx', 'LEFT')
+                                      ->join('category', 'category.category_idx = products.category_idx', 'LEFT')
+                                      ->where('products.status', 'ON')
+                                      ->where('products.slug', $slug)
+                                      ->first();
+
+        $related_product = $this->productModel->select('products.product_name, products.slug, products.description, products.image1, products.price, tenant.tenant_name, tenant.logo, province.province')
+                                              ->join('tenant', 'tenant.tenant_idx = products.tenant_idx', 'LEFT')
+                                              ->join('province', 'tenant.province_idx = province.province_idx', 'LEFT')
+                                              ->where('products.status', 'ON')
+                                              ->where('products.category_idx', $product['category_idx'])
+                                              ->findAll();
+                                              
+        //format tenant name into tenant-name
+        foreach ($related_product as $key => $row) {
+            if ($row['tenant_name']) {
+                $product[$key]['tenant_name'] = $this->createURLSlug($row['tenant_name']);
+            }
+        }
+
+        //replace 0 with 62
+        $first = substr($product['phone'], 0, 1);
+        if ($first == '0') {
+            $product['phone'] = '62' . substr($product['phone'], 1);
+        }
+
+        $data = [
+            'category'          => $categories,
+            'product'           => $product,
+            'related_product'   => $related_product,
+        ];
+
+        return view('frontend/product_detail', $data);
+    }
+
+    public function brand_detail($brand)
+    {
+        
+    }
+
+    public function product_by_category($category)
+    {
+        
     }
 
     public function search_product()

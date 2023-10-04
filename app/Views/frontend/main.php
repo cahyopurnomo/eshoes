@@ -103,7 +103,7 @@
             <?php foreach ($product as $key => $row): ?>
                 <div class="col-3 mb-4">
                     <div class="card text-left">
-                        <a href="<?=base_url('product/'.$row['slug']) ?>">
+                        <a href="<?=base_url(strtolower($row['tenant_name']).'/'.$row['slug']) ?>">
                             <img src="<?=!empty($row['image1']) ? base_url('assets/uploads/products/'.$row['image1']) : base_url('assets/uploads/banner/no-image.jpg') ?>" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <p class="medium-bold mb-1"><?=$row['product_name'] ?></p>
