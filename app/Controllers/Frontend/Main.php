@@ -191,6 +191,10 @@ class Main extends BaseController
                                       ->where('products.slug', $slug)
                                       ->first();
 
+        if (!$product) {
+            return redirect()->back()->with('error', 'Produk Tidak Ditemukan');
+        }
+        
         $related_product = $this->productModel->select('products.product_name, products.slug, products.description, products.image1, products.price, tenant.tenant_name, tenant.logo, province.province')
                                               ->join('tenant', 'tenant.tenant_idx = products.tenant_idx', 'LEFT')
                                               ->join('province', 'tenant.province_idx = province.province_idx', 'LEFT')
@@ -204,6 +208,8 @@ class Main extends BaseController
                 $product[$key]['tenant_name'] = $this->createURLSlug($row['tenant_name']);
             }
         }
+
+        shuffle($related_product); //acak urutannya
 
         //replace 0 with 62
         $first = substr($product['phone'], 0, 1);
