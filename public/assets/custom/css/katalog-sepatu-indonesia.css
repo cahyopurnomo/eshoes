@@ -262,6 +262,7 @@ a.nav-link .fa.fa-list {
   left: 0;
   width: 100%;
   padding: 30px 0px 25px 0px;
+  z-index: 999;
 }
 
 .mega-menu .container {
@@ -271,6 +272,11 @@ a.nav-link .fa.fa-list {
 .mega-menu .item {
   flex-grow: 1;
   margin: 0 15px;
+}
+
+.mega-menu .item ul {
+  list-style: none;
+  padding-left: 0;
 }
 
 .mega-menu a {
