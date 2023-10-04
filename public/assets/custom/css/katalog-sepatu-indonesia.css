@@ -254,59 +254,43 @@ a.nav-link .fa.fa-list {
 
 /*NAV MEGA MENU*/
 
-.navbar .megamenu {
-  padding: 1.5rem;
-  border: 0;
-  border-top: 1px #004daf solid;
-  border-bottom: 1px #f7f8ff solid;
-  border-radius: 0;
+.mega-menu {
+  background: #ffffff;
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  padding: 30px 0px 25px 0px;
 }
 
-.dropdown-toggle::after {
-  margin-left: 10px;
-  position: relative;
-  top: 2px;
+.mega-menu .container {
+  display: flex;
 }
 
-.navbar .megamenu h6 {
-  font-size: 13px !important;
+.mega-menu .item {
+  flex-grow: 1;
+  margin: 0 15px;
 }
 
-.navbar .megamenu ul {
-  padding: 0;
-  list-style: none;
-  font-size: 13px;
+.mega-menu a {
+  border-top: 1px solid #f7f8ff;
+  color: #004daf;
+  display: block;
+  padding: 10px 0;
 }
 
-.navbar .megamenu ul li {
-  border-top: 1px #f7f8ff solid;
-  padding: 5px 0px;
+.mega-menu a:hover {
+  color: #13182b;
 }
 
-/* ============ desktop view ============ */
-
-@media all and (min-width: 992px) {
-  .navbar .has-megamenu {
-    position: static !important;
-  }
-
-  .navbar .megamenu {
-    left: 0;
-    right: 0;
-    width: 100%;
-    margin-top: 0;
-  }
+.dropdown {
+  position: static;
 }
 
-/* ============ mobile view ============ */
-
-@media (max-width: 991px) {
-  .navbar.fixed-top .navbar-collapse,
-  .navbar.sticky-top .navbar-collapse {
-    overflow-y: auto;
-    max-height: 90vh;
-    margin-top: 10px;
-  }
+.dropdown:hover .mega-menu {
+  visibility: visible;
+  opacity: 1;
 }
 
 /*COL TOP FOOTER*/

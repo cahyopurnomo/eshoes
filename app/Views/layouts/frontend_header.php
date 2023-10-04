@@ -15,22 +15,24 @@
                 <li class="nav-item">
                     <a class="nav-link <?=$request->uri->getSegment(1) == 'brand' ? 'active' : '' ?>" href="<?=base_url('brand') ?>"><i class="fa fa-tags"></i>&nbsp; Brand</a>
                 </li>
-                <li class="nav-item dropdown has-megamenu">
-                    <a class="nav-link dropdown-toggle <?=$request->uri->getSegment(1) == 'category' ? 'active' : '' ?>" href="<?=base_url('category') ?>" data-bs-toggle="dropdown"><i class="fa fa-list"></i>&nbsp; Kategori</a>
-                    <div class="dropdown-menu megamenu" role="menu">
-                        <div class="row">
+                <li class="nav-item dropdown">
+                    <a class="nav-link <?=$request->uri->getSegment(1) == 'category' ? 'active' : '' ?>" href="#">
+                        <i class="fa fa-list"></i>&nbsp; Kategori &nbsp;<i class="fa fa-angle-down"></i>
+                    </a>
+                    <div class='mega-menu'>
+                        <div class="container">
                             <?php foreach ($category as $key => $row): ?>
                                 <?php if (!empty($row['category_name'])): ?>
-                                <div class="col-sm-3">
-                                    <h6 class="bold text-green mb-2"><i class="fa fa-file-text-o"></i>&nbsp; <?=$row['category_name'] ?></h6>
-                                    <ul>
-                                    <?php if (!empty($row['sub_categories'])): ?>
-                                        <?php foreach ($row['sub_categories'] as $k => $rec): ?>
-                                            <li><a href="<?=base_url('main?cat='.$rec['category_idx']) ?>">-&nbsp; <?=$rec['category_name'] ?></a></li>
-                                        <?php endforeach; ?>
-                                    <?php endif; ?>
-                                    </ul>
-                                </div>
+                                    <div class="item">
+                                        <h6 class="bold text-green mb-2"><i class="fa fa-file-text-o"></i>&nbsp; <?=$row['category_name'] ?></h6>
+                                        <ul>
+                                            <?php if (!empty($row['sub_categories'])): ?>
+                                                <?php foreach ($row['sub_categories'] as $k => $rec): ?>
+                                                    <li><a href="<?=base_url('main?cat='.$rec['category_idx']) ?>">-&nbsp; <?=$rec['category_name'] ?></a></li>
+                                                <?php endforeach; ?>
+                                            <?php endif; ?>
+                                        </ul>
+                                    </div>
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         </div>
