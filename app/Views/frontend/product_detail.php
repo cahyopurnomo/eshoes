@@ -24,7 +24,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row row-col-product-detail">
             <div class="col-5">
                 <section class="product-page">
                     <div class="thumbnails">
@@ -107,7 +107,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row row-col-product-terkait">
                 <?php foreach ($related_product as $key => $row): ?>
                     <div class="col-3 mb-4">
                         <div class="card text-left">
