@@ -78,6 +78,10 @@ a:active {
   transition: all 0.3s ease-in-out;
 }
 
+a.btn {
+  line-height: 2em !important;
+}
+
 img {
   width: 100%;
   border-radius: 0px;
@@ -407,6 +411,8 @@ li.page-item.disabled .page-link {
   border: 1px #dddddd solid;
   border-color: rgb(221, 221, 221, 0.72);
   border-radius: 0px;
+
+  width: 100%;
 }
 
 /*PRODUK DETAIL*/
