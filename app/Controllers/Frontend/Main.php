@@ -43,7 +43,7 @@ class Main extends BaseController
         //format tenant name into tenant-name
         foreach ($product as $key => $row) {
             if ($row['tenant_name']) {
-                $product[$key]['tenant_name'] = $this->createURLSlug($row['tenant_name']);
+                $product[$key]['tenant_name'] = $this->createURLSlug(strtolower($row['tenant_name']));
             }
         }
 
@@ -194,7 +194,7 @@ class Main extends BaseController
         if (!$product) {
             return redirect()->back()->with('error', 'Produk Tidak Ditemukan');
         }
-        
+
         $related_product = $this->productModel->select('products.product_name, products.slug, products.description, products.image1, products.price, tenant.tenant_name, tenant.logo, province.province')
                                               ->join('tenant', 'tenant.tenant_idx = products.tenant_idx', 'LEFT')
                                               ->join('province', 'tenant.province_idx = province.province_idx', 'LEFT')
@@ -220,6 +220,7 @@ class Main extends BaseController
         $data = [
             'category'          => $categories,
             'product'           => $product,
+            'brand_url'         => $this->createURLSlug(strtolower($product['tenant_name'])),
             'related_product'   => $related_product,
         ];
 
@@ -228,7 +229,20 @@ class Main extends BaseController
 
     public function brand_detail($brand)
     {
+        $tenant = $this->tenantModel->where('LOWER(tenant_name)', $brand)->first();
+        if (!$tenant) {
+            return redirect()->back()->with('error', 'Brand Tidak Ditemukan');
+        }
+
+        $categories = $this->getCategoryTree(0);
         
+        $data = [
+            'category'          => $categories,
+            'tenant'            => $tenant,
+            'related_product'   => $related_product,
+        ];
+
+        return view('frontend/brand', $data);
     }
 
     public function product_by_category($category)
