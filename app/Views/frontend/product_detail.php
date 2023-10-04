@@ -3,7 +3,7 @@
 <main class="col-page mb-3">
     <?php if (session()->getFlashdata('error')) : ?>
     <div class="container">
-        <div class="alert alert-danger alert-dismissible show fade">
+        <div class="alert mb-23 alert-danger alert-dismissible show fade">
             <div class="alert-body">
                 <b>Upppsss! </b>
                 <?=session()->getFlashdata('error')?>
