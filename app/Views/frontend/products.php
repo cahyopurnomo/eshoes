@@ -24,7 +24,7 @@
             </div>
         </div>
         <?php endif; ?>
-        <div class="row">
+        <div class="row col-card-product-unggulan">
             <?php foreach ($products as $key => $row): ?>
             <div class="col-3 mb-4">
                 <div class="card text-left">
