@@ -39,7 +39,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?=$request->uri->getSegment(1) == 'products' ? 'active' : '' ?>" href="<?=base_url('products') ?>"><i class="fa fa-star"></i>&nbsp; Produk Unggulan</a>
+                    <a class="nav-link <?=$request->uri->getSegment(1) == 'products' ? 'active' : '' ?>" href="<?=base_url('products?cat=all') ?>"><i class="fa fa-star"></i>&nbsp; Produk Unggulan</a>
                 </li>
             </ul>
             <ul class="navbar-nav mb-2 mb-md-0 medium-bold">

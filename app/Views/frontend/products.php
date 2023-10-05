@@ -14,6 +14,16 @@
                 </div>
             </div>
         </div>
+        <?php if (empty($products)): ?>
+        <div class="row">
+            <div class="alert mb-23 alert-danger alert-dismissible show fade">
+                <div class="alert-body">
+                    <b>Upppsss! </b>
+                    Produk Tidak Ditemukan
+                </div>
+            </div>
+        </div>
+        <?php endif; ?>
         <div class="row">
             <?php foreach ($products as $key => $row): ?>
             <div class="col-3 mb-4">

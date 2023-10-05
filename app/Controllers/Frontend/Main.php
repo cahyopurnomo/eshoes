@@ -40,6 +40,14 @@ class Main extends BaseController
                                       ->where('products.status', 'ON')
                                       ->paginate(12, 'item');
         
+        foreach ($categories as $key => $row) {
+            if ($row['category_name']) {
+                $category_name = strtolower($row['category_name']);
+                $category_name = $this->createURLSlug($category_name);
+                $categories[$key]['category_url'] = base_url('products?cat='.$category_name);
+            }
+        }
+
         //format tenant name into tenant-name
         foreach ($tenant as $key => $row) {
             if ($row['tenant_name']) {
@@ -338,12 +346,24 @@ class Main extends BaseController
     {
         $categories = $this->getCategoryTree(0);
 
-        $products = $this->productModel->select('products.product_idx, products.product_name, products.slug, products.image1, products.price, tenant.tenant_name, tenant.logo, province.province')
-                                       ->join('tenant', 'tenant.tenant_idx = products.tenant_idx', 'LEFT')
-                                       ->join('province', 'tenant.province_idx = province.province_idx', 'LEFT')
-                                       ->where('products.status', 'ON')
-                                       ->orderBy('products.created_at', 'desc')
-                                       ->paginate(12, 'item');
+        $cat = !empty($this->request->getGet('cat')) ? $this->request->getGet('cat') : 'all';
+        $cat = str_replace('-', ' ', $cat);
+        if ($cat == 'all') {
+            $products = $this->productModel->select('products.product_idx, products.product_name, products.slug, products.image1, products.price, tenant.tenant_name, tenant.logo, province.province')
+                                           ->join('tenant', 'tenant.tenant_idx = products.tenant_idx', 'INNET')
+                                           ->join('province', 'tenant.province_idx = province.province_idx', 'INNER')
+                                           ->where('products.status', 'ON')
+                                           ->orderBy('products.created_at', 'desc')
+                                           ->paginate(12, 'item');
+        } else {
+            $products = $this->productModel->select('products.product_idx, products.product_name, products.slug, products.image1, products.price, tenant.tenant_name, tenant.logo, province.province')
+                                           ->join('tenant', 'tenant.tenant_idx = products.tenant_idx', 'INNER')
+                                           ->join('province', 'tenant.province_idx = province.province_idx', 'INNER')
+                                           ->join('category', 'category.category_idx = products.category_idx', 'INNER')
+                                           ->where('products.status', 'ON')
+                                           ->like('LOWER(category.category_name)', $cat, 'both')
+                                           ->paginate(12, 'item');
+        }
 
         //format product url into tenant-name
         foreach ($products as $key => $row) {
@@ -393,13 +413,13 @@ class Main extends BaseController
     {
         $categories = $this->getCategoryTree(0);
 
-        $category = $this->categoryModel->paginate(12, 'item');
+        $category = $this->categoryModel->where('parent_idx >', 0)->paginate(12, 'item');
         
         foreach ($category as $key => $row) {
             if ($row['category_name']) {
                 $category_name = strtolower($row['category_name']);
                 $category_name = $this->createURLSlug($category_name);
-                $tenant[$key]['brand_url'] = base_url('product/'.$category_name);
+                $category[$key]['products_url'] = base_url('products?cat='.$category_name);
             }
         }
         
