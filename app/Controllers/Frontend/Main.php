@@ -59,7 +59,7 @@ class Main extends BaseController
         }
         
         // acak result biar ga bosen
-        $category = $this->categoryModel->where('parent_idx >', 0)->findAll(6);
+        $category = $this->categoryModel->where('parent_idx >', 0)->findAll();
         foreach ($category as $key => $row) {
             if ($row['category_name']) {
                 $category_name = $this->createURLSlug(strtolower($row['category_name']));

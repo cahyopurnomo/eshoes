@@ -43,7 +43,7 @@
             </div>
             <div class="row row-kategori-unggulan">
                 <?php foreach ($categories as $key => $row): ?>
-                    <?php if (!empty($row['category_name'])): ?>
+                    <?php if (!empty($row['category_name']) && $key <= 5): ?>
                         <div class="col-2 mb-3">
                             <div class="card text-center">
                                 <a href="<?=$row['category_url'] ?>">
