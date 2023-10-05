@@ -348,6 +348,13 @@ class Main extends BaseController
 
         $cat = !empty($this->request->getGet('cat')) ? $this->request->getGet('cat') : 'all';
         $cat = str_replace('-', ' ', $cat);
+        
+        if ($cat != 'all') {
+            $cat = $this->categoryModel->select('category_idx')
+                                              ->where('LOWER(category_name)', $cat)
+                                              ->first();
+        }
+
         if ($cat == 'all') {
             $products = $this->productModel->select('products.product_idx, products.product_name, products.slug, products.image1, products.price, tenant.tenant_name, tenant.logo, province.province')
                                            ->join('tenant', 'tenant.tenant_idx = products.tenant_idx', 'INNET')
@@ -359,9 +366,8 @@ class Main extends BaseController
             $products = $this->productModel->select('products.product_idx, products.product_name, products.slug, products.image1, products.price, tenant.tenant_name, tenant.logo, province.province')
                                            ->join('tenant', 'tenant.tenant_idx = products.tenant_idx', 'INNER')
                                            ->join('province', 'tenant.province_idx = province.province_idx', 'INNER')
-                                           ->join('category', 'category.category_idx = products.category_idx', 'INNER')
                                            ->where('products.status', 'ON')
-                                           ->like('LOWER(category.category_name)', $cat, 'both')
+                                           ->where('products.category_idx', $cat['category_idx'])
                                            ->paginate(12, 'item');
         }
 
