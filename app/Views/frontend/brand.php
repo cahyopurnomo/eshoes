@@ -166,12 +166,12 @@
                                 <div class="row mb-5">
                                     <?php if (!empty($banner4['banner_image'])): ?>
                                     <div class="col-md-4">
-                                        <img src="<?=base_url('assets/uploads/banner/'.$banner4['banner_image']) ?>" class="d-block w-100" alt="<?=$banner4['banner_name'] ?>">
+                                        <img src="<?=base_url('assets/uploads/banner/'.$banner4['banner_image']) ?>" class="d-block w-100 img-banner-456" alt="<?=$banner4['banner_name'] ?>">
                                     </div>
                                     <?php endif; ?>
                                     <?php if (!empty($banner5['banner_image'])): ?>
                                     <div class="col-md-4">
-                                        <img src="<?=base_url('assets/uploads/banner/'.$banner5['banner_image']) ?>" class="d-block w-100" alt="<?=$banner5['banner_name'] ?>">
+                                        <img src="<?=base_url('assets/uploads/banner/'.$banner5['banner_image']) ?>" class="d-block w-100 img-banner-456" alt="<?=$banner5['banner_name'] ?>">
                                     </div>
                                     <?php endif; ?>
                                     <?php if (!empty($banner6['banner_image'])): ?>
@@ -189,7 +189,7 @@
                                 <div class="col-box-form-kategori mb-4">
                                     <div class="row">
                                         <div class="col-md-3 offset-md-9">
-                                            <form action="<?=$_SERVER['PHP_SELF'] ?>" method="GET">
+                                            <form class="select-list-form-control" action="<?=$_SERVER['PHP_SELF'] ?>" method="GET">
                                                 <select class="form-group" name="sort" onchange="this.form.submit()">
                                                     <option value="newest">Terbaru</option>
                                                     <option value="oldest">Terlama</option>
