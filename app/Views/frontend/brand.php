@@ -164,21 +164,28 @@
                                 </div>
                                 <!-- SLIDE 4,5,6-->
                                 <div class="row mb-5">
+                                    <?php if (!empty($banner4['banner_image'])): ?>
                                     <div class="col-md-4">
                                         <img src="<?=base_url('assets/uploads/banner/'.$banner4['banner_image']) ?>" class="d-block w-100" alt="<?=$banner4['banner_name'] ?>">
                                     </div>
+                                    <?php endif; ?>
+                                    <?php if (!empty($banner5['banner_image'])): ?>
                                     <div class="col-md-4">
                                         <img src="<?=base_url('assets/uploads/banner/'.$banner5['banner_image']) ?>" class="d-block w-100" alt="<?=$banner5['banner_name'] ?>">
                                     </div>
+                                    <?php endif; ?>
+                                    <?php if (!empty($banner6['banner_image'])): ?>
                                     <div class="col-md-4">
                                         <img src="<?=base_url('assets/uploads/banner/'.$banner6['banner_image']) ?>" class="d-block w-100" alt="<?=$banner6['banner_name'] ?>">
                                     </div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
 
                         <div class="tab-pane" id="produk-tab-pane" role="tabpanel" aria-labelledby="produk-tab" tabindex="0">
                             <div class="content-tabs-produk">
+                                <?php if (!empty($product)): ?>
                                 <div class="col-box-form-kategori mb-4">
                                     <div class="row">
                                         <div class="col-md-3 offset-md-9">
@@ -195,6 +202,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                <?php endif; ?>
                                 <div class="row">
                                     <?php foreach ($product as $key => $row): ?>
                                         <div class="col-3 mb-4">
