@@ -42,9 +42,9 @@
                 </div>
             </div>
             <div class="row row-kategori-unggulan">
-                <?php foreach ($category as $key => $row): ?>
+                <?php foreach ($categories as $key => $row): ?>
                     <?php if (!empty($row['category_name'])): ?>
-                        <div class="col mb-3">
+                        <div class="col-2 mb-3">
                             <div class="card text-center">
                                 <a href="<?=$row['category_url'] ?>">
                                     <img src="<?=!empty($row['category_image']) ? base_url('assets/uploads/logo/'.$row['category_image']) : base_url('assets/uploads/banner/no-image.jpg') ?>" class="card-img-top" alt="...">

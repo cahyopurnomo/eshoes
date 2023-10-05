@@ -39,14 +39,6 @@ class Main extends BaseController
                                       ->join('province', 'tenant.province_idx = province.province_idx', 'LEFT')
                                       ->where('products.status', 'ON')
                                       ->paginate(12, 'item');
-        
-        foreach ($categories as $key => $row) {
-            if ($row['category_name']) {
-                $category_name = strtolower($row['category_name']);
-                $category_name = $this->createURLSlug($category_name);
-                $categories[$key]['category_url'] = base_url('products?cat='.$category_name);
-            }
-        }
 
         //format tenant name into tenant-name
         foreach ($tenant as $key => $row) {
@@ -67,17 +59,26 @@ class Main extends BaseController
         }
         
         // acak result biar ga bosen
-        shuffle($categories);
+        $category = $this->categoryModel->where('parent_idx >', 0)->findAll(6);
+        foreach ($category as $key => $row) {
+            if ($row['category_name']) {
+                $category_name = $this->createURLSlug(strtolower($row['category_name']));
+                $category[$key]['category_url'] = base_url('products?cat='.$category_name);
+            }
+        }
+
+        shuffle($category);
         shuffle($banner);
         shuffle($tenant);
         shuffle($product);
 
         $data = [
-            'category'  => $categories,
-            'banner'    => $banner,
-            'tenant'    => $tenant,
-            'product'   => $product,
-            'pager'     => $this->productModel->pager
+            'category'   => $categories,
+            'categories' => $category,
+            'banner'     => $banner,
+            'tenant'     => $tenant,
+            'product'    => $product,
+            'pager'      => $this->productModel->pager
         ];
 
         return view('frontend/main', $data);
@@ -97,7 +98,9 @@ class Main extends BaseController
         foreach ($result as $mainCategory) {
           $category = array();
           $category['category_idx'] = $mainCategory['category_idx'];
+          $category['parent_idx'] = $mainCategory['parent_idx'];
           $category['category_name'] = $mainCategory['category_name'];
+          $category['category_slug'] = $this->createURLSlug(strtolower($mainCategory['category_name']));
           $category['category_image'] = $mainCategory['category_image'];
           if (!empty($this->getCategoryTree($category['category_idx']))) {
                 $category['sub_categories'] = $this->getCategoryTree($category['category_idx']);
@@ -423,8 +426,7 @@ class Main extends BaseController
         
         foreach ($category as $key => $row) {
             if ($row['category_name']) {
-                $category_name = strtolower($row['category_name']);
-                $category_name = $this->createURLSlug($category_name);
+                $category_name = $this->createURLSlug(strtolower($row['category_name']));
                 $category[$key]['products_url'] = base_url('products?cat='.$category_name);
             }
         }

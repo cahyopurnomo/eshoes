@@ -28,7 +28,7 @@
                                         <ul>
                                             <?php if (!empty($row['sub_categories'])): ?>
                                                 <?php foreach ($row['sub_categories'] as $k => $rec): ?>
-                                                    <li><a href="<?=base_url('main?cat='.$rec['category_idx']) ?>">-&nbsp; <?=$rec['category_name'] ?></a></li>
+                                                    <li><a href="<?=base_url('products?cat='.$rec['category_slug']) ?>">-&nbsp; <?=$rec['category_name'] ?></a></li>
                                                 <?php endforeach; ?>
                                             <?php endif; ?>
                                         </ul>
