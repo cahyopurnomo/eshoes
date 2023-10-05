@@ -52,7 +52,7 @@ class Main extends BaseController
         foreach ($product as $key => $row) {
             if ($row['tenant_name']) {
                 $tenant_name = strtolower($row['tenant_name']);
-                $this->createURLSlug($tenant_name);
+                $tenant_name = $this->createURLSlug($tenant_name);
                 
                 $product[$key]['product_url'] = base_url('product/'.$tenant_name.'/'.$row['slug']);
             }
@@ -388,6 +388,30 @@ class Main extends BaseController
 
         return view('frontend/brands', $data);
     }
+
+    public function all_category()
+    {
+        $categories = $this->getCategoryTree(0);
+
+        $category = $this->categoryModel->paginate(12, 'item');
+        
+        foreach ($category as $key => $row) {
+            if ($row['category_name']) {
+                $category_name = strtolower($row['category_name']);
+                $category_name = $this->createURLSlug($category_name);
+                $tenant[$key]['brand_url'] = base_url('product/'.$category_name);
+            }
+        }
+        
+        $data = [
+            'category'    => $categories,
+            'categories'  => $category,
+            'pager'       => $this->categoryModel->pager
+        ];
+
+        return view('frontend/categories', $data);
+    }
+
     public function product_by_category($category)
     {
         
