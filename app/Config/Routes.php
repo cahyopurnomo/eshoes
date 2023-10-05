@@ -11,6 +11,9 @@ $routes->get('contact-us', 'Frontend\Main::contact_us');
 $routes->post('submit-contact-us', 'Frontend\Main::submit_contact_us');
 $routes->post('search-product', 'Frontend\Main::search_product'); //search product
 
+$routes->get('products', 'Frontend\Main::all_product'); //all product
+$routes->get('categories', 'Frontend\Main::all_category'); //all category
+$routes->get('brands', 'Frontend\Main::all_brand'); //all brands
 $routes->get('category/(:any)', 'Frontend\Main::product_by_category/$1'); //product by selected category
 $routes->get('product/(:any)/(:any)', 'Frontend\Main::product_detail/$1/$2'); //product detail
 $routes->get('brand/(:any)', 'Frontend\Main::brand_detail/$1'); //brand detail
