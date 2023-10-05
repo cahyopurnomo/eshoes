@@ -49,16 +49,17 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     $('.select-kategori').select2();
-});
-
-$(document).ready(function() {
     $('.select-brand').select2();
-});
-
-$(document).ready(function() {
     $('.select-provinsi').select2();
-});
-
-$(document).ready(function() {
     $('.select-sort-list').select2();
+
+    // tab brand detail
+    $('button[data-bs-toggle="tab"]').on('show.bs.tab', function(e) {
+        localStorage.setItem('activeTab', $(e.target).attr('data-bs-target'));
+    });
+
+    var activeTab = localStorage.getItem('activeTab');
+    if(activeTab){
+        $('button[data-bs-target="' + activeTab + '"]').tab('show');
+    }
 });

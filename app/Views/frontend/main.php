@@ -78,7 +78,7 @@
             <?php foreach ($tenant as $key => $row): ?>
                 <div class="col-2 mb-3">
                     <div class="card">
-                        <a href="<?=base_url('brand?t='.$row['tenant_idx']) ?>"><img src="<?=!empty($row['logo']) ? base_url('assets/uploads/logo/'.$row['logo']) : base_url('assets/uploads/banner/no-image.jpg') ?>" class="card-img-top" alt="..."></a>
+                        <a href="<?=$row['brand_url'] ?>"><img src="<?=!empty($row['logo']) ? base_url('assets/uploads/logo/'.$row['logo']) : base_url('assets/uploads/banner/no-image.jpg') ?>" class="card-img-top" alt="..."></a>
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -103,7 +103,7 @@
             <?php foreach ($product as $key => $row): ?>
                 <div class="col-3 mb-4">
                     <div class="card text-left">
-                        <a href="<?=base_url(strtolower($row['tenant_name']).'/'.$row['slug']) ?>">
+                        <a href="<?=$row['product_url'] ?>">
                             <img src="<?=!empty($row['image1']) ? base_url('assets/uploads/products/'.$row['image1']) : base_url('assets/uploads/banner/no-image.jpg') ?>" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <p class="medium-bold mb-1"><?=$row['product_name'] ?></p>

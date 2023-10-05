@@ -41,12 +41,23 @@ class Main extends BaseController
                                       ->paginate(12, 'item');
         
         //format tenant name into tenant-name
-        foreach ($product as $key => $row) {
+        foreach ($tenant as $key => $row) {
             if ($row['tenant_name']) {
-                $product[$key]['tenant_name'] = $this->createURLSlug(strtolower($row['tenant_name']));
+                $tenant_name = strtolower($row['tenant_name']);
+                $tenant_name = $this->createURLSlug($tenant_name);
+                $tenant[$key]['brand_url'] = base_url('brand/'.$tenant_name);
             }
         }
 
+        foreach ($product as $key => $row) {
+            if ($row['tenant_name']) {
+                $tenant_name = strtolower($row['tenant_name']);
+                $this->createURLSlug($tenant_name);
+                
+                $product[$key]['product_url'] = base_url('product/'.$tenant_name.'/'.$row['slug']);
+            }
+        }
+        // echo '<pre>', print_r($tenant),die();
         // acak result biar ga bosen
         shuffle($categories);
         shuffle($banner);
@@ -220,7 +231,7 @@ class Main extends BaseController
         $data = [
             'category'          => $categories,
             'product'           => $product,
-            'brand_url'         => $this->createURLSlug(strtolower($product['tenant_name'])),
+            'brand_url'         => base_url('brand/'.$this->createURLSlug(strtolower($product['tenant_name']))),
             'related_product'   => $related_product,
         ];
 
@@ -229,17 +240,95 @@ class Main extends BaseController
 
     public function brand_detail($brand)
     {
-        $tenant = $this->tenantModel->where('LOWER(tenant_name)', $brand)->first();
+        $tenant = $this->tenantModel->select('tenant.*, province.province')
+                                    ->join('province', 'tenant.province_idx = province.province_idx', 'LEFT')
+                                    ->where('LOWER(tenant_name)', strtolower($brand))
+                                    ->first();
         if (!$tenant) {
             return redirect()->back()->with('error', 'Brand Tidak Ditemukan');
         }
 
-        $categories = $this->getCategoryTree(0);
+        //replace 0 with 62
+        $first = substr($tenant['phone'], 0, 1);
+        if ($first == '0') {
+            $tenant['phone'] = '62' . substr($tenant['phone'], 1);
+        }
+
+        $banner1 = $this->bannerModel->select('banner_name, banner_image, position')
+                                     ->where('tenant_idx', $tenant['tenant_idx'])
+                                     ->where('position', 'BANNER 1')
+                                     ->where('status', 'ON')
+                                     ->findAll(3);
+        $banner2 = $this->bannerModel->select('banner_name, banner_image, position')
+                                     ->where('tenant_idx', $tenant['tenant_idx'])
+                                     ->where('position', 'BANNER 2')
+                                     ->where('status', 'ON')
+                                     ->findAll(3);
+        $banner3 = $this->bannerModel->select('banner_name, banner_image, position')
+                                     ->where('tenant_idx', $tenant['tenant_idx'])
+                                     ->where('position', 'BANNER 3')
+                                     ->where('status', 'ON')
+                                     ->findAll(3);
+        $banner4 = $this->bannerModel->select('banner_name, banner_image, position')
+                                     ->where('tenant_idx', $tenant['tenant_idx'])
+                                     ->where('position', 'BANNER 4')
+                                     ->where('status', 'ON')
+                                     ->first();
+        $banner5 = $this->bannerModel->select('banner_name, banner_image, position')
+                                     ->where('tenant_idx', $tenant['tenant_idx'])
+                                     ->where('position', 'BANNER 5')
+                                     ->where('status', 'ON')
+                                     ->first();
+        $banner6 = $this->bannerModel->select('banner_name, banner_image, position')
+                                     ->where('tenant_idx', $tenant['tenant_idx'])
+                                     ->where('position', 'BANNER 6')
+                                     ->where('status', 'ON')
+                                     ->first();
+            
+        // sorting product
+        $sort = $this->request->getVar('sort');
+        $key = $value = '';
+        if ($sort == 'newest') {
+            $key = 'products.created_at';
+            $value = 'desc';
+        } else if ($sort == 'oldest') {
+            $key = 'products.created_at';
+            $value = 'asc';
+        } else if ($sort == 'lower_price') {
+            $key = 'products.price';
+            $value = 'asc';
+        } else if ($sort == 'higher_price') {
+            $key = 'products.price';
+            $value = 'desc';
+        } else if ($sort == 'az') {
+            $key = 'products.product_name';
+            $value = 'asc';
+        } else if ($sort == 'za') {
+            $key = 'products.product_name';
+            $value = 'desc';
+        }
+
+        $product = $this->productModel->select('products.product_idx, products.product_name, products.slug, products.image1, products.price, tenant.tenant_name, tenant.logo, province.province')
+                                      ->join('tenant', 'tenant.tenant_idx = products.tenant_idx', 'LEFT')
+                                      ->join('province', 'tenant.province_idx = province.province_idx', 'LEFT')
+                                      ->where('products.status', 'ON')
+                                      ->where('products.tenant_idx', $tenant['tenant_idx'])
+                                      ->orderBy($key, $value)
+                                      ->paginate(12, 'item');
         
+        $categories = $this->getCategoryTree(0);
+
         $data = [
-            'category'          => $categories,
-            'tenant'            => $tenant,
-            'related_product'   => $related_product,
+            'category' => $categories,
+            'tenant'   => $tenant,
+            'banner1'  => $banner1,
+            'banner2'  => $banner2,
+            'banner3'  => $banner3,
+            'banner4'  => $banner4,
+            'banner5'  => $banner5,
+            'banner6'  => $banner6,
+            'product'  => $product,
+            'pager'    => $this->productModel->pager
         ];
 
         return view('frontend/brand', $data);

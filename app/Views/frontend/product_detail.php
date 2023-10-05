@@ -75,12 +75,12 @@
                 </div>
                 <div class="row">
                     <div class="col-1">
-                        <a href="<?=base_url($brand_url) ?>">
+                        <a href="<?=$brand_url ?>">
                             <img src="<?=base_url('assets/uploads/logo/'.$product['logo']) ?>" class="img-toko">
                         </a>
                     </div>
                     <div class="col-11">
-                        <p class="text-brand-toko mb-0"><a href="<?=base_url($brand_url) ?>" class="medium-bold"><?=$product['tenant_name'] ?></a></p>
+                        <p class="text-brand-toko mb-0"><a href="<?=$brand_url ?>" class="medium-bold"><?=$product['tenant_name'] ?></a></p>
                         <p class="text-grey"><img src="<?=base_url('assets/img/pin-marker.png') ?>" class="img-pin-marker">&nbsp; <?=$product['province'] ?></p>
                     </div>
                 </div>
