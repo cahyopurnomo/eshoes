@@ -52,12 +52,12 @@ class Main extends BaseController
         foreach ($product as $key => $row) {
             if ($row['tenant_name']) {
                 $tenant_name = strtolower($row['tenant_name']);
-                $this->createURLSlug($tenant_name);
+                $tenant_name = $this->createURLSlug($tenant_name);
                 
                 $product[$key]['product_url'] = base_url('product/'.$tenant_name.'/'.$row['slug']);
             }
         }
-        // echo '<pre>', print_r($tenant),die();
+        
         // acak result biar ga bosen
         shuffle($categories);
         shuffle($banner);
@@ -332,6 +332,84 @@ class Main extends BaseController
         ];
 
         return view('frontend/brand', $data);
+    }
+
+    public function all_product()
+    {
+        $categories = $this->getCategoryTree(0);
+
+        $products = $this->productModel->select('products.product_idx, products.product_name, products.slug, products.image1, products.price, tenant.tenant_name, tenant.logo, province.province')
+                                       ->join('tenant', 'tenant.tenant_idx = products.tenant_idx', 'LEFT')
+                                       ->join('province', 'tenant.province_idx = province.province_idx', 'LEFT')
+                                       ->where('products.status', 'ON')
+                                       ->orderBy('products.created_at', 'desc')
+                                       ->paginate(12, 'item');
+
+        //format product url into tenant-name
+        foreach ($products as $key => $row) {
+            if ($row['tenant_name']) {
+                $tenant_name = strtolower($row['tenant_name']);
+                $this->createURLSlug($tenant_name);
+                
+                $products[$key]['product_url'] = base_url('product/'.$tenant_name.'/'.$row['slug']);
+            }
+        }
+
+        $data = [
+            'category' => $categories,
+            'products' => $products,
+            'pager'    => $this->productModel->pager
+        ];
+
+        return view('frontend/products', $data);
+    }
+
+    public function all_brand()
+    {
+        $categories = $this->getCategoryTree(0);
+
+        $tenant = $this->tenantModel->select('tenant_idx, tenant_name, logo')
+                                    ->where('status', 'ACTIVE')
+                                    ->paginate(12, 'item');
+        
+        foreach ($tenant as $key => $row) {
+            if ($row['tenant_name']) {
+                $tenant_name = strtolower($row['tenant_name']);
+                $tenant_name = $this->createURLSlug($tenant_name);
+                $tenant[$key]['brand_url'] = base_url('brand/'.$tenant_name);
+            }
+        }
+        
+        $data = [
+            'category' => $categories,
+            'tenant'   => $tenant,
+            'pager'    => $this->tenantModel->pager
+        ];
+
+        return view('frontend/brands', $data);
+    }
+
+    public function all_category()
+    {
+        $categories = $this->getCategoryTree(0);
+
+        $category = $this->categoryModel->paginate(12, 'item');
+        
+        foreach ($category as $key => $row) {
+            if ($row['category_name']) {
+                $category_name = strtolower($row['category_name']);
+                $category_name = $this->createURLSlug($category_name);
+                $tenant[$key]['brand_url'] = base_url('product/'.$category_name);
+            }
+        }
+        
+        $data = [
+            'category'    => $categories,
+            'categories'  => $category,
+            'pager'       => $this->categoryModel->pager
+        ];
+
+        return view('frontend/categories', $data);
     }
 
     public function product_by_category($category)

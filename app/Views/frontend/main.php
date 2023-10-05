@@ -37,7 +37,7 @@
                 </div>
                 <div class="col-6">
                     <div class="text-end mb-3">
-                        <h6 class="bold mb-0"><a href="kategori.html" class="text-green">Lihat Semua Kategori &nbsp;<i class="fa fa-angle-double-right"></i></a></h6>
+                        <h6 class="bold mb-0"><a href="<?=base_url('categories') ?>" class="text-green">Lihat Semua Kategori &nbsp;<i class="fa fa-angle-double-right"></i></a></h6>
                     </div>
                 </div>
             </div>
@@ -46,7 +46,7 @@
                     <?php if (!empty($row['category_name'])): ?>
                         <div class="col mb-3">
                             <div class="card text-center">
-                                <a href="<?=base_url('product?cat='.$row['category_idx']) ?>">
+                                <a href="<?=base_url('product?cat='.$row['category_name']) ?>">
                                     <img src="<?=!empty($row['category_image']) ? base_url('assets/uploads/logo/'.$row['category_image']) : base_url('assets/uploads/banner/no-image.jpg') ?>" class="card-img-top" alt="...">
                                     <div class="card-body">
                                         <h6 class="medium-bold mb-0"><?=$row['category_name'] ?></h6>
@@ -70,7 +70,7 @@
             </div>
             <div class="col-6">
                 <div class="text-end mb-3">
-                    <h6 class="bold mb-0"><a href="brand.html" class="text-green">Lihat Semua Brand &nbsp;<i class="fa fa-angle-double-right"></i></a></h6>
+                    <h6 class="bold mb-0"><a href="<?=base_url('brands') ?>" class="text-green">Lihat Semua Brand &nbsp;<i class="fa fa-angle-double-right"></i></a></h6>
                 </div>
             </div>
         </div>
@@ -95,7 +95,7 @@
             </div>
             <div class="col-6">
                 <div class="text-end mb-3">
-                    <h6 class="bold mb-0"><a href="produk-unggulan.html" class="text-green">Lihat Semua Produk &nbsp;<i class="fa fa-angle-double-right"></i></a></h6>
+                    <h6 class="bold mb-0"><a href="<?=base_url('products') ?>" class="text-green">Lihat Semua Produk &nbsp;<i class="fa fa-angle-double-right"></i></a></h6>
                 </div>
             </div>
         </div>

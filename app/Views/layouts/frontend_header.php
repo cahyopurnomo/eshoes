@@ -1,7 +1,7 @@
 <?php $request = \Config\Services::request(); ?>
 <nav class="navbar navbar-expand-lg fixed-top w3_megamenu">
     <div class="container-xxl">
-        <a class="navbar-brand me-4" href="index.html">
+        <a class="navbar-brand me-4" href="<?=base_url() ?>">
             <img src="<?=base_url('assets/custom/img/logo-katalog-sepatu-indonesia.png') ?>">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -13,7 +13,7 @@
                     <a class="nav-link <?=$request->uri->getSegment(1) == '' ? 'active' : '' ?>" aria-current="page" href="<?=base_url() ?>"><i class="fa fa-home"></i>&nbsp; Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?=$request->uri->getSegment(1) == 'brand' ? 'active' : '' ?>" href="<?=base_url('brand') ?>"><i class="fa fa-tags"></i>&nbsp; Brand</a>
+                    <a class="nav-link <?=$request->uri->getSegment(1) == 'brand' ? 'active' : '' ?>" href="<?=base_url('brands') ?>"><i class="fa fa-tags"></i>&nbsp; Brand</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link <?=$request->uri->getSegment(1) == 'category' ? 'active' : '' ?>" href="#">
