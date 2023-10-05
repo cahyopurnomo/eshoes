@@ -85,7 +85,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-12">
-                                                <a class="text-green medium-bold" href="<?=base_url('admin/forgot-password'); ?>"><u>Forgot Password?</u></a>
+                                                <a class="text-green medium-bold" href=""  data-bs-toggle="modal" data-bs-target="#modal-forgot-password"><u>Forgot Password?</u></a>
                                             </div>
                                         </div>
                                     </form>
@@ -97,6 +97,27 @@
             </div>
         </div>
     </section>
+    <!-- MODAL FORGOT PASSWORD -->
+    <div class="modal fade" id="modal-forgot-password" tabindex="-1" aria-labelledby="modal-forgot-password" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form class="row">
+                        <div class="col-12 mb-2">
+                            <h5>Atur ulang kata sandi</h5>
+                            <p>Masukkan e-mail yang terdaftar. Kami akan mengirimkan kode verifikasi untuk atur ulang kata sandi.</p>
+                        </div>
+                        <div class="col-9">
+                            <input type="text" class="form-control" placeholder="Email Anda ...">
+                        </div>
+                        <div class="col-3">
+                            <button type="submit" class="btn text-white medium-bold btn-primary w-100 mb-0">Kirim</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Bootstrap core JavaScript -->
     <script src="<?=base_url('assets/custom/vendor/jquery/jquery.min.js') ?>"></script>
     <script src="<?=base_url('assets/custom/vendor/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
