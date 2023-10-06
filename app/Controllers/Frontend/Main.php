@@ -440,13 +440,33 @@ class Main extends BaseController
         return view('frontend/categories', $data);
     }
 
-    public function product_by_category($category)
-    {
-        
-    }
-
     public function search_product()
     {
+        $categories = $this->getCategoryTree(0);
+
+        $keyword = $this->request->getVar('k');
+        $products = $this->productModel->select('products.product_idx, products.product_name, products.slug, products.image1, products.price, tenant.tenant_name, tenant.logo, province.province')
+                                       ->join('tenant', 'tenant.tenant_idx = products.tenant_idx', 'INNER')
+                                       ->join('province', 'tenant.province_idx = province.province_idx', 'INNER')
+                                       ->where('products.status', 'ON')
+                                       ->like('products.product_name', $keyword, 'both')
+                                       ->paginate(12, 'item');
+
+        foreach ($products as $key => $row) {
+            if ($row['tenant_name']) {
+                $tenant_name = strtolower($row['tenant_name']);
+                $this->createURLSlug($tenant_name);
+                
+                $products[$key]['product_url'] = base_url('product/'.$tenant_name.'/'.$row['slug']);
+            }
+        } 
         
+        $data = [
+            'category'    => $categories,
+            'products'    => $products,
+            'pager'       => $this->productModel->pager
+        ];
+
+        return view('frontend/search', $data);
     }
 }

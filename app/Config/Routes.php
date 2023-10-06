@@ -9,7 +9,7 @@ $routes->get('/', 'Frontend\Main::index');
 $routes->get('about-us', 'Frontend\Main::about_us');
 $routes->get('contact-us', 'Frontend\Main::contact_us');
 $routes->post('submit-contact-us', 'Frontend\Main::submit_contact_us');
-$routes->post('search-product', 'Frontend\Main::search_product'); //search product
+$routes->get('search', 'Frontend\Main::search_product'); //search product
 
 $routes->get('products', 'Frontend\Main::all_product'); //all product
 $routes->get('categories', 'Frontend\Main::all_category'); //all category

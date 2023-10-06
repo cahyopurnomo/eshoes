@@ -36,12 +36,12 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body">
-                <form class="row" method="post" url="<?=base_url('search-product') ?>" autocomplete="off">
+                <form class="row" method="get" action="<?=base_url('search') ?>" autocomplete="off">
                     <div class="col-9">
-                        <input type="search" class="form-control" placeholder="Cari Sepatu ...">
+                        <input type="search" name="k" class="form-control" placeholder="Cari Sepatu ...">
                     </div>
                     <div class="col-3">
-                        <button type="submit" class="btn text-white medium-bold btn-primary w-100 mb-0">Cari</button>
+                        <input type="submit" class="btn text-white medium-bold btn-primary w-100 mb-0" value="Cari">
                     </div>
                 </form>
             </div>
