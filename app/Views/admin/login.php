@@ -105,13 +105,17 @@
                     <form class="row">
                         <div class="col-12 mb-2">
                             <h5>Atur ulang kata sandi</h5>
-                            <p>Masukkan e-mail yang terdaftar. Kami akan mengirimkan kode verifikasi untuk atur ulang kata sandi.</p>
+                            <p>Masukkan e-mail yang terdaftar. Kami akan mengirimkan kata sandi yang baru.</p>
+                            <div class="alert alert-dismissible show fade" id="alert">
+                                <div class="alert-body">alert</div>
+                            </div>
                         </div>
                         <div class="col-9">
-                            <input type="text" class="form-control" placeholder="Email Anda ...">
+                            <input type="email" name="email" id="email" class="form-control" placeholder="Email Anda ...">
+                            <input type="hidden" class="txt_csrfname" name="csrf_token_name" value="<?= csrf_hash() ?>" />
                         </div>
                         <div class="col-3">
-                            <button type="submit" class="btn text-white medium-bold btn-primary w-100 mb-0">Kirim</button>
+                            <input type="submit" id="forgotPassword" class="btn text-white medium-bold btn-primary w-100 mb-0" value="Kirim">
                         </div>
                     </form>
                 </div>
@@ -127,5 +131,66 @@
     <script src="<?=base_url('assets/custom/js/jquery.zoom.min.js') ?>"></script>
     <!-- Custom Script -->
     <script src="<?=base_url('assets/custom/js/custom.js') ?>"></script>
+    <script>
+        $(document).ready(function(){
+            $('#alert').css('display', 'none');
+
+            $('#forgotPassword').click(function(e){
+                e.preventDefault();
+                email = $('#email').val();
+                
+                if (email == '') {    
+                    $('#alert').addClass('alert-danger');
+                    $('#alert').css('display', 'block');
+                    
+                    $('.alert-body').text('Email tidak boleh kosong');
+                    e.preventDefault();
+                }
+                
+                if (email != '' && IsEmail(email) == false) {
+                    $('#alert').addClass('alert-danger');
+                    $('#alert').css('display', 'block');
+                    $('.alert-body').text('Format Email salah');
+                    e.preventDefault();
+                } 
+
+                if (email != '' && IsEmail(email) == true) {
+                    $('#alert').css('display', 'none');
+                    csrfName = $('.txtcsrfname').attr('name');
+                    csrfHash = $('.txtcsrfname').val();
+
+                    $.ajax({
+                        url : "<?=base_url('admin/forgot-passwd') ?>",
+                        method: 'POST',
+                        data: {email: email, [csrfName]: csrfHash},
+                        dataType: 'json',
+                        success: function(response) {
+                            $('.txt_csrfname').val(response.token);
+                            $('#alert').removeClass('alert-danger');
+                            if (response.status == false) {
+                                $('#alert').addClass('alert-danger');
+                                $('#alert').css('display', 'block');
+                                $('.alert-body').text(response.message);
+                            } else {
+                                $('#alert').addClass('alert-success');
+                                $('#alert').css('display', 'block');
+                                $('.alert-body').text(response.message);
+                                $('#email').val('');
+                            }
+                        },
+                    });
+                }
+            });
+        });
+
+        function IsEmail(email) {
+            var regex = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            if (!regex.test(email)) {
+                    return false;
+            } else {
+                    return true;
+            }
+        }
+    </script>
 </body>
 </html>

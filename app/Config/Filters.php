@@ -46,6 +46,8 @@ class Filters extends BaseConfig
                 'admin/ajax-banner-list',
                 'tenant/ajax-banner-list',
                 'tenant/ajax-product-list',
+                'tenant/forgot-passwd',
+                'admin/forgot-passwd',
             ]],
             // 'invalidchars',
         ],

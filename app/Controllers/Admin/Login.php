@@ -108,7 +108,41 @@ class Login extends BaseController
 
     public function forgot_password()
     {
+        $email = $this->request->getPost('email');
+        $user = $this->loginModel->where('email', $email)->first();
 
+        if (!$user) {
+            $data = [
+                'token' => csrf_hash(),
+                'status' => false,
+                'message' => 'Email Tidak Terdaftar'
+            ];
+            return $this->response->setJSON($data);
+        }
+
+        //reset password
+        $passwd = substr(str_shuffle("0123456789abcdefghijklmnopqrstvwxyz"), 0, 6);
+        $message = 'Hi, <br>Password berhasil diperbaharui. ';
+        $message .= 'Password baru Anda: '.$passwd.'<br><br>';
+        
+        $data_email = [
+            'to'      => $user['email'],
+            'subject' => 'Reset Password',
+            'message' => $message,
+        ];
+        send_email($data_email);
+
+        $data = [
+            'passwd' => password_hash($passwd, PASSWORD_BCRYPT)
+        ];
+        $this->loginModel->update($user['user_idx'], $data);
+
+        $data = [
+            'token' => csrf_hash(),
+            'status' => true,
+            'message' => 'Password baru sudah dikirimkan ke email.'
+        ];
+        return $this->response->setJSON($data);
     }
 
     public function logout()

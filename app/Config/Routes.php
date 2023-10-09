@@ -21,6 +21,7 @@ $routes->get('brand/(:any)', 'Frontend\Main::brand_detail/$1'); //brand detail
 //ADMIN
 $routes->get('admin', 'Admin\Login::index');
 $routes->post('admin/do-login', 'Admin\Login::do_login');
+$routes->post('admin/forgot-passwd', 'Admin\Login::forgot_password');
 
 $routes->group('admin', ['filter' => 'userAuth'], function($routes) {
     $routes->get('dashboard', 'Admin\Dashboard::index');
@@ -73,7 +74,7 @@ $routes->group('admin', ['filter' => 'userAuth'], function($routes) {
 //TENANT
 $routes->get('login', 'Tenant\Login::index');
 $routes->post('do-login', 'Tenant\Login::do_login');
-$routes->get('forgot-password', 'Tenant\Login::forgot_password'); 
+$routes->post('tenant/forgot-passwd', 'Tenant\Login::forgot_password');
 
 $routes->group('tenant', ['filter' => 'userAuth'], function($routes) {
     $routes->get('dashboard', 'Tenant\Dashboard::index');
