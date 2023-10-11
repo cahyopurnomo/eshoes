@@ -32,7 +32,7 @@
             <div class="row">
                 <div class="col-6">
                     <div class="col-title-content ps-3 mb-3">
-                        <h6 class="bold mb-0">Kategori Unggulan</h6>
+                        <h6 class="bold mb-0">Kategori</h6>
                     </div>
                 </div>
                 <div class="col-6">
@@ -44,7 +44,7 @@
             <div class="row row-kategori-unggulan">
                 <?php foreach ($categories as $key => $row): ?>
                     <?php if (!empty($row['category_name']) && $key <= 5): ?>
-                        <div class="col-2 mb-3">
+                        <div class="col mb-3">
                             <div class="card text-center">
                                 <a href="<?=$row['category_url'] ?>">
                                     <img src="<?=!empty($row['category_image']) ? base_url('assets/uploads/logo/'.$row['category_image']) : base_url('assets/uploads/banner/no-image.jpg') ?>" class="card-img-top" alt="...">
@@ -65,7 +65,7 @@
         <div class="row">
             <div class="col-6">
                 <div class="col-title-content ps-3 mb-3">
-                    <h6 class="bold mb-0">Brand Unggulan</h6>
+                    <h6 class="bold mb-0">Brand</h6>
                 </div>
             </div>
             <div class="col-6">
@@ -90,7 +90,7 @@
         <div class="row">
             <div class="col-6">
                 <div class="col-title-content ps-3 mb-3">
-                    <h6 class="bold mb-0">Produk Unggulan</h6>
+                    <h6 class="bold mb-0">Produk</h6>
                 </div>
             </div>
             <div class="col-6">

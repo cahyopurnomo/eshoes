@@ -103,7 +103,7 @@
                 </div>
                 <div class="col-6">
                     <div class="text-end mb-3">
-                        <h6 class="bold mb-0"><a href="produk-unggulan.html" class="text-green">Lihat Semua Produk &nbsp;<i class="fa fa-angle-double-right"></i></a></h6>
+                        <h6 class="bold mb-0"><a href="<?=base_url('products?cat=all') ?>" class="text-green">Lihat Semua Produk &nbsp;<i class="fa fa-angle-double-right"></i></a></h6>
                     </div>
                 </div>
             </div>

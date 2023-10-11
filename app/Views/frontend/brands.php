@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-6">
                 <div class="col-title-content ps-3 mb-3">
-                    <h6 class="bold mb-0">Brand Unggulan</h6>
+                    <h6 class="bold mb-0">Brand</h6>
                 </div>
             </div>
             <div class="col-6">

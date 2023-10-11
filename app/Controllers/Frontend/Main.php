@@ -59,7 +59,7 @@ class Main extends BaseController
         }
         
         // acak result biar ga bosen
-        $category = $this->categoryModel->where('parent_idx >', 0)->findAll();
+        $category = $this->categoryModel->where('parent_idx', 0)->findAll();
         foreach ($category as $key => $row) {
             if ($row['category_name']) {
                 $category_name = $this->createURLSlug(strtolower($row['category_name']));
@@ -351,12 +351,14 @@ class Main extends BaseController
 
         $cat = !empty($this->request->getGet('cat')) ? $this->request->getGet('cat') : 'all';
         $cat = str_replace('-', ' ', $cat);
-        
-        if ($cat != 'all') {
-            $cat = $this->categoryModel->select('category_idx')
-                                              ->where('LOWER(category_name)', $cat)
-                                              ->first();
-        }
+        // $isParent = false;
+        // JIKA ADA CATEGORY YG DIPILIH
+        // if ($cat != 'all') {
+        //     $checkParent = $this->categoryModel->select('category_idx, parent_idx')
+        //                                ->where('LOWER(category_name)', $cat)
+        //                                ->first();
+        //     $isParent = $checkParent == 0 ? true : false;
+        // }
 
         if ($cat == 'all') {
             $products = $this->productModel->select('products.product_idx, products.product_name, products.slug, products.image1, products.price, tenant.tenant_name, tenant.logo, province.province')
@@ -366,11 +368,25 @@ class Main extends BaseController
                                            ->orderBy('products.created_at', 'desc')
                                            ->paginate(12, 'item');
         } else {
+            // CEK DULU INI CATEGORY PARENT ATAU BUKAN
+            $c = $this->categoryModel->select('category_idx, parent_idx')
+                                     ->where('LOWER(category_name)', $cat)
+                                     ->first();
+            
+            if ($c['parent_idx'] == 0) {
+                $key = 'category.parent_idx';
+                $value = $c['parent_idx'];
+            } else {
+                $key = 'products.category_idx';
+                $value = $c['category_idx'];
+            }
+
             $products = $this->productModel->select('products.product_idx, products.product_name, products.slug, products.image1, products.price, tenant.tenant_name, tenant.logo, province.province')
+                                           ->join('category', 'category.category_idx = products.category_idx', 'INNER')
                                            ->join('tenant', 'tenant.tenant_idx = products.tenant_idx', 'INNER')
                                            ->join('province', 'tenant.province_idx = province.province_idx', 'INNER')
                                            ->where('products.status', 'ON')
-                                           ->where('products.category_idx', $cat['category_idx'])
+                                           ->where($key, $value)
                                            ->paginate(12, 'item');
         }
 
