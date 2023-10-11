@@ -375,7 +375,7 @@ class Main extends BaseController
             
             if ($c['parent_idx'] == 0) {
                 $key = 'category.parent_idx';
-                $value = $c['parent_idx'];
+                $value = $c['category_idx'];
             } else {
                 $key = 'products.category_idx';
                 $value = $c['category_idx'];
