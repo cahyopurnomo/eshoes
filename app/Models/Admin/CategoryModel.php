@@ -13,7 +13,7 @@ class CategoryModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = true;
     protected $protectFields    = true;
-    protected $allowedFields    = ['parent_idx', 'category_name', 'category_image', 'created_at', 'updated_at', 'deleted_at'];
+    protected $allowedFields    = ['parent_idx', 'category_name', 'category_image', 'category_slug', 'created_at', 'updated_at', 'deleted_at'];
 
     // Dates
     protected $useTimestamps = false;

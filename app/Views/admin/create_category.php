@@ -35,10 +35,10 @@
                             <select name="parent_category" class="form-control select2">
                             <option value="0">--Pilih Induk Kategori--</option>
                             <?php foreach ($category as $key => $row): ?>
-                                <option value="<?=$row['category_idx'] ?>" <?=(!empty($category_id) && $category_id == $row['category_idx']) || ($row['category_idx'] == old('position')) ? 'selected' : ''; ?>><?=$row['category_name'] ?></option>
+                                <option value="<?=$row['category_idx'] ?>" <?=$parent_idx == $row['category_idx'] || ($row['category_idx'] == old('parent_category')) ? 'selected' : ''; ?>><?=$row['category_name'] ?></option>
                                 <?php if (!empty($row['sub_categories'])): ?>
                                     <?php foreach ($row['sub_categories'] as $k => $rec): ?>
-                                        <option value="<?=$rec['category_idx'] ?>" <?=(!empty($category_id) && $category_id == $rec['category_idx']) || ($rec['category_idx'] == old('position')) ? 'selected' : ''; ?>>&nbsp--&nbsp<?=$rec['category_name'] ?></option>
+                                        <option value="<?=$rec['category_idx'] ?>" <?=$parent_idx == $rec['category_idx'] || ($rec['category_idx'] == old('parent_category')) ? 'selected' : ''; ?>>&nbsp--&nbsp<?=$rec['category_name'] ?></option>
                                     <?php endforeach; ?>
                                 <?php endif; ?>
                             <?php endforeach; ?>

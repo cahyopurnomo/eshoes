@@ -21,11 +21,7 @@ class Category extends BaseController
 
     public function create()
     {
-        // $categories = $this->categoryModel->findAll();
-        // $cat = $this->generateTree($categories, 0);
-
         $categories = $this->getCategoryTree(0);
-        // echo '<pre>', print_r($cat), die();
 
         $data = [
             'category'     => $categories,
@@ -51,23 +47,6 @@ class Category extends BaseController
         }
         return $categories;
     }
-
-    function generateTree($items = array(), $parent_id = 0){
-        // $tree = '<ul>';
-        $tree = '';
-        // for($i=0, $ni=count($items); $i < $ni; $i++){
-        foreach ($items as $key => $row) {
-            if($row['parent_idx'] == $parent_id){
-                // $tree .= '<li>';
-                $tree .= $row['category_name'].'<br>';
-                $sep = 
-                $tree .= $sep.$this->generateTree($items, $row['category_idx']);
-                // $tree .= '</li>';
-            } 
-        }
-        // $tree .= '</ul>';
-        return $tree;
-      }
 
     public function store()
     {
@@ -97,6 +76,7 @@ class Category extends BaseController
         $parent_id      = $this->request->getPost('parent_category');
         $category_name  = $this->request->getPost('category_name');
         $category_image = $this->request->getFile('category_image');
+        $category_slug  = $this->createUrlSlug($category_name);
         $filename       = $category_image->getName();
         
         // upload file logo
@@ -105,6 +85,7 @@ class Category extends BaseController
         $data = [
             'parent_idx'     => $parent_id,
             'category_name'  => $category_name,
+            'category_slug'  => $category_slug,
             'category_image' => $filename
         ];
         $id = $this->categoryModel->insert($data);
@@ -154,6 +135,7 @@ class Category extends BaseController
         $category_id    = $this->encrypter->decrypt(hex2bin($category_id));
         $parent_id      = $this->request->getPost('parent_category');
         $category_name  = $this->request->getPost('category_name');
+        $category_slug  = $this->createUrlSlug($category_name);
         $category_image = $this->request->getFile('category_image');
 
         if (!empty($category_image->getName())) {
@@ -181,6 +163,7 @@ class Category extends BaseController
         
         $data['parent_idx'] = $parent_id;
         $data['category_name'] = $category_name;
+        $data['category_slug'] = $category_slug;
         
         $this->categoryModel->update($category_id, $data);
 
@@ -211,7 +194,7 @@ class Category extends BaseController
             $where = 'c1.deleted_at IS NULL';
             $orWhere = '';
             $column_order = array();
-            $column_search = array();
+            $column_search = ['c1.category_name'];
             $order = array('c1.created_at' => 'desc');
             $lists = $this->categoryModel->get_datatables($table, $column_order, $column_search, $order, $where, $orWhere);
             $data = array();
@@ -237,5 +220,12 @@ class Category extends BaseController
 
             echo json_encode($output);
         }
+    }
+
+    function createUrlSlug($urlString)
+    {
+        //unused
+        $slug = preg_replace('/[^A-Za-z0-9-]+/', '-', strtolower($urlString));
+        return $slug;
     }
 }

@@ -46,7 +46,7 @@
                     <?php if (!empty($row['category_name']) && $key <= 5): ?>
                         <div class="col mb-3">
                             <div class="card text-center">
-                                <a href="<?=$row['category_url'] ?>">
+                                <a href="<?=base_url('products?cat='.$row['category_slug']) ?>">
                                     <img src="<?=!empty($row['category_image']) ? base_url('assets/uploads/logo/'.$row['category_image']) : base_url('assets/uploads/banner/no-image.jpg') ?>" class="card-img-top" alt="...">
                                     <div class="card-body">
                                         <h6 class="medium-bold mb-0"><?=$row['category_name'] ?></h6>

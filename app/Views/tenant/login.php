@@ -86,7 +86,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-lg-12">
-                                                <a class="text-green medium-bold" href=""  data-bs-toggle="modal" data-bs-target="#modal-forgot-password"><u>Forgot Password?</u></a>
+                                                <a class="text-green medium-bold" href="" data-bs-toggle="modal" data-bs-target="#modal-forgot-password"><u>Forgot Password?</u></a>
                                             </div>
                                         </div>
                                     </form>
