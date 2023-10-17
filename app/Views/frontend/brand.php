@@ -35,7 +35,7 @@
                                                 <a href="<?='https://www.instagram.com/'.$tenant['instagram'] ?>"><img src="<?=base_url('assets/img/instagram.jpg') ?>"></a>
                                                 <?php endif; ?>
                                                 <?php if (!empty($tenant['linkedin'])): ?>
-                                                <a href="<?='https://www.linkedin.com/in/'.$tenant['linkedin'] ?>"><img src="<?=base_url('assets/img/linkedin.jpg') ?>"></a>
+                                                <a href="<?='https://www.linkedin.com/'.$tenant['linkedin'] ?>"><img src="<?=base_url('assets/img/linkedin.jpg') ?>"></a>
                                                 <?php endif; ?>
                                                 <?php if (!empty($tenant['tiktok'])): ?>
                                                 <a href="<?='https://www.tiktok.com/@'.$tenant['tiktok'] ?>"><img src="<?=base_url('assets/img/tik-tok.jpg') ?>"></a>
