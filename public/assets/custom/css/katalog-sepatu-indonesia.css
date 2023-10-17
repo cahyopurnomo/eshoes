@@ -622,6 +622,22 @@ img.img-pin-marker {
   padding: 7px;
 }
 
+/* HOME SECTION KATEGORI */
+
+.row-kategori-unggulan .card .card-body {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.row-kategori-unggulan .card .card-body h6 {
+  background: #f7f8ff;
+  border: 1px #f7f8ff solid;
+  padding: 6px 15px;
+  color: #004daf !important;
+  border-radius: 30px;
+}
+
 @media (min-width: 360px) and (max-width: 767px) {
   .card-body h6 {
     line-height: 1.6em !important;
