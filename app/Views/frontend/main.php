@@ -76,11 +76,13 @@
         </div>
         <div class="row row-brand-unggulan">
             <?php foreach ($tenant as $key => $row): ?>
+                <?php if ($key <= 5): ?>
                 <div class="col-2 mb-3">
                     <div class="card">
                         <a href="<?=$row['brand_url'] ?>"><img src="<?=!empty($row['logo']) ? base_url('assets/uploads/logo/'.$row['logo']) : base_url('assets/uploads/banner/no-image.jpg') ?>" class="card-img-top" alt="..."></a>
                     </div>
                 </div>
+                <?php endif; ?>
             <?php endforeach; ?>
         </div>
     </div>
