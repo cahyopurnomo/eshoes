@@ -193,7 +193,7 @@ class Category extends BaseController
             $table = 'category c1';
             $where = 'c1.deleted_at IS NULL';
             $orWhere = '';
-            $column_order = array();
+            $column_order = ['c1.category_name'];
             $column_search = ['c1.category_name'];
             $order = array('c1.created_at' => 'desc');
             $lists = $this->categoryModel->get_datatables($table, $column_order, $column_search, $order, $where, $orWhere);
