@@ -6,6 +6,7 @@ use App\Controllers\BaseController;
 use App\Models\Admin\TenantModel;
 use App\Models\Admin\CityModel;
 use App\Models\Admin\ProvinceModel;
+use App\Models\Tenant\ProductModel;
 use Config\Services;
 
 class Tenant extends BaseController
@@ -15,6 +16,7 @@ class Tenant extends BaseController
         $this->encrypter = \Config\Services::encrypter();
         $this->tenantModel = new TenantModel();
         $this->provinceModel = new ProvinceModel();
+        $this->productModel = new ProductModel();
         $this->cityModel = new CityModel();
     }
 
@@ -372,7 +374,10 @@ class Tenant extends BaseController
             }
 
             // delete tenant
-            $this->tenantModel->delete($tenant_idx);    
+            $this->tenantModel->delete($tenant_idx);
+
+            // delete all product by this tenant
+            $this->productModel->set('deleted_at', date('Y-m-d H:i:s'))->where('tenant_idx', $tenant_idx)->update();
 
             return redirect()->to('admin/tenant')->with('success', 'Data Tenant Berhasil Dihapus');
         }
