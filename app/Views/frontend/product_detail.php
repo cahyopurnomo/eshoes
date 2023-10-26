@@ -86,7 +86,16 @@
                 </div>
                 <div class="mt-3">
                     <a href="https://wa.me/<?=$product['phone'] ?>" class="btn btn-primary text-white medium-bold"><i class="fa fa-whatsapp"></i> &nbsp; Whatsapp</a>
-                    <a href="mailto:<?=$product['email'] ?>" class="btn btn-email text-green medium-bold"><i class="fa fa-envelope"></i> &nbsp; Email</a>
+                    <?php if (!empty($tenant['lazada'])): ?>
+                        <a href="<?='https://www.lazada.co.id/shop/'.$tenant['lazada'] ?>" class="btn col-link-sosial-media"><img src="<?=base_url('assets/img/lazada.jpg') ?>"></a>
+                    <?php endif; ?>
+                    <?php if (!empty($tenant['tokopedia'])): ?>
+                        <a href="<?='https://www.tokopedia.com/'.$tenant['tokopedia'] ?>" class="btn col-link-sosial-media"><img src="<?=base_url('assets/img/tokopedia.jpg') ?>"></a>
+                    <?php endif; ?>
+                    <?php if (!empty($tenant['shopee'])): ?>
+                        <a href="<?='https://shopee.co.id/'.$tenant['shopee'] ?>" class="btn col-link-sosial-media"><img src="<?=base_url('assets/img/shopee.jpg') ?>"></a>
+                    <?php endif; ?>
+                    <!-- <a href="mailto:<?=$product['email'] ?>" class="btn btn-email text-green medium-bold"><i class="fa fa-envelope"></i> &nbsp; Email</a> -->
                 </div>
             </div>
         </div>
@@ -128,4 +137,11 @@
     </div>
     <?php endif; ?>
 </main>
+<style>
+    .col-link-sosial-media {
+        margin: 0;
+        width: 42px;
+        padding: 0;
+    }
+</style>
 <?=$this->endSection(); ?>

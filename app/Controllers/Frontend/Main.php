@@ -236,6 +236,7 @@ class Main extends BaseController
 
         $data = [
             'category'          => $categories,
+            'tenant'            => $tenant,
             'product'           => $product,
             'brand_url'         => base_url('brand/'.$this->createURLSlug(strtolower($product['tenant_name']))),
             'related_product'   => $related_product,
