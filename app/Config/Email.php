@@ -28,17 +28,17 @@ class Email extends BaseConfig
     /**
      * SMTP Server Address
      */
-    public string $SMTPHost = 'mail.mioranetwork.com';
+    public string $SMTPHost = 'mail.eshoes.com';
 
     /**
      * SMTP Username
      */
-    public string $SMTPUser = 'michelle@mioranetwork.com';
+    public string $SMTPUser = 'admin@eshoes.com';
 
     /**
      * SMTP Password
      */
-    public string $SMTPPass = 'BebekBaris2023';
+    public string $SMTPPass = 'rahasiaBersama';
 
     /**
      * SMTP Port
