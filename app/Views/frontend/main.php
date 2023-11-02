@@ -46,7 +46,7 @@
                     <?php if (!empty($row['category_name']) && $key <= 5): ?>
                         <div class="col mb-3">
                             <div class="card text-center">
-                                <a href="<?=$row['category_url'] ?>">
+                                <a href="<?=base_url('products?cat='.$row['category_slug']) ?>">
                                     <img src="<?=!empty($row['category_image']) ? base_url('assets/uploads/logo/'.$row['category_image']) : base_url('assets/uploads/banner/no-image.jpg') ?>" class="card-img-top" alt="...">
                                     <div class="card-body">
                                         <h6 class="medium-bold mb-0"><?=$row['category_name'] ?></h6>
@@ -76,11 +76,13 @@
         </div>
         <div class="row row-brand-unggulan">
             <?php foreach ($tenant as $key => $row): ?>
+                <?php if ($key <= 5): ?>
                 <div class="col-2 mb-3">
                     <div class="card">
                         <a href="<?=$row['brand_url'] ?>"><img src="<?=!empty($row['logo']) ? base_url('assets/uploads/logo/'.$row['logo']) : base_url('assets/uploads/banner/no-image.jpg') ?>" class="card-img-top" alt="..."></a>
                     </div>
                 </div>
+                <?php endif; ?>
             <?php endforeach; ?>
         </div>
     </div>

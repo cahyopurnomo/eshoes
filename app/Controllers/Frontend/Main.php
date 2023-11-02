@@ -25,6 +25,7 @@ class Main extends BaseController
     public function index()
     {
         $categories = $this->getCategoryTree(0);
+        
         $banner = $this->bannerModel->select('banner_image')
                                     ->where('tenant_idx', 0)
                                     ->where('status', 'ON')
@@ -58,15 +59,9 @@ class Main extends BaseController
             }
         }
         
-        // acak result biar ga bosen
         $category = $this->categoryModel->where('parent_idx', 0)->findAll();
-        foreach ($category as $key => $row) {
-            if ($row['category_name']) {
-                $category_name = $this->createURLSlug(strtolower($row['category_name']));
-                $category[$key]['category_url'] = base_url('products?cat='.$category_name);
-            }
-        }
-
+        
+        // acak result biar ga bosen
         shuffle($category);
         shuffle($banner);
         shuffle($tenant);
@@ -241,6 +236,7 @@ class Main extends BaseController
 
         $data = [
             'category'          => $categories,
+            'tenant'            => $tenant,
             'product'           => $product,
             'brand_url'         => base_url('brand/'.$this->createURLSlug(strtolower($product['tenant_name']))),
             'related_product'   => $related_product,
@@ -350,15 +346,6 @@ class Main extends BaseController
         $categories = $this->getCategoryTree(0);
 
         $cat = !empty($this->request->getGet('cat')) ? $this->request->getGet('cat') : 'all';
-        $cat = str_replace('-', ' ', $cat);
-        // $isParent = false;
-        // JIKA ADA CATEGORY YG DIPILIH
-        // if ($cat != 'all') {
-        //     $checkParent = $this->categoryModel->select('category_idx, parent_idx')
-        //                                ->where('LOWER(category_name)', $cat)
-        //                                ->first();
-        //     $isParent = $checkParent == 0 ? true : false;
-        // }
 
         if ($cat == 'all') {
             $products = $this->productModel->select('products.product_idx, products.product_name, products.slug, products.image1, products.price, tenant.tenant_name, tenant.logo, province.province')
@@ -370,9 +357,9 @@ class Main extends BaseController
         } else {
             // CEK DULU INI CATEGORY PARENT ATAU BUKAN
             $c = $this->categoryModel->select('category_idx, parent_idx')
-                                     ->where('LOWER(category_name)', $cat)
+                                     ->where('category_slug', $cat)
                                      ->first();
-            
+                                     
             if ($c['parent_idx'] == 0) {
                 $key = 'category.parent_idx';
                 $value = $c['category_idx'];

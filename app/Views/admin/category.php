@@ -55,7 +55,7 @@
             "url": "<?=site_url('admin/ajax-category-list') ;?>",
             "type": "POST"
          },
-         "order": [],
+         // "order": [['category_name','asc']],
          "columnDefs": [
             { 'targets': "_all", "orderable": false, },
             { "className": 'text-center', "targets": "_all" },
