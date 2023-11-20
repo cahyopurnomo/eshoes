@@ -95,6 +95,9 @@
                     <?php if (!empty($tenant['shopee'])): ?>
                         <a href="<?='https://shopee.co.id/'.$tenant['shopee'] ?>" class="btn col-link-sosial-media"><img src="<?=base_url('assets/img/shopee.jpg') ?>"></a>
                     <?php endif; ?>
+                    <?php if (!empty($tenant['blibli'])): ?>
+                        <a href="<?='https://www.blibli.com/brand/'.$tenant['blibli'] ?>" class="btn col-link-sosial-media"><img src="<?=base_url('assets/img/blibli.png') ?>"></a>
+                    <?php endif; ?>
                     <!-- <a href="mailto:<?=$product['email'] ?>" class="btn btn-email text-green medium-bold"><i class="fa fa-envelope"></i> &nbsp; Email</a> -->
                 </div>
             </div>
@@ -120,12 +123,12 @@
                 <?php foreach ($related_product as $key => $row): ?>
                     <div class="col-3 mb-4">
                         <div class="card text-left">
-                            <a href="<?=base_url(strtolower($row['tenant_name']).'/'.$row['slug']) ?>">
+                            <a href="<?=base_url('product/'.strtolower($row['tenant_name']).'/'.$row['slug']) ?>">
                                 <img src="<?=base_url('assets/uploads/products/').$row['image1'] ?>" class="card-img-top" alt="<?=$row['slug'] ?>">
                                 <div class="card-body">
                                     <p class="medium-bold mb-1"><?=$row['product_name'] ?></p>
                                     <p class="text-green bold mb-3">Rp. <?=number_format($row['price']) ?></p>
-                                    <p class="mb-1 text-grey"><img src="<?=base_url('assets/uploads/logo/'.$row['logo']) ?>assets/img/toko-01.jpg" class="img-toko">&nbsp; <?=$row['tenant_name'] ?></p>
+                                    <p class="mb-1 text-grey"><img src="<?=base_url('assets/uploads/logo/'.$row['logo']) ?>" class="img-toko">&nbsp; <?=$row['tenant_name'] ?></p>
                                     <p class="mb-0 text-grey"><img src="<?=base_url('assets/img/pin-marker.png') ?>" class="img-pin-marker">&nbsp; <?=$row['province'] ?></p>
                                 </div>
                             </a>

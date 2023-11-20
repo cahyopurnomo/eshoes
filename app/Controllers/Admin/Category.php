@@ -25,6 +25,7 @@ class Category extends BaseController
 
         $data = [
             'category'     => $categories,
+            'parent_idx'   => '',
             'url'          => base_url('admin/save-category'),
             'btn_text'     => 'Simpan',
             'header_text'  => 'Tambah'

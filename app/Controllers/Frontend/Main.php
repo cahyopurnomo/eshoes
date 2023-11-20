@@ -247,10 +247,12 @@ class Main extends BaseController
 
     public function brand_detail($brand)
     {
+        $brand = str_replace('-', ' ', $brand);
         $tenant = $this->tenantModel->select('tenant.*, province.province')
                                     ->join('province', 'tenant.province_idx = province.province_idx', 'LEFT')
                                     ->where('LOWER(tenant_name)', strtolower($brand))
                                     ->first();
+               
         if (!$tenant) {
             return redirect()->back()->with('error', 'Brand Tidak Ditemukan');
         }
@@ -353,7 +355,7 @@ class Main extends BaseController
                                            ->join('province', 'tenant.province_idx = province.province_idx', 'INNER')
                                            ->where('products.status', 'ON')
                                            ->orderBy('products.created_at', 'desc')
-                                           ->paginate(12, 'item');
+                                           ->paginate(50, 'item');
         } else {
             // CEK DULU INI CATEGORY PARENT ATAU BUKAN
             $c = $this->categoryModel->select('category_idx, parent_idx')
@@ -402,7 +404,7 @@ class Main extends BaseController
 
         $tenant = $this->tenantModel->select('tenant_idx, tenant_name, logo')
                                     ->where('status', 'ACTIVE')
-                                    ->paginate(12, 'item');
+                                    ->paginate(50, 'item');
         
         foreach ($tenant as $key => $row) {
             if ($row['tenant_name']) {
@@ -425,7 +427,7 @@ class Main extends BaseController
     {
         $categories = $this->getCategoryTree(0);
 
-        $category = $this->categoryModel->where('parent_idx >', 0)->paginate(12, 'item');
+        $category = $this->categoryModel->where('parent_idx >', 0)->paginate(50, 'item');
         
         foreach ($category as $key => $row) {
             if ($row['category_name']) {

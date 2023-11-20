@@ -60,6 +60,9 @@
                                                 <?php if (!empty($tenant['shopee'])): ?>
                                                 <a href="<?='https://shopee.co.id/'.$tenant['shopee'] ?>"><img src="<?=base_url('assets/img/shopee.jpg') ?>"></a>
                                                 <?php endif; ?>
+                                                <?php if (!empty($tenant['blibli'])): ?>
+                                                <a href="<?='https://www.blibli.com/brand/'.$tenant['blibli'] ?>"><img src="<?=base_url('assets/img/blibli.png') ?>"></a>
+                                                <?php endif; ?>
                                             </p>
                                         </div>
                                     </div>

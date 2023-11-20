@@ -16,7 +16,7 @@ class Login extends BaseController
     public function index()
     {
         if (!empty(session()->get('tenant_idx')))
-            return redirect()->to('/tenant/dashboard');
+            return redirect()->to('/tenant/product');
         else
             return view('tenant/login');
     }
@@ -37,7 +37,7 @@ class Login extends BaseController
                     'loggedAs'      => 'tenant',
                     'segment'       => 'tenant',
                 ]);
-                return redirect()->to('tenant/dashboard');
+                return redirect()->to('tenant/product');
             } else {
                 session()->setFlashdata('error', 'Email & Password Salah');
                 return redirect()->back();
