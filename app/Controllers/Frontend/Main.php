@@ -62,7 +62,6 @@ class Main extends BaseController
         $category = $this->categoryModel->where('parent_idx', 0)->findAll();
         
         // acak result biar ga bosen
-        shuffle($category);
         shuffle($banner);
         shuffle($tenant);
         shuffle($product);
@@ -358,7 +357,7 @@ class Main extends BaseController
                                            ->paginate(50, 'item');
         } else {
             // CEK DULU INI CATEGORY PARENT ATAU BUKAN
-            $c = $this->categoryModel->select('category_idx, parent_idx')
+            $c = $this->categoryModel->select('category_idx, category_name, parent_idx')
                                      ->where('category_slug', $cat)
                                      ->first();
                                      
@@ -389,9 +388,13 @@ class Main extends BaseController
             }
         }
 
+        // ACAK PRODUK
+        shuffle($products);
+        
         $data = [
             'category' => $categories,
             'products' => $products,
+            'category_selected' => $c['category_name'],
             'pager'    => $this->productModel->pager
         ];
 
@@ -414,6 +417,9 @@ class Main extends BaseController
             }
         }
         
+        // ACAK BRANDS
+        shuffle($tenant);
+
         $data = [
             'category' => $categories,
             'tenant'   => $tenant,

@@ -4,13 +4,8 @@
     <div class="container">
         <div class="row">
             <div class="col-6">
-                <div class="col-title-content ps-3 mb-3">
-                    <h6 class="bold mb-0">Produk</h6>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="text-end mb-3">
-                    <h6 class="bold mb-0"><a href="<?=base_url() ?>" class="text-green">Kembali &nbsp;<i class="fa fa-angle-double-right"></i></a></h6>
+                <div class="mb-3">
+                    <h6 class="bold mb-0"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;&nbsp;<a href="<?=base_url() ?>" class="text-green">Kembali</a></h6>
                 </div>
             </div>
         </div>
@@ -24,6 +19,65 @@
             </div>
         </div>
         <?php endif; ?>
+        <div class="col-title">
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="title-category text-center mb-4"><?=$category_selected ?></h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-box-form-kategori mb-4">
+            <div class="row">
+                <div class="col-md-3">
+                    <select class="select-kategori" name="">
+                        <option value="select_kategori" disabled selected>Select Kategori</option>
+                        <option value="sepatu_sport">Sepatu Sport</option>
+                        <option value="sepatu_sneaker">Sepatu Sneaker</option>
+                        <option value="sepatu_fashion">Sepatu Fashion</option>
+                        <option value="sepatu_joging">Sepatu Joging</option>
+                        <option value="sepatu_olahraga">Sepatu Olahraga</option>
+                        <option value="sepatu_boots">Sepatu Boots</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select class="select-brand" name="">
+                        <option value="select_brand" disabled selected>Select Brand</option>
+                        <option value="ventela">Ventela</option>
+                        <option value="aero_street">Aero Street</option>
+                        <option value="patrobas">Patrobas</option>
+                        <option value="brodo">Brodo</option>
+                        <option value="nah_project">Nah Project</option>
+                        <option value="buccheri">Buccheri</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select class="select-provinsi" name="">
+                        <option value="select_provinsi" disabled selected>Select Provinsi</option>
+                        <option value="aceh">Aceh</option>
+                        <option value="bali">Bali</option>
+                        <option value="banten">Banten</option>
+                        <option value="bengkulu">Bengkulu</option>
+                        <option value="yogyakarta">DI Yogyakarta</option>
+                        <option value="jakarta">DKI Jakarta</option>
+                        <option value="gorontalo">Gorontalo</option>
+                        <option value="jambi">Jambi</option>
+                        <option value="jawa_barat">Jawa Barat</option>
+                        <option value="jawa_timur">Jawa Timur</option>
+                        <option value="jawa_tengah">Jawa Tengah</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select class="select-sort-list" name="">
+                        <option value="newest_post">Newest Post</option>
+                        <option value="oldest_post">Oldest Post</option>
+                        <option value="lowest_price">Lowest Price</option>
+                        <option value="highest_price">Highest Price</option>
+                        <option value="a_z">A - Z</option>
+                        <option value="z_a">Z - A</option>
+                    </select>
+                </div>
+            </div>
+        </div>
         <div class="row col-card-product-unggulan">
             <?php foreach ($products as $key => $row): ?>
             <div class="col-3 mb-4">
