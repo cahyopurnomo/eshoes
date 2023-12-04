@@ -28,7 +28,7 @@
                                         <ul>
                                             <?php if (!empty($row['sub_categories'])): ?>
                                                 <?php foreach ($row['sub_categories'] as $k => $rec): ?>
-                                                    <li><a href="<?=base_url('products?cat='.$rec['category_slug']) ?>">-&nbsp; <?=$rec['category_name'] ?></a></li>
+                                                    <li><a href="<?=base_url('products?c='.$rec['category_slug']) ?>">-&nbsp; <?=$rec['category_name'] ?></a></li>
                                                 <?php endforeach; ?>
                                             <?php endif; ?>
                                         </ul>
@@ -39,7 +39,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link <?=$request->uri->getSegment(1) == 'products' ? 'active' : '' ?>" href="<?=base_url('products?cat=all') ?>"><i class="fa fa-star"></i>&nbsp; Produk</a>
+                    <a class="nav-link <?=$request->uri->getSegment(1) == 'products' ? 'active' : '' ?>" href="<?=base_url('products?c=all') ?>"><i class="fa fa-star"></i>&nbsp; Produk</a>
                 </li>
             </ul>
             <ul class="navbar-nav mb-2 mb-md-0 medium-bold">

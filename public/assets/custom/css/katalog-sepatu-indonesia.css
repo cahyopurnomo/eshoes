@@ -86,6 +86,10 @@ a.btn {
   line-height: 2em !important;
 }
 
+.col-title-content h6 {
+  font-size: 15px !important;
+}
+
 img {
   width: 100%;
   border-radius: 0px;
@@ -518,6 +522,11 @@ img.img-pin-marker {
   border: 1px #e2eee6 solid;
 }
 
+.row-brand-unggulan .card .card-img-top {
+  min-height: 180px;
+  max-height: 180px;
+}
+
 /*SELECT 2*/
 
 .select2-container {
@@ -636,6 +645,66 @@ img.img-pin-marker {
   padding: 6px 15px;
   color: #004daf !important;
   border-radius: 30px;
+  display: none;
+}
+
+.col-page.col-page-brands .card .card-img-top {
+  height: 100%;
+  min-height: 195px;
+}
+
+.col-card-product-unggulan .card img.card-img-top {
+  max-height: 230px;
+  min-height: 230px;
+  object-fit: cover;
+}
+
+.card .card-img-top {
+  height: 100%;
+  min-height: 300px;
+  max-height: 300px;
+  object-fit: cover;
+}
+
+/*ZOOM*/
+
+.col-thumnail-product-zoom-detail #zoomImg {
+  width: 100% !important;
+  display: flex;
+}
+
+.col-thumnail-product-zoom-detail .zoom .zoom-main {
+  width: 80%;
+  height: 100%;
+  background: #f7f8ff;
+  position: absolute;
+  right: 0;
+}
+
+.col-thumnail-product-zoom-detail .zoom.zoom-thumb-hide .zoom-main {
+  width: 100%;
+}
+
+.col-thumnail-product-zoom-detail #zoomImg .zoom-main .zoom-mousemove {
+  width: 100%;
+  object-fit: cover;
+}
+
+.col-thumnail-product-zoom-detail #zoomImg .zoom-thumb {
+  width: 20%;
+  padding: 10px;
+  padding-top: 0px;
+  padding-left: 0;
+  object-fit: cover;
+}
+
+.col-thumnail-product-zoom-detail #zoomImg .zoom-thumb .zoom-click {
+  width: 100%;
+  object-fit: cover;
+}
+
+.col-title h1.title-category {
+  margin-bottom: 3rem !important;
 }
 
 @media (min-width: 360px) and (max-width: 767px) {
@@ -789,6 +858,32 @@ img.img-pin-marker {
   .col-card-product-unggulan .col-3 {
     width: 100%;
   }
+  
+  .col-page.col-page-brands .col-2 {
+      width: 50%;
+    }
+    
+    .col-page.col-page-brands .card .card-img-top{
+        min-height: 160px;
+    }
+    
+    .row-kategori-unggulan .card .card-img-top {
+      min-height: 150px;
+    }
+    
+    .row-brand-unggulan .card .card-img-top {
+      min-height: 150px;
+      max-height: 150px;
+    }
+    
+    .col-title h1.title-category {
+      margin-bottom: 2rem !important;
+    }
+    
+    .col-box-form-kategori .col-md-3 {
+      margin-bottom: 0.5rem;
+    }
+
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
@@ -920,4 +1015,26 @@ img.img-pin-marker {
     height: 100%;
     min-height: 46px;
   }
+  
+  
+  
+  .col-page.col-page-brands .col-2 {
+    width: 25%;
+    }
+
+    .col-page.col-page-brands .card .card-img-top{
+        min-height: 150px;
+    }
+    
+    .row-kategori-unggulan .card .card-img-top {
+      min-height: 150px;
+    }
+    
+    .card .card-img-top {
+      height: 100%;
+      min-height: 200px;
+      max-height: 200px;
+      object-fit: cover;
+    }
+    
 }

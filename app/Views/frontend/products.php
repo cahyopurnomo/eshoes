@@ -29,51 +29,37 @@
         <div class="col-box-form-kategori mb-4">
             <div class="row">
                 <div class="col-md-3">
-                    <select class="select-kategori" name="">
-                        <option value="select_kategori" disabled selected>Select Kategori</option>
-                        <option value="sepatu_sport">Sepatu Sport</option>
-                        <option value="sepatu_sneaker">Sepatu Sneaker</option>
-                        <option value="sepatu_fashion">Sepatu Fashion</option>
-                        <option value="sepatu_joging">Sepatu Joging</option>
-                        <option value="sepatu_olahraga">Sepatu Olahraga</option>
-                        <option value="sepatu_boots">Sepatu Boots</option>
+                    <select class="select-kategori" name="cboCategory" id="cboCategory">
+                    <option value="">All Kategori</option>
+                    <?php foreach ($categories as $key => $row): ?>
+                        <option value="<?=$row['category_slug'] ?>" <?=$row['category_slug'] == $category_slug_selected ? 'selected' : '' ?>><?=$row['category_name'] ?></option>
+                    <?php endforeach; ?>
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <select class="select-brand" name="">
-                        <option value="select_brand" disabled selected>Select Brand</option>
-                        <option value="ventela">Ventela</option>
-                        <option value="aero_street">Aero Street</option>
-                        <option value="patrobas">Patrobas</option>
-                        <option value="brodo">Brodo</option>
-                        <option value="nah_project">Nah Project</option>
-                        <option value="buccheri">Buccheri</option>
+                    <select class="select-brand" name="cboBrand" id="cboBrand">
+                    <option value="">All Brand</option>
+                    <?php foreach ($brand as $key => $row): ?>
+                        <option value="<?=strtolower($row['tenant_name']) ?>" <?=$tenant_name_selected == $row['tenant_name'] ? 'selected' : '' ?>><?=$row['tenant_name'] ?></option>
+                    <?php endforeach; ?>
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <select class="select-provinsi" name="">
-                        <option value="select_provinsi" disabled selected>Select Provinsi</option>
-                        <option value="aceh">Aceh</option>
-                        <option value="bali">Bali</option>
-                        <option value="banten">Banten</option>
-                        <option value="bengkulu">Bengkulu</option>
-                        <option value="yogyakarta">DI Yogyakarta</option>
-                        <option value="jakarta">DKI Jakarta</option>
-                        <option value="gorontalo">Gorontalo</option>
-                        <option value="jambi">Jambi</option>
-                        <option value="jawa_barat">Jawa Barat</option>
-                        <option value="jawa_timur">Jawa Timur</option>
-                        <option value="jawa_tengah">Jawa Tengah</option>
+                    <select class="select-provinsi" name="cboProvince" id="cboProvince">
+                    <option value="">All Propinsi</option>
+                    <?php foreach ($province as $key => $row): ?>
+                        <option value="<?=strtolower($row['province']) ?>" <?=$province_selected == $row['province'] ? 'selected' : '' ?>><?=$row['province'] ?></option>
+                    <?php endforeach; ?>
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <select class="select-sort-list" name="">
-                        <option value="newest_post">Newest Post</option>
-                        <option value="oldest_post">Oldest Post</option>
-                        <option value="lowest_price">Lowest Price</option>
-                        <option value="highest_price">Highest Price</option>
-                        <option value="a_z">A - Z</option>
-                        <option value="z_a">Z - A</option>
+                    <select class="select-sort-list" name="cboSorting" id="cboSorting">
+                        <option value="newest_post" <?=$sorting_selected == 'newest_post' ? 'selected' : '' ?>>Newest Post</option>
+                        <option value="oldest_post" <?=$sorting_selected == 'oldest_post' ? 'selected' : '' ?>>Oldest Post</option>
+                        <option value="lowest_price" <?=$sorting_selected == 'lowest_price' ? 'selected' : '' ?>>Lowest Price</option>
+                        <option value="highest_price" <?=$sorting_selected == 'highest_price' ? 'selected' : '' ?>>Highest Price</option>
+                        <option value="a_z" <?=$sorting_selected == 'a_z' ? 'selected' : '' ?>>A - Z</option>
+                        <option value="z_a" <?=$sorting_selected == 'z_a' ? 'selected' : '' ?>>Z - A</option>
                     </select>
                 </div>
             </div>
@@ -106,4 +92,54 @@
         </div>
     </div>
 </main>
+<script src="<?=base_url('assets/preset/vendor/jquery/jquery.min.js?v=').time(); ?>"></script>
+<script>
+    $(document).ready(function(){
+        let origin = $(location).attr('href');
+
+        $('#cboCategory').on('click, change', function(){
+            c = $(this).val();
+            // GET ORIGIN
+            let url = new URL(origin);
+            let search_params = url.searchParams;
+            // SET NEW VALUE
+            search_params.set('c', c);
+            // GO TO CURRENT URL
+            location.href = url;
+        });
+
+        $('#cboBrand').on('click, change', function(){
+            b = $(this).val();
+            // GET ORIGIN
+            let url = new URL(origin);
+            let search_params = url.searchParams;
+            // SET NEW VALUE
+            search_params.set('b', b);
+            // GO TO CURRENT URL
+            location.href = url;
+        });
+
+        $('#cboProvince').on('click, change', function(){
+            p = $(this).val();
+            // GET ORIGIN
+            let url = new URL(origin);
+            let search_params = url.searchParams;
+            // SET NEW VALUE
+            search_params.set('p', p);
+            // GO TO CURRENT URL
+            location.href = url;
+        });
+
+        $('#cboSorting').on('click, change', function(){
+            s = $(this).val();
+            // GET ORIGIN
+            let url = new URL(origin);
+            let search_params = url.searchParams;
+            // SET NEW VALUE
+            search_params.set('s', s);
+            // GO TO CURRENT URL
+            location.href = url;
+        });
+    })
+</script>
 <?=$this->endSection(); ?>

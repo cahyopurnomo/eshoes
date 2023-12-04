@@ -31,7 +31,7 @@
     <script src="<?=base_url('assets/preset/vendor/datatables/jquery.dataTables.min.js?v=').time(); ?>"></script>
     <script src="<?=base_url('assets/preset/vendor/datatables/dataTables.bootstrap4.min.js?v=').time(); ?>"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js?v=<?=time() ?>"></script>
-    <!-- <?= $this->renderSection('scripts') ?> -->
+    
     <style>
         .required label:after {
             color: #ff5159;
@@ -102,6 +102,7 @@
     </div>
     <!-- Custom scripts for all pages-->
     <script src="<?=base_url('assets/preset/js/sb-admin-2.min.js?v=').time(); ?>"></script>
+    
 </body>
 
 </html>

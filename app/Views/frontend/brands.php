@@ -1,6 +1,6 @@
 <?=$this->extend('layouts/frontend_template'); ?>
 <?=$this->Section('main'); ?>
-<main class="col-page mb-3">
+<main class="col-page col-page-brands mb-3">
     <div class="container">
         <div class="row">
             <div class="col-6">
@@ -17,7 +17,7 @@
         
         <div class="row">
             <?php foreach ($tenant as $key => $row): ?>
-                <div class="col-3 mb-3">
+                <div class="col-2 mb-3">
                     <div class="card">
                         <a href="<?=$row['brand_url'] ?>"><img src="<?=!empty($row['logo']) ? base_url('assets/uploads/logo/'.$row['logo']) : base_url('assets/uploads/banner/no-image.jpg') ?>" class="card-img-top" alt="..."></a>
                     </div>

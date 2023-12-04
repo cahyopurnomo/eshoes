@@ -7,6 +7,7 @@ use App\Models\Admin\CategoryModel;
 use App\Models\Tenant\ProductModel;
 use App\Models\Admin\TenantModel;
 use App\Models\Admin\BannerModel;
+use App\Models\Admin\ProvinceModel;
 
 use Config\Services;
 
@@ -20,6 +21,7 @@ class Main extends BaseController
         $this->categoryModel = new CategoryModel();
         $this->productModel = new ProductModel();
         $this->bannerModel = new BannerModel();
+        $this->provinceModel = new ProvinceModel();
     }
 
     public function index()
@@ -199,7 +201,7 @@ class Main extends BaseController
         $categories = $this->getCategoryTree(0);
 
         // find product by slug
-        $product = $this->productModel->select('products.product_idx, products.category_idx, products.product_name, products.slug, products.description, products.image1, products.image2, products.image3, products.price, tenant.tenant_name, tenant.email, tenant.logo, tenant.phone, province.province, category.category_name')
+        $product = $this->productModel->select('products.product_idx, products.category_idx, products.product_name, category.category_slug, products.slug, products.description, products.image1, products.image2, products.image3, products.price, tenant.tenant_name, tenant.email, tenant.logo, tenant.phone, province.province, category.category_name')
                                       ->join('tenant', 'tenant.tenant_idx = products.tenant_idx', 'LEFT')
                                       ->join('province', 'tenant.province_idx = province.province_idx', 'LEFT')
                                       ->join('category', 'category.category_idx = products.category_idx', 'LEFT')
@@ -344,9 +346,75 @@ class Main extends BaseController
 
     public function all_product()
     {
-        $categories = $this->getCategoryTree(0);
+        $where = [];
+        $order_by = 'products.created_at';
+        $order_value = 'desc';
 
-        $cat = !empty($this->request->getGet('cat')) ? $this->request->getGet('cat') : 'all';
+        // GET CATEGORY
+        $categoriesMenu = $this->getCategoryTree(0);
+
+        // CATEGORY
+        if (!empty($this->request->getGet('c'))) {
+            $cat = $this->request->getGet('c');
+
+            if ($cat != 'all') {
+                // CEK DULU INI CATEGORY PARENT ATAU BUKAN
+                $c = $this->categoryModel->select('category_idx, category_name, category_slug, parent_idx')
+                                        ->where('category_slug', $cat)
+                                        ->first();
+                                        
+                // JIKA CATEGORY ADALAH PARENT
+                if ($c['parent_idx'] == 0) {
+                    $where['category.parent_idx'] = $c['category_idx'];
+                } else {
+                    $where['category.category_slug'] = $c['category_slug'];
+                }
+
+                $category_selected = $c['category_name'];
+                $category_slug_selected = $c['category_slug'];
+            } else {
+                $cat = 'all';
+                $category_selected = 'All Kategori';
+                $category_slug_selected = '';
+            }
+        }
+        
+        // BRAND
+        if (!empty($this->request->getGet('b'))) {
+            $brand = $this->request->getGet('b');
+            $tenant_name_selected = $brand;
+            $where['tenant.tenant_name'] = $brand;
+        }
+        // PROVINCE
+        if (!empty($this->request->getGet('p'))) {
+            $province = $this->request->getGet('p');
+            $province_selected = $province;
+            $where['province.province'] = $province;
+        }
+        // SORTING
+        if (!empty($this->request->getGet('s'))) {
+            $sorting = $this->request->getGet('b');
+            $sorting_selected = $sorting;
+            if ($sorting == 'newest_post') {
+                $order_by = 'products.created_at';
+                $order_value = 'desc';
+            } else if ($sorting == 'oldest_post') {
+                $order_by = 'products.created_at';
+                $order_value = 'asc';
+            } else if ($sorting == 'lowest Price') {
+                $order_by = 'products.product_price';
+                $order_value = 'asc';
+            } else if ($sorting == 'highest_price') {
+                $order_by = 'products.product_price';
+                $order_value = 'desc';
+            } else if ($sorting == 'a_z') {
+                $order_by = 'products.product_name';
+                $order_value = 'asc';
+            } else if ($sorting == 'z_a') {
+                $order_by = 'products.product_name';
+                $order_value = 'desc';
+            }
+        }
 
         if ($cat == 'all') {
             $products = $this->productModel->select('products.product_idx, products.product_name, products.slug, products.image1, products.price, tenant.tenant_name, tenant.logo, province.province')
@@ -356,25 +424,13 @@ class Main extends BaseController
                                            ->orderBy('products.created_at', 'desc')
                                            ->paginate(50, 'item');
         } else {
-            // CEK DULU INI CATEGORY PARENT ATAU BUKAN
-            $c = $this->categoryModel->select('category_idx, category_name, parent_idx')
-                                     ->where('category_slug', $cat)
-                                     ->first();
-                                     
-            if ($c['parent_idx'] == 0) {
-                $key = 'category.parent_idx';
-                $value = $c['category_idx'];
-            } else {
-                $key = 'products.category_idx';
-                $value = $c['category_idx'];
-            }
-
             $products = $this->productModel->select('products.product_idx, products.product_name, products.slug, products.image1, products.price, tenant.tenant_name, tenant.logo, province.province')
                                            ->join('category', 'category.category_idx = products.category_idx', 'INNER')
                                            ->join('tenant', 'tenant.tenant_idx = products.tenant_idx', 'INNER')
                                            ->join('province', 'tenant.province_idx = province.province_idx', 'INNER')
                                            ->where('products.status', 'ON')
-                                           ->where($key, $value)
+                                           ->where($where)
+                                           ->orderBy($order_by, $order_value)
                                            ->paginate(12, 'item');
         }
 
@@ -388,14 +444,30 @@ class Main extends BaseController
             }
         }
 
+        // GET ALL CATEGORY
+        $categories = $this->categoryModel->where('parent_idx >', 0)->orderBy('category_name', 'asc')->findAll();
+
+        // GET ALL BRAND
+        $brand = $this->tenantModel->orderBy('tenant_name', 'asc')->findAll();
+
+        // GET ALL PROVINCE
+        $province = $this->provinceModel->findAll();
+
         // ACAK PRODUK
         shuffle($products);
         
         $data = [
-            'category' => $categories,
-            'products' => $products,
-            'category_selected' => $c['category_name'],
-            'pager'    => $this->productModel->pager
+            'category'               => $categoriesMenu,
+            'products'               => $products,
+            'category_selected'      => $category_selected,
+            'category_slug_selected' => $category_slug_selected,
+            'tenant_name_selected'   => !empty($tenant_name_selected) ? $tenant_name_selected : '',
+            'province_selected'      => !empty($province_selected) ? $province_selected : '',
+            'sorting_selected'       => !empty($sorting_selected) ? $sorting_selected : '',
+            'categories'             => $categories,
+            'brand'                  => $brand,
+            'province'               => $province,
+            'pager'                  => $this->productModel->pager
         ];
 
         return view('frontend/products', $data);
@@ -438,7 +510,7 @@ class Main extends BaseController
         foreach ($category as $key => $row) {
             if ($row['category_name']) {
                 $category_name = $this->createURLSlug(strtolower($row['category_name']));
-                $category[$key]['products_url'] = base_url('products?cat='.$category_name);
+                $category[$key]['products_url'] = base_url('products?c='.$category_name);
             }
         }
         

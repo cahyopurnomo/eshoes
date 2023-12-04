@@ -24,6 +24,11 @@
     <link rel="stylesheet" href="<?=base_url('assets/custom/css/fontawesome.css') ?>">
     <!-- Style CSS -->
     <link rel="stylesheet" href="<?=base_url('assets/custom/css/katalog-sepatu-indonesia.css') ?>">
+
+    <link rel="stylesheet" href="<?=base_url('assets/custom/css/zoomy.css') ?>">
+
+    <script src="<?=base_url('assets/custom/vendor/jquery/jquery.min.js?v=').time() ?>"></script>
+    
     <style>
         .required label:after {
             color: #ff5159;
@@ -43,14 +48,15 @@
         <?=$this->include('layouts/frontend_footer') ?>
     </footer>
     <!-- Bootstrap core JavaScript -->
-    <script src="<?=base_url('assets/custom/vendor/jquery/jquery.min.js') ?>"></script>
-    <script src="<?=base_url('assets/custom/vendor/bootstrap/js/bootstrap.bundle.min.js') ?>"></script>
+    
+    <script src="<?=base_url('assets/custom/vendor/bootstrap/js/bootstrap.bundle.min.js?v=').time() ?>"></script>
     <!-- Select 2 -->
-    <script src="<?=base_url('assets/custom/js/select2.min.js') ?>"></script>
+    <script src="<?=base_url('assets/custom/js/select2.min.js?v=').time() ?>"></script>
     <!-- Produk Detail Thumbnail Zoom -->
-    <script src="<?=base_url('assets/custom/js/jquery.zoom.min.js') ?>"></script>
+    <script src="<?=base_url('assets/custom/js/zoomy.js?v=').time() ?>"></script>
+
     <!-- Custom Script -->
-    <script src="<?=base_url('assets/custom/js/custom.js') ?>"></script>
+    <script src="<?=base_url('assets/custom/js/custom.js?v=').time() ?>"></script>
 </body>
 
 </html>

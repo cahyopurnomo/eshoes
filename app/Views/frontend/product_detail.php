@@ -18,44 +18,15 @@
                     <p class="text-grey mb-1">
                         <a href="<?=base_url() ?>" class="text-green medium-bold">Home</a> &nbsp;<i class="fa fa-angle-double-right"></i>&nbsp;
                         <a href="<?=base_url('brand/'.$product['tenant_name']) ?>" class="text-green medium-bold"><?=$product['tenant_name'] ?></a> &nbsp;<i class="fa fa-angle-double-right"></i>&nbsp;
-                        <a href="<?=base_url('category/'.$product['category_name']) ?>" class="text-green medium-bold"><?=$product['category_name'] ?></a> &nbsp;<i class="fa fa-angle-double-right"></i>&nbsp;
+                        <a href="<?=base_url('products?c='.$product['category_slug']) ?>" class="text-green medium-bold"><?=$product['category_name'] ?></a> &nbsp;<i class="fa fa-angle-double-right"></i>&nbsp;
                         <?=$product['tenant_name'] ?>
                     </p>
                 </div>
             </div>
         </div>
         <div class="row row-col-product-detail">
-            <div class="col-5">
-                <section class="product-page">
-                    <div class="thumbnails">
-                        <?php if ($product['image1']): ?>
-                            <div class="thumb active">
-                                <a href="<?=base_url('assets/uploads/products/'.$product['image1']) ?>">
-                                    <img src="<?=base_url('assets/uploads/products/'.$product['image1']) ?>" alt="<?=$product['image1'] ?>">
-                                </a>
-                            </div>
-                        <?php endif; ?>
-                        <?php if ($product['image2']): ?>
-                            <div class="thumb">
-                                <a href="<?=base_url('assets/uploads/products/'.$product['image2']) ?>">
-                                    <img src="<?=base_url('assets/uploads/products/'.$product['image2']) ?>" alt="<?=$product['image2'] ?>">
-                                </a>
-                            </div>
-                        <?php endif; ?>
-                        <?php if ($product['image3']): ?>
-                            <div class="thumb">
-                                <a href="<?=base_url('assets/uploads/products/'.$product['image3']) ?>">
-                                    <img src="<?=base_url('assets/uploads/products/'.$product['image3']) ?>" alt="<?=$product['image3'] ?>">
-                                </a>
-                            </div>
-                        <?php endif; ?>
-                    </div>
-                    <div class="img-display">
-                        <span class="zoom">
-                            <img src="<?=base_url('assets/uploads/products/'.$product['image1']) ?>" alt="<?=$product['image1'] ?>">
-                        </span>
-                    </div>
-                </section>
+            <div class="col-5 col-thumnail-product-zoom-detail">
+                <div id="zoomImg"></div>
             </div>
             <div class="col-7">
                 <p class="mb-0"><?=$product['tenant_name'] ?></p>
@@ -115,7 +86,7 @@
                 </div>
                 <div class="col-6">
                     <div class="text-end mb-3">
-                        <h6 class="bold mb-0"><a href="<?=base_url('products?cat=all') ?>" class="text-green">Lihat Semua Produk &nbsp;<i class="fa fa-angle-double-right"></i></a></h6>
+                        <h6 class="bold mb-0"><a href="<?=base_url('products?c=all') ?>" class="text-green">Lihat Semua Produk &nbsp;<i class="fa fa-angle-double-right"></i></a></h6>
                     </div>
                 </div>
             </div>
@@ -140,11 +111,44 @@
     </div>
     <?php endif; ?>
 </main>
+<script>
+    $(document).ready(function(){
+        var urls = [];
+        
+        let image1 = '<?=$product["image1"] ? base_url("assets/uploads/products/".$product["image1"]) : "" ?>';
+        let image2 = '<?=$product["image2"] ? base_url("assets/uploads/products/".$product["image2"]) : "" ?>';
+        let image3 = '<?=$product["image3"] ? base_url("assets/uploads/products/".$product["image3"]) : "" ?>';
+        
+        if (image1 != '') {
+            urls.push(image1);
+        } 
+        if (image2 != '') {
+            urls.push(image2);
+        } 
+        if (image3 != '') {
+            urls.push(image3);
+        }
+        
+        var options = {
+            width:525
+        };
+        $('#zoomImg').zoomy(urls, options);
+    });
+    
+</script>
 <style>
     .col-link-sosial-media {
         margin: 0;
         width: 42px;
         padding: 0;
+    }
+    
+    .zoom-main {
+        border: dashed thin #ccc;
+    }
+    
+    .zoom-main span{
+        border: none !important;
     }
 </style>
 <?=$this->endSection(); ?>
